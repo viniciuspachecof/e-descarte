@@ -1,5 +1,7 @@
 {
   "name": "e-descarte",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

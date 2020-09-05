@@ -14,27 +14,27 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Início',
-      url: '/folder/Inbox',
+      url: 'home',
       icon: 'home'
     },
     {
       title: 'Cadastrar ponto',
-      url: '/folder/Outbox',
+      url: '', //CRIAR TELA
       icon: 'location'
     },
     {
       title: 'Perfil',
-      url: '/folder/Favorites',
+      url: '', //CRIAR TELA
       icon: 'person'
     },
     {
       title: 'Fale conosco',
-      url: '/folder/Favorites',
+      url: '', //CRIAR TELA
       icon: 'megaphone'
     },
     {
       title: 'Sobre',
-      url: '/folder/Archived',
+      url: '', //CRIAR TELA
       icon: 'help-circle'
     }
   ];
