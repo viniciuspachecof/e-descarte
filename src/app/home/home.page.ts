@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 declare var google: any;
 
@@ -9,11 +10,11 @@ declare var google: any;
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
-  map: any;
 
+export class HomePage implements OnInit {
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
+  map: any;
   infoWindows: any = [];
   markers: any = [
     {
@@ -23,43 +24,74 @@ export class HomePage implements OnInit {
     },
     {
       title: "FAMCRI",
-      latitude: "-28.686798",
-      longitude: "-49.3849732"
+      latitude: "-28.686901",
+      longitude: "-49.384303"
     }
   ];
 
-  // lat;
-  // lng;
+  constructor(private geo: Geolocation, private platform: Platform) { }
 
-  constructor(private geo: Geolocation) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ionViewDidEnter() {
-    this.showMap();
+    this.platform.ready().then(() => {
+      this.showMap();    
+    })
+  };
+
+  showMap() {
+    this.geo.getCurrentPosition({
+      timeout: 10000, 
+      enableHighAccuracy: true
+    }).then(res => {
+      let userLat = res.coords.latitude;
+      let userLong = res.coords.longitude;
+
+      const location = new google.maps.LatLng(userLat, userLong);
+      const options = {
+        center: location,
+        zoom: 13,
+        disableDefaultUI: true
+      };
+      
+      this.map = new google.maps.Map(this.mapRef.nativeElement, options);  
+
+      this.addMarkerUserToMap(location);
+
+      this.addMarkersToMap(this.markers);
+    });
+  };
+
+  addMarkerUserToMap(location){
+    let mapMarker = new google.maps.Marker({
+      title: 'Sua posição',
+      position: location
+    });
+
+    mapMarker.setMap(this.map);
+      
+    this.addInfoWindowToMarker(mapMarker);
   };
 
   addMarkersToMap(markers) {
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
-        position: position,
         title: marker.title,
-        latitude: marker.latitude,
-        longitude: marker.longitude
+        position: position
       });
 
       mapMarker.setMap(this.map);
+      
       this.addInfoWindowToMarker(mapMarker);
     }
   };
 
   addInfoWindowToMarker(marker) {
-    let infoWindowContent = '<div id="content">'
-      + '<h2 id="firstHeading" class="firstHeading">' + marker.title + '</h2>' +
-      '<p>Latitude: ' + marker.latitude + '</p>' +
-      '<p>Longitude: ' + marker.longitude + '</p>' + '</div>';
+    let infoWindowContent = 
+    `<div class="infoitem"> 
+        <h4>`+ marker.title +`</h4> 
+    </div>`;
 
     let infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
@@ -69,35 +101,13 @@ export class HomePage implements OnInit {
       this.closeAllInfoWindow();
       infoWindow.open(this.map, marker);
     });
+
     this.infoWindows.push(infoWindow);
   };
 
   closeAllInfoWindow() {
     for (let window of this.infoWindows) {
       window.close();
-    }
-  };
-
-  showMap() {
-    const location = new google.maps.LatLng(-28.681246, -49.3813287);
-    const options = {
-      center: location,
-      zoom: 15,
-      disableDefaultUI: true
     };
-    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-    this.addMarkersToMap(this.markers);
   };
-
-  // ondeTo() {
-  //   this.geo.getCurrentPosition({
-  //     timeout: 10000,
-  //     enableHighAccuracy: true
-  //   }).then((res) => {
-  //     this.lat = res.coords.latitude;
-  //     this.lng = res.coords.longitude;
-  //   }).catch((e) => {
-  //     console.log(e);
-  //   })
-  // }
 }
