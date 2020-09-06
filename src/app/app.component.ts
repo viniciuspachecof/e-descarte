@@ -19,22 +19,22 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Cadastrar ponto',
-      url: '', //CRIAR TELA
+      url: 'cadastrar-ponto',
       icon: 'location'
     },
     {
       title: 'Perfil',
-      url: '', //CRIAR TELA
+      url: 'perfil',
       icon: 'person'
     },
     {
       title: 'Fale conosco',
-      url: '', //CRIAR TELA
+      url: 'fale-conosco',
       icon: 'megaphone'
     },
     {
       title: 'Sobre',
-      url: '', //CRIAR TELA
+      url: 'sobre',
       icon: 'help-circle'
     }
   ];
