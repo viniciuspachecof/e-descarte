@@ -19,13 +19,13 @@ export class HomePage implements OnInit {
   markers: any = [
     {
       title: "Faculdades ESUCRI",
-      latitude: "-28.681298",
-      longitude: "-49.3748468"
+      latitude: "-28.6811761",
+      longitude: "-49.3738259"
     },
     {
       title: "FAMCRI",
-      latitude: "-28.686901",
-      longitude: "-49.384303"
+      latitude: "-28.6868546",
+      longitude: "-49.3845147"
     }
   ];
 
@@ -65,7 +65,8 @@ export class HomePage implements OnInit {
   addMarkerUserToMap(location){
     let mapMarker = new google.maps.Marker({
       title: 'Sua posição',
-      position: location
+      position: location,
+      icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
     });
 
     mapMarker.setMap(this.map);
@@ -78,7 +79,8 @@ export class HomePage implements OnInit {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
         title: marker.title,
-        position: position
+        position: position,
+        icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
       });
 
       mapMarker.setMap(this.map);
