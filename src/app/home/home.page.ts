@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
+import { PontoDescarteService } from '../services/PontoDescarte.service';
 
 declare var google: any;
 
@@ -16,28 +17,32 @@ export class HomePage implements OnInit {
 
   map: any;
   infoWindows: any = [];
-  markers: any = [
-    {
-      title: "Faculdades ESUCRI",
-      latitude: "-28.6811761",
-      longitude: "-49.3738259"
-    },
-    {
-      title: "FAMCRI",
-      latitude: "-28.6868546",
-      longitude: "-49.3845147"
-    }
-  ];
+  markers: any = [];
 
-  constructor(private geo: Geolocation, private platform: Platform) { }
+  constructor(private geo: Geolocation, private platform: Platform, private pontodescarteService: PontoDescarteService, private loadingController: LoadingController) { }
 
   ngOnInit() { }
 
   ionViewDidEnter() {
     this.platform.ready().then(() => {
-      this.showMap();    
-    })
+      this.listar();        
+    })       
   };
+
+  async listar () {
+    const loading = await this.loadingController.create({
+      message: 'Carregando'
+    });
+
+    loading.present();
+
+    this.pontodescarteService.getPontosDescarte().subscribe((data) => {
+      this.markers = data;
+      loading.dismiss();
+
+      this.showMap();
+    });
+  }
 
   showMap() {
     this.geo.getCurrentPosition({
@@ -78,7 +83,7 @@ export class HomePage implements OnInit {
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
-        title: marker.title,
+        title: marker.nome,
         position: position,
         icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
       });
