@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   map: any;
   infoWindows: any = [];
   markers: any = [];
+  mapMarkers: any = [];
 
   constructor(private geo: Geolocation, private platform: Platform, private pontodescarteService: PontoDescarteService, private loadingController: LoadingController) { }
 
@@ -25,11 +26,11 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     this.platform.ready().then(() => {
-      this.listar();        
-    })       
+      this.listar();
+    })
   };
 
-  async listar () {
+  async listar() {
     const loading = await this.loadingController.create({
       message: 'Carregando'
     });
@@ -46,7 +47,7 @@ export class HomePage implements OnInit {
 
   showMap() {
     this.geo.getCurrentPosition({
-      timeout: 10000, 
+      timeout: 10000,
       enableHighAccuracy: true
     }).then(res => {
       let userLat = res.coords.latitude;
@@ -58,24 +59,57 @@ export class HomePage implements OnInit {
         zoom: 13,
         disableDefaultUI: true
       };
-      
-      this.map = new google.maps.Map(this.mapRef.nativeElement, options);  
 
-      this.addMarkerUserToMap(location);
+      this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+      this.map.addListener('click', (e) => {
+        this.onClickMap(e.latLng.lat(), e.latLng.lng());
+      });
+
+      this.addMarkerUserToMap(location, userLat, userLong);
 
       this.addMarkersToMap(this.markers);
     });
   };
 
-  addMarkerUserToMap(location){
+  onClickMap(lat, long) {
+    this.clearMarkers();  
+
+    const location = new google.maps.LatLng(lat, long);
+
+    let mapMarker = new google.maps.Marker({
+      position: location,
+      latitude: lat,
+      longitude: long,
+      icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
+    });
+
+    mapMarker.setMap(this.map);
+
+    this.mapMarkers.push(mapMarker);
+
+    console.log('Latitude: ' + lat + ' Longitude' + long)
+  };
+
+  clearMarkers() {
+    for (let i = 0; i < this.mapMarkers.length; i++) {
+      this.mapMarkers[i].setMap(null);
+    }
+  }
+
+  addMarkerUserToMap(location, userLat, userLong) {
     let mapMarker = new google.maps.Marker({
       title: 'Sua posição',
       position: location,
+      latitude: userLat,
+      longitude: userLong,
       icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
     });
 
     mapMarker.setMap(this.map);
-      
+
+    this.mapMarkers.push(mapMarker);
+
     this.addInfoWindowToMarker(mapMarker);
   };
 
@@ -85,20 +119,27 @@ export class HomePage implements OnInit {
       let mapMarker = new google.maps.Marker({
         title: marker.nome,
         position: position,
+        latitude: marker.latitude,
+        longitude: marker.longitude,
         icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
       });
 
       mapMarker.setMap(this.map);
-      
+
+      this.mapMarkers.push(mapMarker);
+
       this.addInfoWindowToMarker(mapMarker);
     }
   };
 
   addInfoWindowToMarker(marker) {
-    let infoWindowContent = 
-    `<div class="infoitem"> 
-        <h4>`+ marker.title +`</h4> 
-    </div>`;
+    let infoWindowContent =
+      `<div class="infoitem">` +
+      `<h4>` + marker.title + `</h4>` +
+      `<p>` + marker.longitude + `</p>` +
+      `<p>` + marker.latitude + `</p>` +
+      `<ion-button id="navigate">Ir ate o local</ion-button>` +
+      `</div>`;
 
     let infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
@@ -107,6 +148,12 @@ export class HomePage implements OnInit {
     marker.addListener('click', () => {
       this.closeAllInfoWindow();
       infoWindow.open(this.map, marker);
+
+      google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+        document.getElementById('navigate').addEventListener('click', () => {
+          window.open('https://www.google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude)
+        })
+      })
     });
 
     this.infoWindows.push(infoWindow);
