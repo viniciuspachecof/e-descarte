@@ -11,26 +11,17 @@
   <form #clienteForm="ngForm" novalidate>
     <ion-item>
       <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
-      </ion-input>   
-    </ion-item>      
+      </ion-input>
+    </ion-item>
 
     <ion-item>
       <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
-      </ion-input>    
+      </ion-input>
     </ion-item>
-
-    <ion-item>
-      <ion-input type="number" placeholder="Latitude" name="latitude" [(ngModel)]="pontodescarte.latitude">
-      </ion-input>    
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="number" placeholder="Longitude" name="fone" [(ngModel)]="pontodescarte.longitude">
-      </ion-input>    
-    </ion-item>
-
-    <div #map id="map"></div>
   </form>
 
-  <ion-button expand="block" (click)="salvar()" [disabled]="clienteForm.invalid" color="danger">Cadastrar ponto</ion-button>  
+  <div #map id="map" style="margin: 20px"></div>
+
+  <ion-button expand="block" (click)="salvar()" [disabled]="clienteForm.invalid" color="danger">Cadastrar ponto
+  </ion-button>
 </ion-content>

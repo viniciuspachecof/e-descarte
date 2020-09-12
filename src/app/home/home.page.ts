@@ -18,9 +18,13 @@ export class HomePage implements OnInit {
   map: any;
   infoWindows: any = [];
   markers: any = [];
-  mapMarkers: any = [];
 
-  constructor(private geo: Geolocation, private platform: Platform, private pontodescarteService: PontoDescarteService, private loadingController: LoadingController) { }
+  constructor(
+    private geo: Geolocation, 
+    private platform: Platform, 
+    private pontodescarteService: PontoDescarteService, 
+    private loadingController: LoadingController
+    ) { }
 
   ngOnInit() { }
 
@@ -61,42 +65,13 @@ export class HomePage implements OnInit {
       };
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-
-      this.map.addListener('click', (e) => {
-        this.onClickMap(e.latLng.lat(), e.latLng.lng());
-      });
-
+    
       this.addMarkerUserToMap(location, userLat, userLong);
 
       this.addMarkersToMap(this.markers);
     });
   };
-
-  onClickMap(lat, long) {
-    this.clearMarkers();  
-
-    const location = new google.maps.LatLng(lat, long);
-
-    let mapMarker = new google.maps.Marker({
-      position: location,
-      latitude: lat,
-      longitude: long,
-      icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
-    });
-
-    mapMarker.setMap(this.map);
-
-    this.mapMarkers.push(mapMarker);
-
-    console.log('Latitude: ' + lat + ' Longitude' + long)
-  };
-
-  clearMarkers() {
-    for (let i = 0; i < this.mapMarkers.length; i++) {
-      this.mapMarkers[i].setMap(null);
-    }
-  }
-
+ 
   addMarkerUserToMap(location, userLat, userLong) {
     let mapMarker = new google.maps.Marker({
       title: 'Sua posição',
@@ -107,8 +82,6 @@ export class HomePage implements OnInit {
     });
 
     mapMarker.setMap(this.map);
-
-    this.mapMarkers.push(mapMarker);
 
     this.addInfoWindowToMarker(mapMarker);
   };
@@ -125,8 +98,6 @@ export class HomePage implements OnInit {
       });
 
       mapMarker.setMap(this.map);
-
-      this.mapMarkers.push(mapMarker);
 
       this.addInfoWindowToMarker(mapMarker);
     }
