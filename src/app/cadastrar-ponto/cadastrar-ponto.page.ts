@@ -41,7 +41,7 @@ export class CadastrarPontoPage implements OnInit {
     this.platform.ready().then(() => {
       this.listar();
     })
-  };
+  }
 
   listar() {
     this.geo.getCurrentPosition({
@@ -64,7 +64,7 @@ export class CadastrarPontoPage implements OnInit {
         this.onClickMap(e.latLng.lat(), e.latLng.lng());
       });
     });
-  };
+  }
 
   onClickMap(lat, long) {
     this.clearMarkers();
@@ -83,7 +83,7 @@ export class CadastrarPontoPage implements OnInit {
     this.mapMarkers.push(mapMarker);
 
     this.pontodescarte.latitude = lat;
-    this.pontodescarte.longitude = long;    
+    this.pontodescarte.longitude = long;
   }
 
   clearMarkers() {
@@ -92,35 +92,45 @@ export class CadastrarPontoPage implements OnInit {
     }
   }
 
-async salvar() {
-  if (!this.pontodescarte.latitude || !this.pontodescarte.longitude) {
-    this.alertMessage();
-    return;
+  async salvar() {
+    if (!this.pontodescarte.latitude || !this.pontodescarte.longitude) {
+      this.alertMessageLatLong();
+      return;
+    }
+
+    let loading = await this.loadingController.create({ message: 'Salvando' });
+    loading.present();
+
+    this.pontodescarteService
+      .salvar(this.pontodescarte)
+      .subscribe(() => {
+        loading.dismiss();
+        this.navController.navigateForward(['/home']);
+      }, () => {
+        loading.dismiss();
+        this.alertMessage();
+      });
   }
 
-  let loading = await this.loadingController.create({ message: 'Salvando' });
-  loading.present();
-
-  this.pontodescarteService
-    .salvar(this.pontodescarte)
-    .subscribe(() => {
-      loading.dismiss();
-      this.navController.navigateForward(['/home']);
-    }, () => {
-      loading.dismiss();
-      this.alertMessage();
+  async alertMessageLatLong() {
+    const alerta = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Aviso',
+      message: 'Informe ao mapa o local de descarte.',
+      buttons: ['OK']
     });
-}
 
-async alertMessage() {
-  const alerta = await this.alertController.create({
-    cssClass: 'my-custom-class',
-    header: 'Aviso',
-    message: 'Informe ao mapa o local de descarte.',
-    buttons: ['OK']
-  });
+    await alerta.present();
+  }
 
-  await alerta.present();
-};
-  
+  async alertMessage() {
+    const alerta = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Aviso',
+      message: 'Erro ao fazer o cadastro.',
+      buttons: ['OK']
+    });
+
+    await alerta.present();
+  }
 }
