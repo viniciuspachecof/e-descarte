@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Platform, LoadingController } from '@ionic/angular';
 import { PontoDescarteService } from '../services/PontoDescarte.service';
+import { PontoDescarte } from '../models/pontodescarte.interface';
 
 declare var google: any;
 
@@ -18,6 +19,7 @@ export class HomePage implements OnInit {
   map: any;
   infoWindows: any = [];
   markers: any = [];
+  pontosdescarte: PontoDescarte[]
 
   constructor(
     private geo: Geolocation, 
@@ -42,6 +44,7 @@ export class HomePage implements OnInit {
     loading.present();
 
     this.pontodescarteService.getPontosDescarte().subscribe((data) => {
+      this.pontosdescarte = data;
       this.markers = data;
       loading.dismiss();
 
@@ -109,7 +112,8 @@ export class HomePage implements OnInit {
       `<h4>` + marker.title + `</h4>` +
       `<p>` + marker.longitude + `</p>` +
       `<p>` + marker.latitude + `</p>` +
-      `<a href="../ponto-descarte"><ion-button id="navigate">Ver mais...</ion-button></a>` +
+      // `<ion-button id="navigate">Ver mais...</ion-button>` +
+      `<ion-button [routerLink]="['/comandas', 'editar', pontosdescarte.id]">Ver mais...</ion-button>` +
       `</div>`;
 
     let infoWindow = new google.maps.InfoWindow({
@@ -120,11 +124,11 @@ export class HomePage implements OnInit {
       this.closeAllInfoWindow();
       infoWindow.open(this.map, marker);
 
-      //google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+      // google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
       //  document.getElementById('navigate').addEventListener('click', () => {
       //    window.open('https://www.google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude)
       //  })
-      //})
+      // })
     });
 
     this.infoWindows.push(infoWindow);

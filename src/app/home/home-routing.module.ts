@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage
-  }
+  },
+  {
+    path: 'editar/:id',
+    loadChildren: () => import('./pontodescarte/pontodescarte.module').then(m => m.PontodescartePageModule)
+  },
+
 ];
 
 @NgModule({
