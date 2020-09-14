@@ -15,6 +15,7 @@ export class CadastrarPontoPage implements OnInit {
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
   map: any;
+  infoWindows: any = [];
   mapMarkers: any = [];
   pontodescarte: PontoDescarte;
 
@@ -60,11 +61,53 @@ export class CadastrarPontoPage implements OnInit {
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
+      this.addMarkerUserToMap(location, userLat, userLong);
+
       this.map.addListener('click', (e) => {
         this.onClickMap(e.latLng.lat(), e.latLng.lng());
       });
     });
   }
+
+  addMarkerUserToMap(location, userLat, userLong) {
+    let mapMarker = new google.maps.Marker({
+      title: 'Sua posição',
+      position: location,
+      latitude: userLat,
+      longitude: userLong,
+      icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+    });
+
+    mapMarker.setMap(this.map);
+
+    this.addInfoWindowToMarker(mapMarker);
+  };
+
+  addInfoWindowToMarker(marker) {
+    let infoWindowContent =
+      `<div class="infoitem">` +
+      `<h4>` + marker.title + `</h4>` +
+      `<p>` + marker.longitude + `</p>` +
+      `<p>` + marker.latitude + `</p>`;
+      
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+
+    marker.addListener('click', () => {
+      this.closeAllInfoWindow();
+      infoWindow.open(this.map, marker);
+    });
+
+    this.infoWindows.push(infoWindow);
+  };
+
+  closeAllInfoWindow() {
+    for (let window of this.infoWindows) {
+      window.close();
+    };
+  };
 
   onClickMap(lat, long) {
     this.clearMarkers();
