@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'cadastrar-ponto',
     loadChildren: () => import('./cadastrar-ponto/cadastrar-ponto.module').then( m => m.CadastrarPontoPageModule)
+  },
+  {
+    path: 'ponto-descarte',
+    loadChildren: () => import('./ponto-descarte/ponto-descarte.module').then( m => m.PontoDescartePageModule)
   }
 ];
 
