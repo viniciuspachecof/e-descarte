@@ -7,11 +7,11 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 declare var google: any;
 
 @Component({
-  selector: 'app-cadastrar-ponto',
-  templateUrl: './cadastrar-ponto.page.html',
-  styleUrls: ['./cadastrar-ponto.page.scss'],
+  selector: 'app-cadastrar-pontodescarte',
+  templateUrl: './cadastrar-pontodescarte.page.html',
+  styleUrls: ['./cadastrar-pontodescarte.page.scss'],
 })
-export class CadastrarPontoPage implements OnInit {
+export class CadastrarPontoDescartePage implements OnInit {
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
   map: any;

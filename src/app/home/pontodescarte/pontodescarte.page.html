@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>pontodescarte</ion-title>
+    <ion-title>Ponto de descarte</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #clienteForm="ngForm" novalidate>
+    <ion-item>
+      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
+      </ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
+      </ion-input>
+    </ion-item>
+  </form>
 </ion-content>

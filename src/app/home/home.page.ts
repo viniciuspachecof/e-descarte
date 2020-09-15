@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
-import { Platform, LoadingController } from '@ionic/angular';
+import { Platform, LoadingController, NavController } from '@ionic/angular';
 import { PontoDescarteService } from '../services/PontoDescarte.service';
-import { PontoDescarte } from '../models/pontodescarte.interface';
 
 declare var google: any;
 
@@ -19,13 +18,13 @@ export class HomePage implements OnInit {
   map: any;
   infoWindows: any = [];
   markers: any = [];
-  pontosdescarte: PontoDescarte[]
 
   constructor(
     private geo: Geolocation, 
     private platform: Platform, 
     private pontodescarteService: PontoDescarteService, 
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private navController: NavController,
     ) { }
 
   ngOnInit() { }
@@ -34,7 +33,7 @@ export class HomePage implements OnInit {
     this.platform.ready().then(() => {
       this.listar();
     })
-  };
+  }
 
   async listar() {
     const loading = await this.loadingController.create({
@@ -44,7 +43,6 @@ export class HomePage implements OnInit {
     loading.present();
 
     this.pontodescarteService.getPontosDescarte().subscribe((data) => {
-      this.pontosdescarte = data;
       this.markers = data;
       loading.dismiss();
 
@@ -73,7 +71,7 @@ export class HomePage implements OnInit {
 
       this.addMarkersToMap(this.markers);
     });
-  };
+  }
  
   addMarkerUserToMap(location, userLat, userLong) {
     let mapMarker = new google.maps.Marker({
@@ -87,12 +85,13 @@ export class HomePage implements OnInit {
     mapMarker.setMap(this.map);
 
     this.addInfoWindowToMarker(mapMarker);
-  };
+  }
 
   addMarkersToMap(markers) {
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
+        id: marker.id, // Adicionando o id para o rastreamento do ponto
         title: marker.nome,
         position: position,
         latitude: marker.latitude,
@@ -104,7 +103,7 @@ export class HomePage implements OnInit {
 
       this.addInfoWindowToMarker(mapMarker);
     }
-  };
+  }
 
   addInfoWindowToMarker(marker) {
     let infoWindowContent =
@@ -113,7 +112,7 @@ export class HomePage implements OnInit {
       `<p>` + marker.longitude + `</p>` +
       `<p>` + marker.latitude + `</p>` +
       // `<ion-button id="navigate">Ver mais...</ion-button>` +
-      `<ion-button [routerLink]="['/comandas', 'editar', pontosdescarte.id]">Ver mais...</ion-button>` +
+      `<ion-button id="navigate">Ver mais...</ion-button>` +
       `</div>`;
 
     let infoWindow = new google.maps.InfoWindow({
@@ -124,19 +123,23 @@ export class HomePage implements OnInit {
       this.closeAllInfoWindow();
       infoWindow.open(this.map, marker);
 
-      // google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
-      //  document.getElementById('navigate').addEventListener('click', () => {
-      //    window.open('https://www.google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude)
-      //  })
-      // })
+      google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+       document.getElementById('navigate').addEventListener('click', () => {
+        this.navController.navigateForward(['/home', 'visualizar', marker.id]);
+       })
+      })
     });
 
     this.infoWindows.push(infoWindow);
-  };
+  }
+  
+  onClickButton () {
+    console.log('teste')
+  }
 
   closeAllInfoWindow() {
     for (let window of this.infoWindows) {
       window.close();
     };
-  };
+  }
 }

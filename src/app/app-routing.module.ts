@@ -32,12 +32,8 @@ const routes: Routes = [
     loadChildren: () => import('./fale-conosco/fale-conosco.module').then( m => m.FaleConoscoPageModule)
   },
   {
-    path: 'cadastrar-ponto',
-    loadChildren: () => import('./cadastrar-ponto/cadastrar-ponto.module').then( m => m.CadastrarPontoPageModule)
-  },
-  {
-    path: 'ponto-descarte',
-    loadChildren: () => import('./ponto-descarte/ponto-descarte.module').then( m => m.PontoDescartePageModule)
+    path: 'cadastrar-pontodescarte',
+    loadChildren: () => import('./cadastrar-pontodescarte/cadastrar-pontodescarte.module').then( m => m.CadastrarPontoDescartePageModule)
   }
 ];
 

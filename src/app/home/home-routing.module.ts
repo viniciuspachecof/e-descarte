@@ -9,7 +9,11 @@ const routes: Routes = [
     component: HomePage
   },
   {
-    path: 'editar/:id',
+    path: 'cadastro',
+    loadChildren: () => import('./pontodescarte/pontodescarte.module').then(m => m.PontodescartePageModule)
+  },
+  {
+    path: 'visualizar/:id',
     loadChildren: () => import('./pontodescarte/pontodescarte.module').then(m => m.PontodescartePageModule)
   },
 

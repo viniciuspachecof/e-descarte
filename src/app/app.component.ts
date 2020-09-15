@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Cadastrar ponto',
-      url: 'cadastrar-ponto',
+      url: 'cadastrar-pontodescarte',
       icon: 'location'
     },
     {
