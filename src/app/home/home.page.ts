@@ -112,7 +112,7 @@ export class HomePage implements OnInit {
       `<p>` + marker.longitude + `</p>` +
       `<p>` + marker.latitude + `</p>` +
       // `<ion-button id="navigate">Ver mais...</ion-button>` +
-      `<ion-button id="navigate">Ver mais...</ion-button>` +
+      `<ion-button id="information">Ver mais...</ion-button>` +
       `</div>`;
 
     let infoWindow = new google.maps.InfoWindow({
@@ -124,7 +124,7 @@ export class HomePage implements OnInit {
       infoWindow.open(this.map, marker);
 
       google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
-       document.getElementById('navigate').addEventListener('click', () => {
+       document.getElementById('information').addEventListener('click', () => {
         this.navController.navigateForward(['/home', 'visualizar', marker.id]);
        })
       })
