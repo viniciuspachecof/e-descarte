@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: PontodescartePage
+  },
+  {
+    path: ':pontodescarteId/:usuarioId',
+    loadChildren: () => import('./pontodescarteitem/pontodescarteitem.module').then(m => m.PontodescarteitemPageModule)
   }
 ];
 

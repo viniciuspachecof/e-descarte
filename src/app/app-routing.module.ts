@@ -34,6 +34,14 @@ const routes: Routes = [
   {
     path: 'cadastrar-pontodescarte',
     loadChildren: () => import('./cadastrar-pontodescarte/cadastrar-pontodescarte.module').then( m => m.CadastrarPontoDescartePageModule)
+  },
+  {
+    path: 'ponto-descarte',
+    loadChildren: () => import('./home/pontodescarte/pontodescarte.module').then( m => m.PontodescartePageModule)
+  }, 
+  {
+    path: 'ponto-descarte-item',
+    loadChildren: () => import('./home/pontodescarte/pontodescarteitem/pontodescarteitem.module').then( m => m.PontodescarteitemPageModule)
   }
 ];
 

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #itemForm="ngForm" novalidate>
+    <ion-item>
+      <ion-input type="text" placeholder="Quantidade" name="quant" [(ngModel)]="pontodescarteitem.quant">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-select placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
+        <ion-select-option *ngFor="let item of itens" [value]="item.id">
+          {{item.nome}}
+        </ion-select-option>
+      </ion-select>     
+    </ion-item>
+  </form>
+  
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button color="success" (click)="salvar()" [disabled]="itemForm.invalid">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
