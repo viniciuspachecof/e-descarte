@@ -12,6 +12,8 @@
     <ion-item *ngFor="let pontodescarteitem of pontodescarteitens">
       <div></div>
       <span>{{pontodescarteitem.item.nome}}</span>
+      <ion-icon color="success" name="create" slot="end" [routerLink]="['/ponto-descarte-item/editar', pontodescarteitem.id, pontodescarteId, usuarioId]"></ion-icon>
+      <ion-icon color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarteitem)"></ion-icon>
     </ion-item>
   </ion-list>  
 

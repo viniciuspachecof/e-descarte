@@ -14,24 +14,23 @@ import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.s
 export class CadastroPage implements OnInit {
 
   pontodescarteitem: PontoDescarteItem
-  pontosdescarte: PontoDescarteItem
   itens: Item[];
 
   constructor(
     private alertController: AlertController,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
-    private pontodescarteitensService: PontoDescarteItemService,
+    private pontodescarteitemService: PontoDescarteItemService,
     private itemService: ItemService,
     private navController: NavController,
-  ) { 
+  ) {
     this.pontodescarteitem = {
       quant: 0,
-      pontodescarteId: null,
+      pontodescarteId: this.activatedRoute.snapshot.params['pontodescarteId'],
       pontoDescarte: null,
       itemId: null,
       item: null,
-      usuarioId: null,
+      usuarioId: this.activatedRoute.snapshot.params['usuarioId'],
       usuario: null
     }
   }
@@ -46,35 +45,47 @@ export class CadastroPage implements OnInit {
 
     this.itemService.getItens().subscribe((data) => {
       this.itens = data;
-      // this.carregarPontoDescateItens();
+      this.carregarPontoDescateItens();
       loading.dismiss();
     });
-  };
+  }
 
-  // carregarPontoDescateItens() {
-  //   const id = this.activatedRoute.snapshot.params['id'];    
-  //   this.pontodescarteService.getPontoDescarteItem(id).subscribe((pontodescarte) => {
-  //     this.pontodescarte = pontodescarte;           
-  //   });
-  // }
+  carregarPontoDescateItens() {
+    const id = this.activatedRoute.snapshot.params['id'];
+    if (id) {
+      this.pontodescarteitemService.getPontoDescarteItem(id).subscribe((data) => {
+        this.pontodescarteitem = data;
+      });
+    }
+  }
 
   async salvar() {
+    let pontodescarteId = this.pontodescarteitem.pontodescarteId,
+      usuarioId = this.pontodescarteitem.usuarioId,
+      dto = {
+        id: this.pontodescarteitem.id,
+        quant: this.pontodescarteitem.quant,
+        pontodescarteId: this.pontodescarteitem.pontodescarteId,
+        pontoDescarte: null,
+        itemId: this.pontodescarteitem.itemId,
+        item: null,
+        usuarioId: this.pontodescarteitem.usuarioId,
+        usuario: null
+      };
+
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
-    this.pontodescarteitem.pontodescarteId = this.activatedRoute.snapshot.params['pontodescarteId']; 
-    this.pontodescarteitem.usuarioId = this.activatedRoute.snapshot.params['usuarioId']; 
-
-    this.pontodescarteitensService
-      .salvar(this.pontodescarteitem)
+    this.pontodescarteitemService
+      .salvar(dto)
       .subscribe(() => {
         loading.dismiss();
-        this.navController.navigateForward(['/ponto-descarte', this.pontodescarteitem.pontodescarteId, this.pontodescarteitem.usuarioId]);
+        this.navController.navigateForward(['/ponto-descarte', pontodescarteId, usuarioId]);
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();
       });
-  };
+  }
 
   async mensagemAlerta() {
     const alerta = await this.alertController.create({
@@ -85,6 +96,5 @@ export class CadastroPage implements OnInit {
     });
 
     await alerta.present();
-  };
-
-}
+  }
+};
