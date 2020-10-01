@@ -3,6 +3,10 @@ import { PontoDescarte } from '../models/PontoDescarte.interface';
 import { LoadingController, AlertController, Platform, NavController } from '@ionic/angular';
 import { PontoDescarteService } from '../services/PontoDescarte.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Cidade } from '../models/cidade.interface';
+import { CidadeService } from '../services/cidade.service';
+import { UsuarioService } from '../services/Usuario.service';
+import { Usuario } from '../models/Usuario.interface';
 
 declare var google: any;
 
@@ -18,6 +22,8 @@ export class CadastrarPontoDescartePage implements OnInit {
   infoWindows: any = [];
   mapMarkers: any = [];
   pontodescarte: PontoDescarte;
+  cidades: Cidade[];
+  usuarios: Usuario[];
 
   constructor(
     private geo: Geolocation,
@@ -25,13 +31,19 @@ export class CadastrarPontoDescartePage implements OnInit {
     private navController: NavController,
     private loadingController: LoadingController,
     private platform: Platform,
-    private pontodescarteService: PontoDescarteService
+    private pontodescarteService: PontoDescarteService,
+    private cidadeService: CidadeService,
+    private usuarioService: UsuarioService
   ) {
     this.pontodescarte = {
       nome: null,
       fone: null,
       latitude: null,
-      longitude: null
+      longitude: null,
+      cidadeId: null,
+      cidade: null,
+      usuarioId: null,
+      usuario: null
     }
   }
 
@@ -40,11 +52,33 @@ export class CadastrarPontoDescartePage implements OnInit {
 
   ionViewDidEnter() {
     this.platform.ready().then(() => {
-      this.listar();
+      this.listarCidades();
     })
   }
 
-  listar() {
+  async listarCidades() {
+    const loading = await this.loadingController.create({ message: 'Carregando' });
+    loading.present();
+
+    this.cidadeService.getCidades().subscribe((data) => {
+      this.cidades = data;
+      this.listarUsuarios();
+      loading.dismiss();
+    });
+  }
+  
+  async listarUsuarios() {
+    const loading = await this.loadingController.create({ message: 'Carregando' });
+    loading.present();
+
+    this.usuarioService.getUsuarios().subscribe((data) => {
+      this.usuarios = data;
+      this.carregarMapa();
+      loading.dismiss();
+    });
+  }
+
+  carregarMapa() {
     this.geo.getCurrentPosition({
       timeout: 10000,
       enableHighAccuracy: true
@@ -141,11 +175,24 @@ export class CadastrarPontoDescartePage implements OnInit {
       return;
     }
 
+    let dto = {
+      nome: this.pontodescarte.nome,
+      fone: this.pontodescarte.fone,
+      latitude: this.pontodescarte.latitude,
+      longitude: this.pontodescarte.longitude,
+      cidadeId: this.pontodescarte.cidadeId,
+      cidade: null,
+      usuarioId: this.pontodescarte.usuarioId,
+      usuario: null
+    }
+
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
+    
+
     this.pontodescarteService
-      .salvar(this.pontodescarte)
+      .salvar(dto)
       .subscribe(() => {
         loading.dismiss();
         this.navController.navigateForward(['/home']);

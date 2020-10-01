@@ -10,12 +10,12 @@
 <ion-content>
   <form #clienteForm="ngForm" novalidate>
     <ion-item>
-      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
+      <ion-input disabled="true" type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
       </ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
+      <ion-input disabled="true" type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
       </ion-input>
     </ion-item>
     
@@ -23,6 +23,14 @@
       <ion-select placeholder="Selecione o usuário (temporário)" [(ngModel)]="usuarioId" name="usuario">
         <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
           {{usuario.nome}}
+        </ion-select-option>
+      </ion-select>     
+    </ion-item>
+
+    <ion-item>
+      <ion-select disabled="true" placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
+        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
+          {{cidade.nome}}
         </ion-select-option>
       </ion-select>     
     </ion-item>

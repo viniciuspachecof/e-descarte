@@ -1,3 +1,4 @@
+import { Cidade } from './cidade.interface';
 import { Usuario } from './Usuario.interface';
 
 export interface PontoDescarte {
@@ -6,5 +7,8 @@ export interface PontoDescarte {
     fone: string;
     longitude: number; 
     latitude: number;
-    // usuario: Usuario[];
+    usuarioId: number;
+    usuario: Usuario[];
+    cidadeId: number;
+    cidade: Cidade;
 };
