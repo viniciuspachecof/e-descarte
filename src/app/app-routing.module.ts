@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'ponto-descarte-item',
     loadChildren: () => import('./home/pontodescarte/pontodescarteitem/pontodescarteitem.module').then( m => m.PontodescarteitemPageModule)
+  },  {
+    path: 'lista-pontodescarte',
+    loadChildren: () => import('./lista-pontodescarte/lista-pontodescarte.module').then( m => m.ListaPontodescartePageModule)
   }
+
 ];
 
 @NgModule({

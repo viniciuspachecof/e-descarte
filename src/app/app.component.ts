@@ -23,6 +23,11 @@ export class AppComponent implements OnInit {
       icon: 'location'
     },
     {
+      title: 'Meus pontos cadastrados',
+      url: 'lista-pontodescarte',
+      icon: 'location'
+    },
+    {
       title: 'Perfil',
       url: 'perfil',
       icon: 'person'
