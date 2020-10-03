@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PontodescarteitemPage } from './pontodescarteitem.page';
+import { PontodescartePage } from './info-pontodescarte.page';
 
-describe('PontodescarteitemPage', () => {
-  let component: PontodescarteitemPage;
-  let fixture: ComponentFixture<PontodescarteitemPage>;
+describe('PontodescartePage', () => {
+  let component: PontodescartePage;
+  let fixture: ComponentFixture<PontodescartePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PontodescarteitemPage ],
+      declarations: [ PontodescartePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PontodescarteitemPage);
+    fixture = TestBed.createComponent(PontodescartePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

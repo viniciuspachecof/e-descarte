@@ -36,15 +36,16 @@ const routes: Routes = [
     loadChildren: () => import('./cadastrar-pontodescarte/cadastrar-pontodescarte.module').then( m => m.CadastrarPontoDescartePageModule)
   },
   {
-    path: 'ponto-descarte',
-    loadChildren: () => import('./home/pontodescarte/pontodescarte.module').then( m => m.PontodescartePageModule)
+    path: 'info-pontodescarte',
+    loadChildren: () => import('./home/info-pontodescarte/info-pontodescarte.module').then( m => m.PontodescartePageModule)
   }, 
   {
-    path: 'ponto-descarte-item',
-    loadChildren: () => import('./home/pontodescarte/pontodescarteitem/pontodescarteitem.module').then( m => m.PontodescarteitemPageModule)
-  },  {
-    path: 'lista-pontodescarte',
-    loadChildren: () => import('./lista-pontodescarte/lista-pontodescarte.module').then( m => m.ListaPontodescartePageModule)
+    path: 'listar-pontodescarte-item',
+    loadChildren: () => import('./home/info-pontodescarte/listar-pontodescarte-item/listar-pontodescarte-item.module').then( m => m.PontodescarteitemPageModule)
+  },
+  {
+    path: 'listar-pontodescarte',
+    loadChildren: () => import('./listar-pontodescarte/listar-pontodescarte.module').then( m => m.ListaPontodescartePageModule)
   }
 
 ];

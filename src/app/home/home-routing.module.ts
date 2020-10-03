@@ -9,12 +9,8 @@ const routes: Routes = [
     component: HomePage
   },
   {
-    path: 'cadastro',
-    loadChildren: () => import('./pontodescarte/pontodescarte.module').then(m => m.PontodescartePageModule)
-  },
-  {
     path: 'visualizar/:id',
-    loadChildren: () => import('./pontodescarte/pontodescarte.module').then(m => m.PontodescartePageModule)
+    loadChildren: () => import('./info-pontodescarte/info-pontodescarte.module').then(m => m.PontodescartePageModule)
   },
 
 ];

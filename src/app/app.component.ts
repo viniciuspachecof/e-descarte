@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Meus pontos cadastrados',
-      url: 'lista-pontodescarte',
+      url: 'listar-pontodescarte',
       icon: 'location'
     },
     {

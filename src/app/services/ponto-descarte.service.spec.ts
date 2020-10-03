@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PontoDescarteService } from './PontoDescarte.service';
+import { PontoDescarteService } from './ponto-descarte.service';
 
 describe('PontoDescarteService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PontoDescarte } from '../models/PontoDescarte.interface';
 import { LoadingController, AlertController, Platform, NavController } from '@ionic/angular';
-import { PontoDescarteService } from '../services/PontoDescarte.service';
+import { PontoDescarteService } from '../services/ponto-descarte.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Cidade } from '../models/cidade.interface';
 import { CidadeService } from '../services/cidade.service';
-import { UsuarioService } from '../services/Usuario.service';
+import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/Usuario.interface';
 
 declare var google: any;
@@ -40,6 +40,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
+      status: true,
       cidadeId: null,
       cidade: null,
       usuarioId: null,
@@ -57,7 +58,7 @@ export class CadastrarPontoDescartePage implements OnInit {
   }
 
   async listarCidades() {
-    const loading = await this.loadingController.create({ message: 'Carregando' });
+    const loading = await this.loadingController.create({ message: 'Carregando cidades' });
     loading.present();
 
     this.cidadeService.getCidades().subscribe((data) => {
@@ -66,9 +67,9 @@ export class CadastrarPontoDescartePage implements OnInit {
       loading.dismiss();
     });
   }
-  
+
   async listarUsuarios() {
-    const loading = await this.loadingController.create({ message: 'Carregando' });
+    const loading = await this.loadingController.create({ message: 'Carregando usuários' });
     loading.present();
 
     this.usuarioService.getUsuarios().subscribe((data) => {
@@ -115,7 +116,7 @@ export class CadastrarPontoDescartePage implements OnInit {
     mapMarker.setMap(this.map);
 
     this.addInfoWindowToMarker(mapMarker);
-  };
+  }
 
   addInfoWindowToMarker(marker) {
     let infoWindowContent =
@@ -123,7 +124,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       `<h4>` + marker.title + `</h4>` +
       `<p>` + marker.longitude + `</p>` +
       `<p>` + marker.latitude + `</p>`;
-      
+
 
     let infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
@@ -135,13 +136,13 @@ export class CadastrarPontoDescartePage implements OnInit {
     });
 
     this.infoWindows.push(infoWindow);
-  };
+  }
 
   closeAllInfoWindow() {
     for (let window of this.infoWindows) {
       window.close();
     };
-  };
+  }
 
   onClickMap(lat, long) {
     this.clearMarkers();
@@ -180,6 +181,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       fone: this.pontodescarte.fone,
       latitude: this.pontodescarte.latitude,
       longitude: this.pontodescarte.longitude,
+      status: this.pontodescarte.status,
       cidadeId: this.pontodescarte.cidadeId,
       cidade: null,
       usuarioId: this.pontodescarte.usuarioId,
@@ -188,8 +190,6 @@ export class CadastrarPontoDescartePage implements OnInit {
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
-
-    
 
     this.pontodescarteService
       .salvar(dto)

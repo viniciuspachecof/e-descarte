@@ -80,7 +80,7 @@ export class CadastroPage implements OnInit {
       .salvar(dto)
       .subscribe(() => {
         loading.dismiss();
-        this.navController.navigateForward(['/ponto-descarte', pontodescarteId, usuarioId]);
+        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId, usuarioId]);
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();

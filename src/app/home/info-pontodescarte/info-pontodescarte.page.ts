@@ -5,13 +5,13 @@ import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
 import { Usuario } from 'src/app/models/Usuario.interface';
 import { CidadeService } from 'src/app/services/cidade.service';
-import { PontoDescarteService } from 'src/app/services/PontoDescarte.service';
-import { UsuarioService } from 'src/app/services/Usuario.service';
+import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-pontodescarte',
-  templateUrl: './pontodescarte.page.html',
-  styleUrls: ['./pontodescarte.page.scss'],
+  templateUrl: './info-pontodescarte.page.html',
+  styleUrls: ['./info-pontodescarte.page.scss'],
 })
 export class PontodescartePage implements OnInit {
 
@@ -32,6 +32,7 @@ export class PontodescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
+      status: true,
       usuarioId: null,
       usuario: null,
       cidadeId: null,
@@ -40,35 +41,35 @@ export class PontodescartePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.listarUsuarios();
-  }
-
-  async listarUsuarios() {
-    const loading = await this.loadingController.create({ message: 'Carregando' });
-    loading.present();
-
-    this.usuarioService.getUsuarios().subscribe((data) => {
-      this.usuarios = data; 
-      this.listarCidades();    
-      loading.dismiss();
-    });
+    this.listarCidades();
   }
 
   async listarCidades() {
-    const loading = await this.loadingController.create({ message: 'Carregando' });
+    const loading = await this.loadingController.create({ message: 'Carregando cidades' });
     loading.present();
 
     this.cidadeService.getCidades().subscribe((data) => {
       this.cidades = data;
+      this.listarUsuarios();
+      loading.dismiss();
+    });
+  }
+
+  async listarUsuarios() {
+    const loading = await this.loadingController.create({ message: 'Carregando usuários' });
+    loading.present();
+
+    this.usuarioService.getUsuarios().subscribe((data) => {
+      this.usuarios = data;
       this.carregarPontoDescate();
       loading.dismiss();
     });
   }
 
   carregarPontoDescate() {
-    const id = this.activatedRoute.snapshot.params['id'];    
+    const id = this.activatedRoute.snapshot.params['id'];
     this.pontodescarteService.getPontoDescarte(id).subscribe((pontodescarte) => {
-      this.pontodescarte = pontodescarte;           
+      this.pontodescarte = pontodescarte;
     });
   }
 

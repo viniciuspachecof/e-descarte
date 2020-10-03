@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PontodescartePageRoutingModule } from './pontodescarte-routing.module';
+import { PontodescartePageRoutingModule } from './info-pontodescarte-routing.module';
 
-import { PontodescartePage } from './pontodescarte.page';
+import { PontodescartePage } from './info-pontodescarte.page';
 
 @NgModule({
   imports: [

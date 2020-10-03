@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Platform, LoadingController, NavController } from '@ionic/angular';
-import { PontoDescarteService } from '../services/PontoDescarte.service';
+import { PontoDescarteService } from '../services/ponto-descarte.service';
 
 declare var google: any;
 
@@ -20,12 +20,12 @@ export class HomePage implements OnInit {
   markers: any = [];
 
   constructor(
-    private geo: Geolocation, 
-    private platform: Platform, 
-    private pontodescarteService: PontoDescarteService, 
+    private geo: Geolocation,
+    private platform: Platform,
+    private pontodescarteService: PontoDescarteService,
     private loadingController: LoadingController,
     private navController: NavController,
-    ) { }
+  ) { }
 
   ngOnInit() { }
 
@@ -66,13 +66,13 @@ export class HomePage implements OnInit {
       };
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-    
+
       this.addMarkerUserToMap(location, userLat, userLong);
 
       this.addMarkersToMap(this.markers);
     });
   }
- 
+
   addMarkerUserToMap(location, userLat, userLong) {
     let mapMarker = new google.maps.Marker({
       title: 'Sua posição',
@@ -89,19 +89,21 @@ export class HomePage implements OnInit {
 
   addMarkersToMap(markers) {
     for (let marker of markers) {
-      let position = new google.maps.LatLng(marker.latitude, marker.longitude);
-      let mapMarker = new google.maps.Marker({
-        id: marker.id, // Adicionando o id para o rastreamento do ponto
-        title: marker.nome,
-        position: position,
-        latitude: marker.latitude,
-        longitude: marker.longitude,
-        icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
-      });
+      if (marker.status) {
+        let position = new google.maps.LatLng(marker.latitude, marker.longitude);
+        let mapMarker = new google.maps.Marker({
+          id: marker.id, // Adicionando o id para o rastreamento do ponto
+          title: marker.nome,
+          position: position,
+          latitude: marker.latitude,
+          longitude: marker.longitude,
+          icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
+        });
 
-      mapMarker.setMap(this.map);
+        mapMarker.setMap(this.map);
 
-      this.addInfoWindowToMarker(mapMarker);
+        this.addInfoWindowToMarker(mapMarker);
+      }
     }
   }
 
@@ -124,16 +126,16 @@ export class HomePage implements OnInit {
       infoWindow.open(this.map, marker);
 
       google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
-       document.getElementById('information').addEventListener('click', () => {
-        this.navController.navigateForward(['/home', 'visualizar', marker.id]);
-       })
+        document.getElementById('information').addEventListener('click', () => {
+          this.navController.navigateForward(['/home', 'visualizar', marker.id]);
+        })
       })
     });
 
     this.infoWindows.push(infoWindow);
   }
-  
-  onClickButton () {
+
+  onClickButton() {
     console.log('teste')
   }
 

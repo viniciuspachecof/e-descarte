@@ -5,9 +5,9 @@ import { PontoDescarteItem } from 'src/app/models/PontoDescarteItem.interface';
 import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.service';
 
 @Component({
-  selector: 'app-pontodescarteitem',
-  templateUrl: './pontodescarteitem.page.html',
-  styleUrls: ['./pontodescarteitem.page.scss'],
+  selector: 'app-listar-pontodescarte-item',
+  templateUrl: './listar-pontodescarte-item.page.html',
+  styleUrls: ['./listar-pontodescarte-item.page.scss'],
 })
 export class PontodescarteitemPage implements OnInit {
 
@@ -31,7 +31,7 @@ export class PontodescarteitemPage implements OnInit {
 
   async listar() {
     this.pontodescarteId = this.activatedRoute.snapshot.params['pontodescarteId'],
-    this.usuarioId = this.activatedRoute.snapshot.params['usuarioId'];  
+      this.usuarioId = this.activatedRoute.snapshot.params['usuarioId'];
 
     const loading = await this.loadingController.create({ message: 'Carregando' });
     loading.present();
@@ -44,7 +44,7 @@ export class PontodescarteitemPage implements OnInit {
   async confirmarExclusao(pontodescarteitem: PontoDescarteItem) {
     let alerta = await this.alertController.create({
       header: 'Confirmação de exclusão',
-      message: `Deseja excluir este item?`,
+      message: `Deseja excluir este lixo eletrônico?`,
       buttons: [{
         text: 'SIM',
         handler: () => {
@@ -62,24 +62,23 @@ export class PontodescarteitemPage implements OnInit {
     busyLoader.present();
 
     this.pontodescarteitemService
-    .excluir(pontodescarteitem).subscribe(() => {
-      busyLoader.dismiss();
-      this.listar()
-    }, () => {
-      busyLoader.dismiss();
-      this.mensagemAlerta();
-    });
+      .excluir(pontodescarteitem).subscribe(() => {
+        busyLoader.dismiss();
+        this.listar()
+      }, () => {
+        busyLoader.dismiss();
+        this.mensagemAlerta();
+      });
   }
 
   async mensagemAlerta() {
     const alerta = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Alerta',
-      message: 'Erro ao excluir o item.',
+      message: 'Erro ao excluir o lixo eletrônico.',
       buttons: ['OK']
     });
 
     await alerta.present();
   }
-
 }

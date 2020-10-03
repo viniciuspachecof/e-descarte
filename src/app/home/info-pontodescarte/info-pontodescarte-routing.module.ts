@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PontodescartePage } from './pontodescarte.page';
+import { PontodescartePage } from './info-pontodescarte.page';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: ':pontodescarteId/:usuarioId',
-    loadChildren: () => import('./pontodescarteitem/pontodescarteitem.module').then(m => m.PontodescarteitemPageModule)
+    loadChildren: () => import('./listar-pontodescarte-item/listar-pontodescarte-item.module').then(m => m.PontodescarteitemPageModule)
   }
 ];
 

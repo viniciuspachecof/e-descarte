@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PontodescarteitemPage } from './pontodescarteitem.page';
+import { PontodescarteitemPage } from './listar-pontodescarte-item.page';
 
 const routes: Routes = [
   {

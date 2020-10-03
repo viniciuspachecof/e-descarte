@@ -7,6 +7,7 @@ export interface PontoDescarte {
     fone: string;
     longitude: number; 
     latitude: number;
+    status: boolean;
     usuarioId: number;
     usuario: Usuario[];
     cidadeId: number;

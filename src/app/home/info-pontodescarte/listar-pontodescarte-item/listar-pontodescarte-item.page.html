@@ -12,13 +12,13 @@
     <ion-item *ngFor="let pontodescarteitem of pontodescarteitens">
       <div></div>
       <span>{{pontodescarteitem.item.nome}}</span>
-      <ion-icon color="success" name="create" slot="end" [routerLink]="['/ponto-descarte-item/editar', pontodescarteitem.id, pontodescarteId, usuarioId]"></ion-icon>
+      <ion-icon color="success" name="create" slot="end" [routerLink]="['/listar-ponto-descarte-item/editar', pontodescarteitem.id, pontodescarteId, usuarioId]"></ion-icon>
       <ion-icon color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarteitem)"></ion-icon>
     </ion-item>
   </ion-list>  
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button color="success" [routerLink]="['/ponto-descarte-item/cadastro', pontodescarteId, usuarioId]">
+    <ion-fab-button color="success" [routerLink]="['/listar-ponto-descarte-item/cadastro', pontodescarteId, usuarioId]">
       <ion-icon name="add-circle"></ion-icon>
     </ion-fab-button>
   </ion-fab>
