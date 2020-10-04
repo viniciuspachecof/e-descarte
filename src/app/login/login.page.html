@@ -7,16 +7,15 @@
 <ion-content>
   <div class="login-container">
     <ion-item>
-      <ion-input type="text" placeholder="E-mail" ></ion-input>
+      <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="usuario.email"></ion-input>
     </ion-item>
     
     <ion-item>
-      <ion-input type="password" placeholder="Senha" ></ion-input>
+      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha"></ion-input>
     </ion-item>
 
-    <a href="../home">
-      <ion-button class="button-container" expand="full" color="success">Entrar</ion-button>
-    </a>
+    <ion-button expand="block" (click)="entrar()" color="success">Entrar
+    </ion-button>
 
     <br>
     <ion-label>

@@ -9,6 +9,8 @@ import { api } from './api';
 export class UsuarioService {
 
   private URI = api + 'usuario';
+  private URI_LOGIN = api + 'login';
+
 
   constructor(
     private httpClient : HttpClient
@@ -20,6 +22,10 @@ export class UsuarioService {
 
   adicionar(usuario: Usuario) {
     return this.httpClient.post<Usuario>(this.URI, usuario);
+  };
+
+  entrar(usuario: Usuario) {
+    return this.httpClient.post<Usuario>(this.URI_LOGIN, usuario);
   };
 
   atualizar(usuario: Usuario) {
