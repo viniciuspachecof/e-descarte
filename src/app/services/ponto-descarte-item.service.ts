@@ -45,4 +45,4 @@ export class PontoDescarteItemService {
       return this.adicionar(pontodescarteitem);
     }
   };
-};
+}

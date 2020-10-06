@@ -41,4 +41,4 @@ export class PontoDescarteService {
       return this.adicionar(pontodescarte);
     }
   };
-};
+}

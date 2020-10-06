@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Usuario } from '../models/Usuario.interface';
+import { TokenService } from '../services/token.service';
 import { UsuarioService } from '../services/usuario.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private usuarioService: UsuarioService,
     private navController: NavController,
+    private tokenService: TokenService
   ) {
     this.usuario = {
       nome: null,
@@ -30,17 +32,18 @@ export class LoginPage implements OnInit {
 
   async entrar() {
     let loading = await this.loadingController.create({ message: 'Entrando' });
-    loading.present();
+    loading.present();    
 
     this.usuarioService
-      .entrar(this.usuario)
-      .subscribe(() => {
-        loading.dismiss();
-        this.navController.navigateForward(['/home']);
-      }, () => {
-        loading.dismiss();
-        this.mensagemAlerta();
-      });
+      .login(this.usuario).subscribe(
+        data => {
+          loading.dismiss();
+          this.tokenService.setToken(data);          
+          this.navController.navigateForward(['/home']);
+        }, () => {
+          loading.dismiss();
+          this.mensagemAlerta();
+        });
   }
 
   async mensagemAlerta() {

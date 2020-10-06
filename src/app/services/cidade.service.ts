@@ -41,4 +41,4 @@ export class CidadeService {
       return this.adicionar(cidade);
     }
   };
-};
+}

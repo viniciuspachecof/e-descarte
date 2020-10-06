@@ -47,7 +47,6 @@ const routes: Routes = [
     path: 'listar-pontodescarte',
     loadChildren: () => import('./listar-pontodescarte/listar-pontodescarte.module').then( m => m.ListaPontodescartePageModule)
   }
-
 ];
 
 @NgModule({

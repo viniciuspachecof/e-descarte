@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private tokenService: TokenService,
+    private navController: NavController,
+  ) { }
 
   ngOnInit() {
   }
 
+  logOut() {
+    this.tokenService.logOut();    
+    this.navController.navigateForward(['/login']);
+  }
 }

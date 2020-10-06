@@ -11,10 +11,13 @@ export class UsuarioService {
   private URI = api + 'usuario';
   private URI_LOGIN = api + 'login';
 
-
   constructor(
     private httpClient : HttpClient
   ) { };
+
+  login(usuario: Usuario) {
+    return this.httpClient.post<Usuario>(this.URI_LOGIN, usuario);
+  };
 
   getUsuarios() {
     return this.httpClient.get<Usuario[]>(this.URI);
@@ -22,10 +25,6 @@ export class UsuarioService {
 
   adicionar(usuario: Usuario) {
     return this.httpClient.post<Usuario>(this.URI, usuario);
-  };
-
-  entrar(usuario: Usuario) {
-    return this.httpClient.post<Usuario>(this.URI_LOGIN, usuario);
   };
 
   atualizar(usuario: Usuario) {
@@ -46,5 +45,5 @@ export class UsuarioService {
     } else {
       return this.adicionar(usuario);
     }
-  };
-};
+  }
+}
