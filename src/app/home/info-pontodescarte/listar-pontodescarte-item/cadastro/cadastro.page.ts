@@ -5,6 +5,7 @@ import { Item } from 'src/app/models/Item.interface';
 import { PontoDescarteItem } from 'src/app/models/PontoDescarteItem.interface';
 import { ItemService } from 'src/app/services/item.service';
 import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -22,6 +23,7 @@ export class CadastroPage implements OnInit {
     private loadingController: LoadingController,
     private pontodescarteitemService: PontoDescarteItemService,
     private itemService: ItemService,
+    private tokenService: TokenService,
     private navController: NavController,
   ) {
     this.pontodescarteitem = {
@@ -30,7 +32,7 @@ export class CadastroPage implements OnInit {
       pontoDescarte: null,
       itemId: null,
       item: null,
-      usuarioId: this.activatedRoute.snapshot.params['usuarioId'],
+      usuarioId: this.tokenService.getUserId(),
       usuario: null
     }
   }
@@ -61,7 +63,6 @@ export class CadastroPage implements OnInit {
 
   async salvar() {
     let pontodescarteId = this.pontodescarteitem.pontodescarteId,
-      usuarioId = this.pontodescarteitem.usuarioId,
       dto = {
         id: this.pontodescarteitem.id,
         quant: this.pontodescarteitem.quant,
@@ -80,7 +81,7 @@ export class CadastroPage implements OnInit {
       .salvar(dto)
       .subscribe(() => {
         loading.dismiss();
-        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId, usuarioId]);
+        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();

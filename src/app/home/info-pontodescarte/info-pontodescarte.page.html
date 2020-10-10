@@ -17,15 +17,7 @@
     <ion-item>
       <ion-input disabled="true" type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
       </ion-input>
-    </ion-item>
-    
-    <ion-item>
-      <ion-select placeholder="Selecione o usuário (temporário)" [(ngModel)]="usuarioId" name="usuario">
-        <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
-          {{usuario.nome}}
-        </ion-select-option>
-      </ion-select>     
-    </ion-item>
+    </ion-item>      
 
     <ion-item>
       <ion-select disabled="true" placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
@@ -37,5 +29,5 @@
   </form>
 
   <ion-button (click)="navigate()">Ir até o local</ion-button>
-  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id, usuarioId]">Descartar meu lixo eletrônico aqui</ion-button>
+  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]">Descartar meu lixo eletrônico aqui</ion-button>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Usuario } from '../models/Usuario.interface';
+import { DataSharingService } from '../services/data-sharing.service';
 import { TokenService } from '../services/token.service';
 import { UsuarioService } from '../services/usuario.service';
 
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private usuarioService: UsuarioService,
     private navController: NavController,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private dataSharingService: DataSharingService
   ) {
     this.usuario = {
       nome: null,
@@ -39,6 +41,8 @@ export class LoginPage implements OnInit {
         data => {
           loading.dismiss();
           this.tokenService.setToken(data);          
+          this.dataSharingService.isLogged.next(true);
+          this.dataSharingService.isCatador.next(this.tokenService.isCatador());
           this.navController.navigateForward(['/home']);
         }, () => {
           loading.dismiss();

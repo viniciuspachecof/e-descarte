@@ -5,8 +5,8 @@ import { PontoDescarteService } from '../services/ponto-descarte.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Cidade } from '../models/cidade.interface';
 import { CidadeService } from '../services/cidade.service';
-import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/Usuario.interface';
+import { TokenService } from '../services/token.service';
 
 declare var google: any;
 
@@ -33,7 +33,7 @@ export class CadastrarPontoDescartePage implements OnInit {
     private platform: Platform,
     private pontodescarteService: PontoDescarteService,
     private cidadeService: CidadeService,
-    private usuarioService: UsuarioService
+    private tokenService: TokenService,
   ) {
     this.pontodescarte = {
       nome: null,
@@ -63,22 +63,11 @@ export class CadastrarPontoDescartePage implements OnInit {
 
     this.cidadeService.getCidades().subscribe((data) => {
       this.cidades = data;
-      this.listarUsuarios();
-      loading.dismiss();
-    });
-  }
-
-  async listarUsuarios() {
-    const loading = await this.loadingController.create({ message: 'Carregando usuários' });
-    loading.present();
-
-    this.usuarioService.getUsuarios().subscribe((data) => {
-      this.usuarios = data;
       this.carregarMapa();
       loading.dismiss();
     });
   }
-
+ 
   carregarMapa() {
     this.geo.getCurrentPosition({
       timeout: 10000,
@@ -184,7 +173,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       status: this.pontodescarte.status,
       cidadeId: this.pontodescarte.cidadeId,
       cidade: null,
-      usuarioId: this.pontodescarte.usuarioId,
+      usuarioId: this.tokenService.getUserId(),
       usuario: null
     }
 

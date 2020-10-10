@@ -19,10 +19,17 @@ export class TokenService {
   public getToken(): string {
     return window.localStorage.getItem(TOKEN_KEY);
   }
+
+  getUserId(): number {
+    if(this.getToken()) {
+      var decoded = jwt_decode(this.getToken());            
+      return parseInt(decoded.nameid);
+    } 
+  }
  
   isCatador(): boolean {
     if(this.getToken()) {
-      var decoded = jwt_decode(this.getToken());            
+      var decoded = jwt_decode(this.getToken());                  
       return (decoded.role === 'CATADOR');
     }
     return false;

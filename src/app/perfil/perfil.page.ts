@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { DataSharingService } from '../services/data-sharing.service';
 import { TokenService } from '../services/token.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class PerfilPage implements OnInit {
   constructor(
     private tokenService: TokenService,
     private navController: NavController,
+    private dataSharingService: DataSharingService
   ) { }
 
   ngOnInit() {
@@ -19,6 +21,7 @@ export class PerfilPage implements OnInit {
 
   logOut() {
     this.tokenService.logOut();    
+    this.dataSharingService.isLogged.next(false);
     this.navController.navigateForward(['/login']);
   }
 }

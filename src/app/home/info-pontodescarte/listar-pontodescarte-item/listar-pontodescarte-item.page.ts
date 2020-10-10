@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { PontoDescarteItem } from 'src/app/models/PontoDescarteItem.interface';
 import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-listar-pontodescarte-item',
@@ -13,13 +14,14 @@ export class PontodescarteitemPage implements OnInit {
 
   pontodescarteitens: PontoDescarteItem[];
   pontodescarteId: null
-  usuarioId: null
+  usuarioId: number
 
   constructor(
     private alertController: AlertController,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteitemService: PontoDescarteItemService,
+    private tokenService: TokenService,
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class PontodescarteitemPage implements OnInit {
 
   async listar() {
     this.pontodescarteId = this.activatedRoute.snapshot.params['pontodescarteId'],
-      this.usuarioId = this.activatedRoute.snapshot.params['usuarioId'];
+    this.usuarioId = this.tokenService.getUserId();
 
     const loading = await this.loadingController.create({ message: 'Carregando' });
     loading.present();

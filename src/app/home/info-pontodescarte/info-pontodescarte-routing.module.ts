@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PontodescartePage
   },
   {
-    path: ':pontodescarteId/:usuarioId',
+    path: ':pontodescarteId',
     loadChildren: () => import('./listar-pontodescarte-item/listar-pontodescarte-item.module').then(m => m.PontodescarteitemPageModule)
   }
 ];

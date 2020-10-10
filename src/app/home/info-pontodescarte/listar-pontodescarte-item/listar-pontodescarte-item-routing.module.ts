@@ -9,11 +9,11 @@ const routes: Routes = [
     component: PontodescarteitemPage
   },
   {
-    path: 'cadastro/:pontodescarteId/:usuarioId',
+    path: 'cadastro/:pontodescarteId',
     loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
   }, 
   {
-    path: 'editar/:id/:pontodescarteId/:usuarioId',
+    path: 'editar/:id/:pontodescarteId',
     loadChildren: () => import('./cadastro/cadastro.module').then(m => m.CadastroPageModule)
   }
 ];

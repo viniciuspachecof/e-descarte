@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TokenService } from './services/token.service';
+import { DataSharingService } from './services/data-sharing.service';
 
 @Component({
   selector: 'app-root',
@@ -54,12 +55,19 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private tokenService: TokenService,
+    private dataSharingService: DataSharingService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.dataSharingService.isLogged.subscribe(value => {
+        this.isLogged = value;
+      });
+      this.dataSharingService.isCatador.subscribe(value => {
+        this.isCatador = value;
+      });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -70,14 +78,5 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     };
-  }
-
-  changeMenu() {
-    this.testLogged();
-  }
-
-  testLogged(): void {
-    this.isLogged = this.tokenService.getToken() != null;
-    this.isCatador = this.tokenService.isCatador();
-  }
+  }  
 }
