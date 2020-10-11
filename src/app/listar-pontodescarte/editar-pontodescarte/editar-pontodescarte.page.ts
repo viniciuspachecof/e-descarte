@@ -9,11 +9,11 @@ import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-editar',
-  templateUrl: './editar.page.html',
-  styleUrls: ['./editar.page.scss'],
+  selector: 'app-editar-pontodescarte',
+  templateUrl: './editar-pontodescarte.page.html',
+  styleUrls: ['./editar-pontodescarte.page.scss'],
 })
-export class EditarPage implements OnInit {
+export class EditarPontoDescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
   usuarios: Usuario[];

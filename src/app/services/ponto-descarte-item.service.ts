@@ -34,8 +34,12 @@ export class PontoDescarteItemService {
     return this.httpClient.get<PontoDescarteItem>(`${this.URI}/${id}`);
   };
 
-  getPontoDescarteItemByPontoDescarte(pontodescarteId: number, usuarioId: number) {
-    return this.httpClient.get<PontoDescarteItem[]>(`${this.URI+'/ByPontoDescarte'}/${pontodescarteId}/${usuarioId}`);
+  getPontoDescarteItemByPontoDescarte(pontodescarteId: number) {
+    return this.httpClient.get<PontoDescarteItem[]>(`${this.URI+'/ByPontoDescarte'}/${pontodescarteId}`);
+  };
+
+  getPontoDescarteItemByPontoDescarteUsuario(pontodescarteId: number, usuarioId: number) {
+    return this.httpClient.get<PontoDescarteItem[]>(`${this.URI+'/ByPontoDescarteUsuario'}/${pontodescarteId}/${usuarioId}`);
   };
 
   salvar(pontodescarteitem: PontoDescarteItem) {

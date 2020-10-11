@@ -37,7 +37,7 @@ export class PontodescarteitemPage implements OnInit {
 
     const loading = await this.loadingController.create({ message: 'Carregando' });
     loading.present();
-    this.pontodescarteitemService.getPontoDescarteItemByPontoDescarte(this.pontodescarteId, this.usuarioId).subscribe((data) => {
+    this.pontodescarteitemService.getPontoDescarteItemByPontoDescarteUsuario(this.pontodescarteId, this.usuarioId).subscribe((data) => {
       this.pontodescarteitens = data;
       loading.dismiss();
     });

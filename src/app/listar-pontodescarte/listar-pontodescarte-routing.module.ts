@@ -9,8 +9,8 @@ const routes: Routes = [
     component: ListaPontodescartePage
   },
   {
-    path: 'editar/:id',
-    loadChildren: () => import('./editar/editar.module').then( m => m.EditarPageModule)
+    path: ':id',
+    loadChildren: () => import('./editar-pontodescarte/editar-pontodescarte.module').then( m => m.EditarPontoDescartePageModule)
   }
 ];
 

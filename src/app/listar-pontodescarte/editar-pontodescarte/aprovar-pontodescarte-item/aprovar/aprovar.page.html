@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Aprovar lixo eletrônico</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #itemForm="ngForm" novalidate>
+    <ion-item>
+      <ion-select disabled="true" placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
+        <ion-select-option *ngFor="let item of itens" [value]="item.id">
+          {{item.nome}}
+        </ion-select-option>
+      </ion-select>     
+    </ion-item>
+    
+    <ion-item>
+      <ion-input disabled="true" type="text" placeholder="Quantidade" name="quant" [(ngModel)]="pontodescarteitem.quant">
+      </ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-radio-group name="status" [(ngModel)]="pontodescarteitem.status">
+        <ion-list-header>
+          <ion-label>Aprovação</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Aprovar</ion-label>
+          <ion-radio slot="start" [value]=1></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Reprovar</ion-label>
+          <ion-radio slot="start" [value]=2></ion-radio>
+        </ion-item>        
+      </ion-radio-group>
+    </ion-list>
+  </form>
+  
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button color="success" (click)="salvar()" [disabled]="itemForm.invalid">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  
+</ion-content>

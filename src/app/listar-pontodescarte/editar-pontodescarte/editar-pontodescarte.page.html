@@ -41,6 +41,8 @@
     </ion-item>
   </form>
 
+  <ion-button [routerLink]="['/editar-pontodescarte', pontodescarte.id]">Lixos cadastrados nesse local</ion-button>
+
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button color="success" (click)="salvar()" [disabled]="clienteForm.invalid">
       <ion-icon name="checkmark-outline"></ion-icon>

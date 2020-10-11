@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Item } from 'src/app/models/Item.interface';
 import { PontoDescarteItem } from 'src/app/models/PontoDescarteItem.interface';
 import { ItemService } from 'src/app/services/item.service';
 import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.service';
-import { TokenService } from 'src/app/services/token.service';
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.page.html',
-  styleUrls: ['./cadastro.page.scss'],
+  selector: 'app-aprovar',
+  templateUrl: './aprovar.page.html',
+  styleUrls: ['./aprovar.page.scss'],
 })
-export class CadastroPage implements OnInit {
+export class AprovarPage implements OnInit {
 
   pontodescarteitem: PontoDescarteItem
   itens: Item[];
@@ -21,10 +20,9 @@ export class CadastroPage implements OnInit {
     private alertController: AlertController,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
+    private navController: NavController,
     private pontodescarteitemService: PontoDescarteItemService,
     private itemService: ItemService,
-    private tokenService: TokenService,
-    private navController: NavController,
   ) {
     this.pontodescarteitem = {
       quant: 0,
@@ -33,7 +31,7 @@ export class CadastroPage implements OnInit {
       pontoDescarte: null,
       itemId: null,
       item: null,
-      usuarioId: this.tokenService.getUserId(),
+      usuarioId: null,
       usuario: null
     }
   }
@@ -62,28 +60,15 @@ export class CadastroPage implements OnInit {
     }
   }
 
-  async salvar() {
-    let pontodescarteId = this.pontodescarteitem.pontodescarteId,
-      dto = {
-        id: this.pontodescarteitem.id,
-        quant: this.pontodescarteitem.quant,
-        status: this.pontodescarteitem.status,
-        pontodescarteId: this.pontodescarteitem.pontodescarteId,
-        pontoDescarte: null,
-        itemId: this.pontodescarteitem.itemId,
-        item: null,
-        usuarioId: this.pontodescarteitem.usuarioId,
-        usuario: null
-      };
-
+  async salvar() {   
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.pontodescarteitemService
-      .salvar(dto)
+      .salvar(this.pontodescarteitem)
       .subscribe(() => {
         loading.dismiss();
-        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);
+        this.navController.navigateForward(['/editar-pontodescarte', this.pontodescarteitem.pontodescarteId]);
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();
@@ -100,4 +85,5 @@ export class CadastroPage implements OnInit {
 
     await alerta.present();
   }
-};
+
+}

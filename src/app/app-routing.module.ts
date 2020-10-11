@@ -46,6 +46,14 @@ const routes: Routes = [
   {
     path: 'listar-pontodescarte',
     loadChildren: () => import('./listar-pontodescarte/listar-pontodescarte.module').then( m => m.ListaPontodescartePageModule)
+  },
+  {
+    path: 'editar-pontodescarte',
+    loadChildren: () => import('./listar-pontodescarte/editar-pontodescarte/editar-pontodescarte.module').then( m => m.EditarPontoDescartePageModule)
+  },
+  {
+    path: 'aprovar-pontodescarte-item',
+    loadChildren: () => import('./listar-pontodescarte/editar-pontodescarte/aprovar-pontodescarte-item/aprovar-pontodescarte-item.module').then( m => m.AprovarPontodescarteItemPageModule)
   }
 ];
 

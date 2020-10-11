@@ -5,6 +5,7 @@ import { Usuario } from './Usuario.interface';
 export interface PontoDescarteItem {    
     id?: number;
     quant: number;
+    status: number;
     pontodescarteId: number;
     pontoDescarte: PontoDescarte
     itemId: number;
