@@ -7,30 +7,30 @@ import { api } from './api';
   providedIn: 'root'
 })
 export class ItemService {
-  private URI = api + 'item';
+  private URL = api + 'item';
 
   constructor(
     private httpClient : HttpClient
   ) { };
 
   getItens() {
-    return this.httpClient.get<Item[]>(this.URI);
+    return this.httpClient.get<Item[]>(this.URL);
   };
 
   adicionar(item: Item) {
-    return this.httpClient.post<Item>(this.URI, item);
+    return this.httpClient.post<Item>(this.URL, item);
   };
 
   atualizar(item: Item) {
-    return this.httpClient.put<Item>(`${this.URI}/${item.id}`, item);
+    return this.httpClient.put<Item>(`${this.URL}/${item.id}`, item);
   };
 
   excluir(item: Item) {
-    return this.httpClient.delete(`${this.URI}/${item.id}`);
+    return this.httpClient.delete(`${this.URL}/${item.id}`);
   };
 
   getItem(id: number) {
-    return this.httpClient.get<Item>(`${this.URI}/${id}`);
+    return this.httpClient.get<Item>(`${this.URL}/${id}`);
   };
 
   salvar(item: Item) {

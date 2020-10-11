@@ -8,30 +8,30 @@ import { api } from './api';
 })
 export class PontoDescarteService {
 
-  private URI = api + 'pontodescarte';
+  private URL = api + 'pontodescarte';
 
   constructor(
     private httpClient : HttpClient
   ) { };
 
   getPontosDescarte() {
-    return this.httpClient.get<PontoDescarte[]>(this.URI);
+    return this.httpClient.get<PontoDescarte[]>(this.URL);
   };
 
   adicionar(pontodescarte: PontoDescarte) {
-    return this.httpClient.post<PontoDescarte>(this.URI, pontodescarte);
+    return this.httpClient.post<PontoDescarte>(this.URL, pontodescarte);
   };
 
   atualizar(pontodescarte: PontoDescarte) {
-    return this.httpClient.put<PontoDescarte>(`${this.URI}/${pontodescarte.id}`, pontodescarte);
+    return this.httpClient.put<PontoDescarte>(`${this.URL}/${pontodescarte.id}`, pontodescarte);
   };
 
   excluir(pontodescarte: PontoDescarte) {
-    return this.httpClient.delete(`${this.URI}/${pontodescarte.id}`);
+    return this.httpClient.delete(`${this.URL}/${pontodescarte.id}`);
   };
 
   getPontoDescarte(id: number) {
-    return this.httpClient.get<PontoDescarte>(`${this.URI}/${id}`);
+    return this.httpClient.get<PontoDescarte>(`${this.URL}/${id}`);
   };
 
   salvar(pontodescarte: PontoDescarte) {
