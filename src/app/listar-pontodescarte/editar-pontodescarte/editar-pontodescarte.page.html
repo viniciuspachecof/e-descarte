@@ -10,13 +10,25 @@
 <ion-content>
   <form #clienteForm="ngForm" novalidate>
     <ion-item>
-      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
-      </ion-input>
+      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
+        <small>
+          <span *ngIf="campoNome.errors.required">
+            O campo nome é obrigatório
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
-      </ion-input>
+      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
+        <small>
+          <span *ngIf="campoFone.errors.required">
+            O campo Fone é obrigatório
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
     
     <ion-item>
