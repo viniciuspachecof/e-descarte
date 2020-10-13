@@ -84,9 +84,9 @@ export class HomePage implements OnInit {
 
     mapMarker.setMap(this.map);
 
-    this.addInfoWindowToMarker(mapMarker);
+    this.addUserInfoWindowToMarker(mapMarker);
   }
-
+  
   addMarkersToMap(markers) {
     for (let marker of markers) {
       if (marker.status) {
@@ -107,13 +107,32 @@ export class HomePage implements OnInit {
     }
   }
 
+  addUserInfoWindowToMarker(marker) {
+    let infoWindowContent =
+      `<div class="infoitem">` +
+      `<h4>` + marker.title + `</h4>` +
+      `<p>` + marker.longitude + `</p>` +
+      `<p>` + marker.latitude + `</p>`;
+
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+
+    marker.addListener('click', () => {
+      this.closeAllInfoWindow();
+      infoWindow.open(this.map, marker);
+    });
+
+    this.infoWindows.push(infoWindow);
+  }
+
   addInfoWindowToMarker(marker) {
     let infoWindowContent =
       `<div class="infoitem">` +
       `<h4>` + marker.title + `</h4>` +
       `<p>` + marker.longitude + `</p>` +
       `<p>` + marker.latitude + `</p>` +
-      // `<ion-button id="navigate">Ver mais...</ion-button>` +
       `<ion-button id="information">Ver mais...</ion-button>` +
       `</div>`;
 

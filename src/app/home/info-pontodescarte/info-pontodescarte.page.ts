@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
 import { CidadeService } from 'src/app/services/cidade.service';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 
 @Component({
@@ -15,12 +16,14 @@ export class PontodescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
   cidades: Cidade[];
+  isCatador: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
-    private cidadeService: CidadeService
+    private cidadeService: CidadeService,
+    private dataSharingService: DataSharingService
   ) {
     this.pontodescarte = {
       nome: null,
@@ -36,6 +39,10 @@ export class PontodescartePage implements OnInit {
   }
 
   async ngOnInit() {
+    this.dataSharingService.isCatador.subscribe(value => {
+      this.isCatador = value;
+    });
+    
     this.listarCidades();
   }
 
