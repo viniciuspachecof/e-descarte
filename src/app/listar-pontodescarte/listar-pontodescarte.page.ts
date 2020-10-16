@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { PontoDescarte } from '../models/pontodescarte.interface';
 import { PontoDescarteService } from '../services/ponto-descarte.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-listar-pontodescarte',
@@ -16,6 +17,7 @@ export class ListaPontodescartePage implements OnInit {
     private alertController: AlertController,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
+    private tokenService: TokenService,
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class ListaPontodescartePage implements OnInit {
   async listar() {
     const loading = await this.loadingController.create({ message: 'Carregando' });
     loading.present();
-    this.pontodescarteService.getPontosDescarte().subscribe((data) => {
+    this.pontodescarteService.getPontoDescarteByUsuario(this.tokenService.getUserId()).subscribe((data) => {
       this.pontosdescarte = data;
       loading.dismiss();
     });

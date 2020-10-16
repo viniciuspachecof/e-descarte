@@ -3,10 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
-import { Usuario } from 'src/app/models/Usuario.interface';
 import { CidadeService } from 'src/app/services/cidade.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-editar-pontodescarte',
@@ -16,7 +15,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class EditarPontoDescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
-  usuarios: Usuario[];
   cidades: Cidade[];  
 
   constructor(
@@ -24,9 +22,9 @@ export class EditarPontoDescartePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
-    private usuarioService: UsuarioService,
     private cidadeService: CidadeService,
     private navController: NavController,
+    private tokenService: TokenService
   ) {
     this.pontodescarte = {
       nome: null,
@@ -51,17 +49,6 @@ export class EditarPontoDescartePage implements OnInit {
 
     this.cidadeService.getCidades().subscribe((data) => {
       this.cidades = data;
-      this.listarUsuarios();
-      loading.dismiss();
-    });
-  }
-
-  async listarUsuarios() {
-    const loading = await this.loadingController.create({ message: 'Carregando usuários' });
-    loading.present();
-
-    this.usuarioService.getUsuarios().subscribe((data) => {
-      this.usuarios = data;
       this.carregarPontoDescate();
       loading.dismiss();
     });
@@ -86,7 +73,7 @@ export class EditarPontoDescartePage implements OnInit {
         longitude: this.pontodescarte.longitude,
         latitude: this.pontodescarte.latitude,
         status: this.pontodescarte.status,
-        usuarioId: this.pontodescarte.usuarioId,
+        usuarioId: this.tokenService.getUserId(),
         usuario: null,
         cidadeId: this.pontodescarte.cidadeId,
         cidade: null

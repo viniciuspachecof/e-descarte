@@ -18,6 +18,14 @@ export class PontoDescarteService {
     return this.httpClient.get<PontoDescarte[]>(this.URL);
   };
 
+  getPontoDescarte(id: number) {
+    return this.httpClient.get<PontoDescarte>(`${this.URL}/${id}`);
+  };
+
+  getPontoDescarteByUsuario(usuarioId: number) {
+    return this.httpClient.get<PontoDescarte[]>(`${this.URL+'/ByUsuario'}/${usuarioId}`);
+  };
+
   adicionar(pontodescarte: PontoDescarte) {
     return this.httpClient.post<PontoDescarte>(this.URL, pontodescarte);
   };
@@ -28,10 +36,6 @@ export class PontoDescarteService {
 
   excluir(pontodescarte: PontoDescarte) {
     return this.httpClient.delete(`${this.URL}/${pontodescarte.id}`);
-  };
-
-  getPontoDescarte(id: number) {
-    return this.httpClient.get<PontoDescarte>(`${this.URL}/${id}`);
   };
 
   salvar(pontodescarte: PontoDescarte) {

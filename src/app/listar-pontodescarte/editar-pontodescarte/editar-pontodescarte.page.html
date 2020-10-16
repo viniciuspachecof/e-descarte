@@ -32,14 +32,6 @@
     </ion-item>
     
     <ion-item>
-      <ion-select placeholder="Selecione o usuário (temporário)" [(ngModel)]="pontodescarte.usuarioId" name="usuario">
-        <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
-          {{usuario.nome}}
-        </ion-select-option>
-      </ion-select>     
-    </ion-item>
-
-    <ion-item>
       <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
         <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
           {{cidade.nome}}

@@ -9,9 +9,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let pontodescarteitem of pontodescarteitens">
+    <ion-item *ngFor="let pontodescarteitem of pontodescarteitens">   
       <div></div>
-      <span>{{pontodescarteitem.item.nome}}</span>
+      <ion-label>
+        <span>{{pontodescarteitem.item.nome}}</span>
+        <p>Qtde.: {{pontodescarteitem.quant}}</p>
+      </ion-label>   
       <ion-icon *ngIf="pontodescarteitem.status === 0" color="success" name="create" slot="end" [routerLink]="['/listar-pontodescarte-item/editar', pontodescarteitem.id, pontodescarteId]"></ion-icon>
       <ion-icon *ngIf="pontodescarteitem.status === 0" color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarteitem)"></ion-icon>
       <ion-icon *ngIf="pontodescarteitem.status === 1" color="success" name="checkmark-circle" slot="end"></ion-icon>

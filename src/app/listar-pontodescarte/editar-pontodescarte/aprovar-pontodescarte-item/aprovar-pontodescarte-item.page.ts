@@ -12,6 +12,7 @@ import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.s
 export class AprovarPontodescarteItemPage implements OnInit {
 
   pontodescarteitens: PontoDescarteItem[];
+  pontodescarteNome: string;
   pontodescarteId: null
 
   constructor(
@@ -33,6 +34,9 @@ export class AprovarPontodescarteItemPage implements OnInit {
     const loading = await this.loadingController.create({ message: 'Carregando' });
     loading.present();
     this.pontodescarteitemService.getPontoDescarteItemByPontoDescarte(this.pontodescarteId).subscribe((data) => {
+      if (data.length>0) {
+        this.pontodescarteNome = data[0]['pontodescarte'].nome
+      }      
       this.pontodescarteitens = data;
       loading.dismiss();
     });
