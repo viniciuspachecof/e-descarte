@@ -106,8 +106,4 @@ export class EditarPontoDescartePage implements OnInit {
 
     await alerta.present();
   }
-
-  onChangeStatus($event) {
-    console.log()
-  }
 }
