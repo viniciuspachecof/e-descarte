@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { PontoDescarte } from '../models/pontodescarte.interface';
+import { DataSharingService } from '../services/data-sharing.service';
 import { PontoDescarteService } from '../services/ponto-descarte.service';
 import { TokenService } from '../services/token.service';
 
@@ -18,12 +19,14 @@ export class ListaPontodescartePage implements OnInit {
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
     private tokenService: TokenService,
+    private dataSharingService: DataSharingService
   ) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
+    this.dataSharingService.displayMenu.next(true);
     this.listar();
   }
 

@@ -21,7 +21,7 @@ export class PerfilPage implements OnInit {
 
   logOut() {
     this.tokenService.logOut();    
-    this.dataSharingService.isLogged.next(false);
+    this.dataSharingService.displayMenu.next(false);
     this.navController.navigateForward(['/login']);
   }
 }

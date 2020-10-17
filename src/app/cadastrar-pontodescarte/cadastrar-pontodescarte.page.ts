@@ -7,6 +7,7 @@ import { Cidade } from '../models/cidade.interface';
 import { CidadeService } from '../services/cidade.service';
 import { Usuario } from '../models/Usuario.interface';
 import { TokenService } from '../services/token.service';
+import { DataSharingService } from '../services/data-sharing.service';
 
 declare var google: any;
 
@@ -34,6 +35,7 @@ export class CadastrarPontoDescartePage implements OnInit {
     private pontodescarteService: PontoDescarteService,
     private cidadeService: CidadeService,
     private tokenService: TokenService,
+    private dataSharingService: DataSharingService
   ) {
     this.pontodescarte = {
       nome: null,
@@ -184,6 +186,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       .salvar(dto)
       .subscribe(() => {
         loading.dismiss();
+        this.dataSharingService.selectedIndex.next(1);
         this.navController.navigateForward(['/home']);
       }, () => {
         loading.dismiss();

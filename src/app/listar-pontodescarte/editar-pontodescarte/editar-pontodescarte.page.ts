@@ -4,6 +4,7 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
 import { CidadeService } from 'src/app/services/cidade.service';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -24,7 +25,8 @@ export class EditarPontoDescartePage implements OnInit {
     private pontodescarteService: PontoDescarteService,
     private cidadeService: CidadeService,
     private navController: NavController,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private dataSharingService: DataSharingService
   ) {
     this.pontodescarte = {
       nome: null,
@@ -40,6 +42,7 @@ export class EditarPontoDescartePage implements OnInit {
   }
 
   async ngOnInit() {
+    this.dataSharingService.displayMenu.next(false);
     this.listarCidades();
   }
 

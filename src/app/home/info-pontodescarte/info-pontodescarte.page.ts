@@ -42,7 +42,7 @@ export class PontodescartePage implements OnInit {
     this.dataSharingService.isCatador.subscribe(value => {
       this.isCatador = value;
     });
-    
+    this.dataSharingService.displayMenu.next(false);
     this.listarCidades();
   }
 

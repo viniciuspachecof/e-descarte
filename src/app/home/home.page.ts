@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Platform, LoadingController, NavController } from '@ionic/angular';
 import { PontoDescarteService } from '../services/ponto-descarte.service';
+import { DataSharingService } from '../services/data-sharing.service';
 
 declare var google: any;
 
@@ -25,11 +26,13 @@ export class HomePage implements OnInit {
     private pontodescarteService: PontoDescarteService,
     private loadingController: LoadingController,
     private navController: NavController,
+    private dataSharingService: DataSharingService
   ) { }
 
   ngOnInit() { }
 
   ionViewDidEnter() {
+    this.dataSharingService.displayMenu.next(true);
     this.platform.ready().then(() => {
       this.listar();
     })
