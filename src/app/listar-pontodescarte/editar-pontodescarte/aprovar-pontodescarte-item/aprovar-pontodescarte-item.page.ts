@@ -15,6 +15,7 @@ export class AprovarPontodescarteItemPage implements OnInit {
   pontodescarteitens: PontoDescarteItem[];
   pontodescarteId: null
   pontodescarteNome: string;
+  usuarioNome: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -43,5 +44,22 @@ export class AprovarPontodescarteItemPage implements OnInit {
       this.pontodescarteitens = data;
       loading.dismiss();
     });
+  }
+
+  async buscarClienteFiltro() {
+    const loading = await this.loadingController.create({ message: 'Buscando...' });
+    loading.present();
+
+    if (this.usuarioNome) {
+      this.pontodescarteitemService.getPontoDescarteItemByPontoDescarteUsuarioNome(this.pontodescarteId, this.usuarioNome).subscribe((data) => {        
+        this.pontodescarteitens = data;     
+        loading.dismiss(); 
+      });
+    } else {
+      this.pontodescarteitemService.getPontoDescarteItemByPontoDescarte(this.pontodescarteId).subscribe((data) => {        
+        this.pontodescarteitens = data;
+        loading.dismiss();
+      });
+    }
   }
 }

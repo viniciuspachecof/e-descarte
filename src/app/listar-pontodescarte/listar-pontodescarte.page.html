@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>Meus pontos</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -10,7 +10,6 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let pontodescarte of pontosdescarte">
-      <div></div>
       <span>{{pontodescarte.nome}}</span>
       <ion-icon color="success" name="create" slot="end" [routerLink]="['/listar-pontodescarte', pontodescarte.id]"></ion-icon>
       <ion-icon color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarte)"></ion-icon>

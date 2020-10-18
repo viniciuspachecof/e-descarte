@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>Aprovar lixo eletrônico</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/aprovar-pontodescarte-item"></ion-back-button>
@@ -14,37 +14,39 @@
         <ion-select-option *ngFor="let item of itens" [value]="item.id">
           {{item.nome}}
         </ion-select-option>
-      </ion-select>     
+      </ion-select>
     </ion-item>
-    
+
     <ion-item>
       <ion-input disabled="true" type="text" placeholder="Quantidade" name="quant" [(ngModel)]="pontodescarteitem.quant">
       </ion-input>
     </ion-item>
-
-    <ion-list>
-      <ion-radio-group name="status" [(ngModel)]="pontodescarteitem.status">
-        <ion-list-header>
-          <ion-label>Aprovação</ion-label>
-        </ion-list-header>
-        <ion-item>
-          <ion-label>Aprovar</ion-label>
-          <ion-radio slot="start" [value]=1></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Reprovar</ion-label>
-          <ion-radio slot="start" [value]=2></ion-radio>
-        </ion-item>        
-      </ion-radio-group>
-    </ion-list>
+   
+    <ion-radio-group (ionChange)="executarAlgo()" name="status" [(ngModel)]="pontodescarteitem.status">
+    <ion-grid style="margin-top: 100px">
+      <ion-row>
+        <ion-col style="position: relative;" size="5" offset="1">
+          <ion-item style="--border-style: none !important">
+            <img [ngStyle]="styleAprovar" src="../../../../../assets/icon/icone-aprovado.png" alt="icone-aprovado">
+            <ion-radio slot="start" [value]=1></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col style="position: relative;" size="5">
+          <ion-item  style="--border-style: none !important">
+            <img [ngStyle]="styleReprovar" src="../../../../../assets/icon/icone-reprovado.png" alt="icone-reprovado">
+            <ion-radio slot="start" [value]=2></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-radio-group>
   </form>
-  
+
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button color="success" (click)="salvar()" [disabled]="itemForm.invalid">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  
+
 </ion-content>
