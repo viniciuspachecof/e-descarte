@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Platform, LoadingController, NavController } from '@ionic/angular';
 import { PontoDescarteService } from '../services/ponto-descarte.service';
+import { DataSharingService } from '../services/data-sharing.service';
 
 declare var google: any;
 
@@ -25,11 +26,13 @@ export class HomePage implements OnInit {
     private pontodescarteService: PontoDescarteService,
     private loadingController: LoadingController,
     private navController: NavController,
+    private dataSharingService: DataSharingService
   ) { }
 
   ngOnInit() { }
 
   ionViewDidEnter() {
+    this.dataSharingService.displayMenu.next(true);
     this.platform.ready().then(() => {
       this.listar();
     })
@@ -79,14 +82,15 @@ export class HomePage implements OnInit {
       position: location,
       latitude: userLat,
       longitude: userLong,
-      icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+      // icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+      icon: '../../assets/icon/marker-azul.png'
     });
 
     mapMarker.setMap(this.map);
 
-    this.addInfoWindowToMarker(mapMarker);
+    this.addUserInfoWindowToMarker(mapMarker);
   }
-
+  
   addMarkersToMap(markers) {
     for (let marker of markers) {
       if (marker.status) {
@@ -97,7 +101,8 @@ export class HomePage implements OnInit {
           position: position,
           latitude: marker.latitude,
           longitude: marker.longitude,
-          icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
+          // icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
+          icon: '../../assets/icon/marker-vermelho.png'
         });
 
         mapMarker.setMap(this.map);
@@ -107,13 +112,32 @@ export class HomePage implements OnInit {
     }
   }
 
+  addUserInfoWindowToMarker(marker) {
+    let infoWindowContent =
+      `<div class="infoitem">` +
+      `<h4>` + marker.title + `</h4>` +
+      `<p>` + marker.longitude + `</p>` +
+      `<p>` + marker.latitude + `</p>`;
+
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+
+    marker.addListener('click', () => {
+      this.closeAllInfoWindow();
+      infoWindow.open(this.map, marker);
+    });
+
+    this.infoWindows.push(infoWindow);
+  }
+
   addInfoWindowToMarker(marker) {
     let infoWindowContent =
       `<div class="infoitem">` +
       `<h4>` + marker.title + `</h4>` +
       `<p>` + marker.longitude + `</p>` +
       `<p>` + marker.latitude + `</p>` +
-      // `<ion-button id="navigate">Ver mais...</ion-button>` +
       `<ion-button id="information">Ver mais...</ion-button>` +
       `</div>`;
 

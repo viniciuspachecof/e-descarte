@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>Cadastrar ponto</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -10,13 +10,25 @@
 <ion-content>
   <form #pontodescarteForm="ngForm" novalidate>
     <ion-item>
-      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
-      </ion-input>
+      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
+        <small>
+          <span *ngIf="campoNome.errors.required">
+            O campo nome é obrigatório
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
-      </ion-input>
+      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
+        <small>
+          <span *ngIf="campoFone.errors.required">
+            O campo fone é obrigatório
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
 
     <ion-item>

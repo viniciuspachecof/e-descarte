@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>Ponto de descarte</ion-title>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -29,5 +29,5 @@
   </form>
 
   <ion-button (click)="navigate()">Ir até o local</ion-button>
-  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]">Descartar meu lixo eletrônico aqui</ion-button>
+  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador">Descartar meu lixo eletrônico aqui</ion-button>
 </ion-content>

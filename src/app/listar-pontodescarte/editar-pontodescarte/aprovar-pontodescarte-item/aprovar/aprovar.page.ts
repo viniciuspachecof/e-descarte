@@ -15,6 +15,8 @@ export class AprovarPage implements OnInit {
 
   pontodescarteitem: PontoDescarteItem
   itens: Item[];
+  styleAprovar = {}
+  styleReprovar = {}
 
   constructor(
     private alertController: AlertController,
@@ -33,6 +35,18 @@ export class AprovarPage implements OnInit {
       item: null,
       usuarioId: null,
       usuario: null
+    },
+
+    this.styleAprovar = {
+      'filter': 'saturate(0%)',
+      '-webkit-filter': 'saturate(0%)',
+      '-moz-filter': 'saturate(0%)'
+    },
+
+    this.styleReprovar = {
+      'filter': 'brightness(200%) saturate(0%)',
+      '-webkit-filter': 'brightness(200%) saturate(0%)',
+      '-moz-filter': 'brightness(200%) saturate(0%)'
     }
   }
 
@@ -84,6 +98,26 @@ export class AprovarPage implements OnInit {
     });
 
     await alerta.present();
+  }
+  
+  executarAlgo() {   
+    if(this.pontodescarteitem.status === 0) return;
+
+    if(this.pontodescarteitem.status === 1) {      
+      this.styleAprovar = { };
+      this.styleReprovar = {
+        'filter': 'brightness(200%) saturate(0%)',
+        '-webkit-filter': 'brightness(200%) saturate(0%)',
+        '-moz-filter': 'brightness(200%) saturate(0%)'
+      }
+    } else {
+      this.styleReprovar = { };    
+      this.styleAprovar = {
+        'filter': 'saturate(0%)',
+        '-webkit-filter': 'saturate(0%)',
+        '-moz-filter': 'saturate(0%)'
+      }
+    }
   }
 
 }

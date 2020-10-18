@@ -8,35 +8,35 @@ import { api } from './api';
 })
 export class UsuarioService {
 
-  private URI = api + 'usuario';
-  private URI_LOGIN = api + 'login';
+  private URL = api + 'usuario';
+  private URL_LOGIN = api + 'login';
 
   constructor(
     private httpClient : HttpClient
   ) { };
 
   login(usuario: Usuario) {
-    return this.httpClient.post<Usuario>(this.URI_LOGIN, usuario);
+    return this.httpClient.post<Usuario>(this.URL_LOGIN, usuario);
   };
 
   getUsuarios() {
-    return this.httpClient.get<Usuario[]>(this.URI);
+    return this.httpClient.get<Usuario[]>(this.URL);
   };
 
   adicionar(usuario: Usuario) {
-    return this.httpClient.post<Usuario>(this.URI, usuario);
+    return this.httpClient.post<Usuario>(this.URL, usuario);
   };
 
   atualizar(usuario: Usuario) {
-    return this.httpClient.put<Usuario>(`${this.URI}/${usuario.id}`, usuario);
+    return this.httpClient.put<Usuario>(`${this.URL}/${usuario.id}`, usuario);
   };
 
   excluir(usuario: Usuario) {
-    return this.httpClient.delete(`${this.URI}/${usuario.id}`);
+    return this.httpClient.delete(`${this.URL}/${usuario.id}`);
   };
 
   getUsuario(id: number) {
-    return this.httpClient.get<Usuario>(`${this.URI}/${id}`);
+    return this.httpClient.get<Usuario>(`${this.URL}/${id}`);
   };
 
   salvar(usuario: Usuario) {

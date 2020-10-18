@@ -8,30 +8,34 @@ import { api } from './api';
 })
 export class PontoDescarteService {
 
-  private URI = api + 'pontodescarte';
+  private URL = api + 'pontodescarte';
 
   constructor(
     private httpClient : HttpClient
   ) { };
 
   getPontosDescarte() {
-    return this.httpClient.get<PontoDescarte[]>(this.URI);
-  };
-
-  adicionar(pontodescarte: PontoDescarte) {
-    return this.httpClient.post<PontoDescarte>(this.URI, pontodescarte);
-  };
-
-  atualizar(pontodescarte: PontoDescarte) {
-    return this.httpClient.put<PontoDescarte>(`${this.URI}/${pontodescarte.id}`, pontodescarte);
-  };
-
-  excluir(pontodescarte: PontoDescarte) {
-    return this.httpClient.delete(`${this.URI}/${pontodescarte.id}`);
+    return this.httpClient.get<PontoDescarte[]>(this.URL);
   };
 
   getPontoDescarte(id: number) {
-    return this.httpClient.get<PontoDescarte>(`${this.URI}/${id}`);
+    return this.httpClient.get<PontoDescarte>(`${this.URL}/${id}`);
+  };
+
+  getPontoDescarteByUsuario(usuarioId: number) {
+    return this.httpClient.get<PontoDescarte[]>(`${this.URL+'/ByUsuario'}/${usuarioId}`);
+  };
+
+  adicionar(pontodescarte: PontoDescarte) {
+    return this.httpClient.post<PontoDescarte>(this.URL, pontodescarte);
+  };
+
+  atualizar(pontodescarte: PontoDescarte) {
+    return this.httpClient.put<PontoDescarte>(`${this.URL}/${pontodescarte.id}`, pontodescarte);
+  };
+
+  excluir(pontodescarte: PontoDescarte) {
+    return this.httpClient.delete(`${this.URL}/${pontodescarte.id}`);
   };
 
   salvar(pontodescarte: PontoDescarte) {

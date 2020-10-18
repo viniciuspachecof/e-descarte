@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TokenService } from './services/token.service';
@@ -13,70 +13,42 @@ import { DataSharingService } from './services/data-sharing.service';
 })
 export class AppComponent implements OnInit {
 
-  isLogged: boolean;
+  displayMenu: boolean;
   isCatador: boolean;
-
-  public selectedIndex = 0;
-  public appPages = [
-    {
-      title: 'Início',
-      url: 'home',
-      icon: 'home'
-    },
-    {
-      title: 'Cadastrar ponto',
-      url: 'cadastrar-pontodescarte',
-      icon: 'location'
-    },
-    {
-      title: 'Meus pontos cadastrados',
-      url: 'listar-pontodescarte',
-      icon: 'location'
-    },
-    {
-      title: 'Perfil',
-      url: 'perfil',
-      icon: 'person'
-    },
-    {
-      title: 'Fale conosco',
-      url: 'fale-conosco',
-      icon: 'megaphone'
-    },
-    {
-      title: 'Sobre',
-      url: 'sobre',
-      icon: 'help-circle'
-    }
-  ];
+  selectedIndex: number;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    private statusBar: StatusBar,   
+    private dataSharingService: DataSharingService,
     private tokenService: TokenService,
-    private dataSharingService: DataSharingService
+    private navController: NavController
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.dataSharingService.isLogged.subscribe(value => {
-        this.isLogged = value;
+      this.dataSharingService.displayMenu.subscribe(value => {
+        this.displayMenu = value;
       });
       this.dataSharingService.isCatador.subscribe(value => {
         this.isCatador = value;
+      });
+      this.dataSharingService.selectedIndex.subscribe(value => {
+        this.selectedIndex = value;
       });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
-  ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    };
-  }  
+  ngOnInit() { }  
+
+  logOut() {
+    this.tokenService.logOut();    
+    this.dataSharingService.displayMenu.next(false);
+    this.navController.navigateForward(['/login']);
+  }
 }

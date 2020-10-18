@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay" *ngIf="isLogged">
+    <ion-menu contentId="main-content" type="overlay" *ngIf="displayMenu">
       <ion-content>
         <ion-list id="inbox-list">
           <img src="../assets/img/logo2.png" style="width: 150px; margin: 0px 0px 15px 10px" alt="logo">          
@@ -41,6 +41,8 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
+        <ion-button expand="block" (click)="logOut()" color="success">Sair
+        </ion-button>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

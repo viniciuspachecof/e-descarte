@@ -28,19 +28,12 @@ export class CriarContaPage implements OnInit {
   ngOnInit() {
   }
 
-  async salvar() {
-    let dto = {
-        id: this.usuario.id,
-        nome: this.usuario.nome,
-        email: this.usuario.email,
-        senha: this.usuario.senha,
-      };
-
+  async salvar() {  
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.usuarioService
-      .salvar(dto)
+      .salvar(this.usuario)
       .subscribe(() => {
         loading.dismiss();
         this.navController.navigateForward(['/login']);
@@ -54,8 +47,10 @@ export class CriarContaPage implements OnInit {
     const alerta = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Alerta',
-      message: 'Erro ao criar conta.',
+      message: 'Erro ao criar a conta.',
       buttons: ['OK']
     });
+
+    await alerta.present();
   }
 }

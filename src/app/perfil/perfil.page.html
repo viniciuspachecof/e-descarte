@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>Perfil</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -8,28 +8,47 @@
 </ion-header>
 
 <ion-content>
-  <div class="login-container">
+  <form #perfilForm="ngForm" novalidate>
     <ion-item>
-      <ion-input type="text" placeholder="Nome completo" ></ion-input>
+      <ion-input type="text" placeholder="Nome completo"  name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
+        <small>
+          <span *ngIf="campoNome.errors.required">
+            O campo nome é obrigatório
+          </span>
+          <span *ngIf="campoNome.errors.pattern">
+            O campo deve ter apenas letras
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
     
     <ion-item>
-      <ion-input type="text" placeholder="E-mail" ></ion-input>
+      <ion-input type="email" placeholder="E-mail" name="email" [(ngModel)]="usuario.email"  required   #campoEmail="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
+        <small>
+          <span *ngIf="campoEmail.errors.required">
+            O campo email é obrigatório
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
 
     <ion-item>
-      <ion-input type="password" placeholder="Senha" ></ion-input>
+      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
+        <small>
+          <span *ngIf="campoSenha.errors.required">
+            O campo senha é obrigatório
+          </span>
+          <span *ngIf="campoNome.errors.minlength">
+            O campo senh deve ter no mínimo 8 caracteres
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
+  </form>
 
-    <a href="">
-      <ion-button class="button-container" expand="full" color="success">Editar</ion-button>
-    </a>
-  
-    <a href="">
-      <ion-button class="button-container" expand="full" color="success">Salvar</ion-button>  
-    </a>
-
-    <ion-button expand="block" (click)="logOut()" color="success">Sair
-    </ion-button>
-  </div>
+    <ion-button class="button-container" expand="full" [disabled]="perfilForm.invalid" (click)="salvar()" color="success">Salvar</ion-button>  
+    <ion-button expand="block" (click)="logOut()" color="success">Sair</ion-button>
 </ion-content>

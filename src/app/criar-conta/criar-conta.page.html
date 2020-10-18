@@ -1,24 +1,49 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>Criar conta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="criar-conta-container">
+  <form #criarContaForm="ngForm" novalidate>
     <ion-item>
-      <ion-input type="text" placeholder="Nome completo" name="nome" [(ngModel)]="usuario.nome"></ion-input>
+      <ion-input type="text" placeholder="Nome completo" name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
+        <small>
+          <span *ngIf="campoNome.errors.required">
+            O campo nome é obrigatório
+          </span>
+          <span *ngIf="campoNome.errors.pattern">
+            O campo deve ter apenas letras
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="E-mail" name="email" [(ngModel)]="usuario.email" ></ion-input>
+      <ion-input type="text" placeholder="E-mail" name="email" [(ngModel)]="usuario.email"  required   #campoEmail="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
+        <small>
+          <span *ngIf="campoEmail.errors.required">
+            O campo email é obrigatório
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
     
     <ion-item>
-      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha"></ion-input>
+      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
+        <small>
+          <span *ngIf="campoSenha.errors.required">
+            O campo senha é obrigatório
+          </span>
+          <span *ngIf="campoNome.errors.minlength">
+            O campo senh deve ter no mínimo 8 caracteres
+          </span>
+        </small>
+      </ion-text>
     </ion-item>
-
-    <ion-button class="button-container" expand="full" color="success" (click)="salvar()">Salvar</ion-button>
-
-  </div>
+  </form>    
+  <ion-button class="button-container" expand="full" color="success" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
 </ion-content>

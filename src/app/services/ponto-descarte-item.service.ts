@@ -8,38 +8,42 @@ import { api } from './api';
 })
 export class PontoDescarteItemService {
 
-  private URI = api + 'pontodescarteitem';
+  private URL = api + 'pontodescarteitem';
 
   constructor(
     private httpClient : HttpClient
   ) { };
 
   getPontoDescarteItens() {
-    return this.httpClient.get<PontoDescarteItem[]>(this.URI);
+    return this.httpClient.get<PontoDescarteItem[]>(this.URL);
   };
 
   adicionar(pontodescarteitem: PontoDescarteItem) {
-    return this.httpClient.post<PontoDescarteItem>(this.URI, pontodescarteitem);
+    return this.httpClient.post<PontoDescarteItem>(this.URL, pontodescarteitem);
   };
 
   atualizar(pontodescarteitem: PontoDescarteItem) {
-    return this.httpClient.put<PontoDescarteItem>(`${this.URI}/${pontodescarteitem.id}`, pontodescarteitem);
+    return this.httpClient.put<PontoDescarteItem>(`${this.URL}/${pontodescarteitem.id}`, pontodescarteitem);
   };
 
   excluir(pontodescarteitem: PontoDescarteItem) {
-    return this.httpClient.delete(`${this.URI}/${pontodescarteitem.id}`);
+    return this.httpClient.delete(`${this.URL}/${pontodescarteitem.id}`);
   };
 
   getPontoDescarteItem(id: number) {
-    return this.httpClient.get<PontoDescarteItem>(`${this.URI}/${id}`);
+    return this.httpClient.get<PontoDescarteItem>(`${this.URL}/${id}`);
   };
 
   getPontoDescarteItemByPontoDescarte(pontodescarteId: number) {
-    return this.httpClient.get<PontoDescarteItem[]>(`${this.URI+'/ByPontoDescarte'}/${pontodescarteId}`);
+    return this.httpClient.get<PontoDescarteItem[]>(`${this.URL+'/ByPontoDescarte'}/${pontodescarteId}`);
   };
 
   getPontoDescarteItemByPontoDescarteUsuario(pontodescarteId: number, usuarioId: number) {
-    return this.httpClient.get<PontoDescarteItem[]>(`${this.URI+'/ByPontoDescarteUsuario'}/${pontodescarteId}/${usuarioId}`);
+    return this.httpClient.get<PontoDescarteItem[]>(`${this.URL+'/ByPontoDescarteUsuario'}/${pontodescarteId}/${usuarioId}`);
+  };
+
+  getPontoDescarteItemByPontoDescarteUsuarioNome(pontodescarteId: number, usuarioNome: string) {
+    return this.httpClient.get<PontoDescarteItem[]>(`${this.URL+'/ByPontoDescarteUsuarioNome'}/${pontodescarteId}/${usuarioNome}`);
   };
 
   salvar(pontodescarteitem: PontoDescarteItem) {

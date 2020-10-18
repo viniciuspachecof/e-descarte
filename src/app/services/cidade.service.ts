@@ -8,30 +8,30 @@ import { api } from './api';
 })
 export class CidadeService {
 
-  private URI = api + 'cidade';
+  private URL = api + 'cidade';
 
   constructor(
     private httpClient : HttpClient
   ) { };
 
   getCidades() {
-    return this.httpClient.get<Cidade[]>(this.URI);
+    return this.httpClient.get<Cidade[]>(this.URL);
   };
 
   adicionar(cidade: Cidade) {
-    return this.httpClient.post<Cidade>(this.URI, cidade);
+    return this.httpClient.post<Cidade>(this.URL, cidade);
   };
 
   atualizar(cidade: Cidade) {
-    return this.httpClient.put<Cidade>(`${this.URI}/${cidade.id}`, cidade);
+    return this.httpClient.put<Cidade>(`${this.URL}/${cidade.id}`, cidade);
   };
 
   excluir(cidade: Cidade) {
-    return this.httpClient.delete(`${this.URI}/${cidade.id}`);
+    return this.httpClient.delete(`${this.URL}/${cidade.id}`);
   };
 
   getCidade(id: number) {
-    return this.httpClient.get<Cidade>(`${this.URI}/${id}`);
+    return this.httpClient.get<Cidade>(`${this.URL}/${id}`);
   };
 
   salvar(cidade: Cidade) {
