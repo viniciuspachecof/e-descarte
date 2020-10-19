@@ -1,0 +1,37 @@
+ion-input{
+    border: 2px solid #00D9D0;
+    background-color: white;
+    border-radius: 15px;
+    font-size: medium;
+    color: #696969;
+    font-weight: bolder;
+    display: flex;
+    margin-top: 5%;
+    box-shadow: 5px 5px #E0FFFF ;
+}
+ion-label{
+    padding-left: 10px;
+    padding-top: 5%;
+    color: #696969;
+    font-size: small;
+    font-weight: bolder;
+    display: block;    
+}
+
+ion-title{
+    padding-top: 2%;
+    display: block;
+    
+}
+
+ion-button{
+    border-radius: 15px;
+   // border: 2px solid #00D9D0;    
+    font-weight: bold;
+    font-size: medium;
+    background-color: #00D9D0;
+    color: white;
+    opacity: 100%;   
+    
+
+}
