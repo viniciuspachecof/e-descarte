@@ -82,7 +82,8 @@ export class HomePage implements OnInit {
       position: location,
       latitude: userLat,
       longitude: userLong,
-      icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+      // icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+      icon: '../../assets/icon/marker-azul.png'
     });
 
     mapMarker.setMap(this.map);
@@ -100,7 +101,8 @@ export class HomePage implements OnInit {
           position: position,
           latitude: marker.latitude,
           longitude: marker.longitude,
-          icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
+          // icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
+          icon: '../../assets/icon/marker-vermelho.png'
         });
 
         mapMarker.setMap(this.map);
