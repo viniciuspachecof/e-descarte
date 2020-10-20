@@ -45,7 +45,7 @@
     </ion-item>
   </form>
 
-  <ion-button [routerLink]="['/editar-pontodescarte', pontodescarte.id]">Lixos cadastrados nesse local</ion-button>
+  <ion-button [routerLink]="['/editar-pontodescarte', pontodescarte.id]" *ngIf="pontodescarte.tipo===0">Lixos cadastrados nesse local</ion-button>
 
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button color="success" (click)="salvar()" [disabled]="clienteForm.invalid">

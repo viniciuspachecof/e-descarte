@@ -102,7 +102,7 @@ export class HomePage implements OnInit {
           latitude: marker.latitude,
           longitude: marker.longitude,
           // icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
-          icon: '../../assets/icon/marker-vermelho.png'
+          icon: marker.tipo===0 ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'
         });
 
         mapMarker.setMap(this.map);

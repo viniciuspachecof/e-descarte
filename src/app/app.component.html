@@ -10,13 +10,13 @@
               <ion-label>Início</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false" *ngIf="isCatador">
+          <ion-menu-toggle auto-hide="false">
             <ion-item (click)="selectedIndex = 2" [class.selected]="selectedIndex == 2" routerLink="/cadastrar-pontodescarte" lines="none" detail="false" routerDirection="root">
               <ion-icon name="location" slot="start"></ion-icon>
               <ion-label>Cadastrar ponto</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false" *ngIf="isCatador">
+          <ion-menu-toggle auto-hide="false">
             <ion-item (click)="selectedIndex = 3" [class.selected]="selectedIndex == 3" routerLink="/listar-pontodescarte" lines="none" detail="false" routerDirection="root">
               <ion-icon name="location" slot="start"></ion-icon>
               <ion-label>Meus pontos cadastrados</ion-label>
