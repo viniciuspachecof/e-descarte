@@ -25,7 +25,8 @@ export class PerfilPage implements OnInit {
     this.usuario = {
       nome: null,
       email: null,
-      senha: null
+      senha: null,
+      tipo:null,
     }
   }
 

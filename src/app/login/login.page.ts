@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
       nome: null,
       email: null,
       senha: null,
+      tipo: null,
     }
   }
 

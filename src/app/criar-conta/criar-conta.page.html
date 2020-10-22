@@ -1,14 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-  <ion-title>
-    Crie sua conta
-  </ion-title>
+<ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" alt="">
 </ion-toolbar>
-</ion-header>
+<h3>CRIE SUA CONTA</h3>
 <ion-content>
   <form #criarContaForm="ngForm" novalidate>
     <div class="content">
-      <div class="ion-padding">
+      <div  class="ion-padding">
       <div>
       <ion-label>Nome Completo:</ion-label>
       <ion-input type="text" expand="block" name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
@@ -33,7 +30,48 @@
         </small>
       </ion-text>   
       <ion-label>Senha:</ion-label>
-      <ion-input type="password"  name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
+      <ion-input type="password"  name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>  
+      <ion-grid>
+        <div  class="tipoUsuario">
+        <ion-row>          
+          <ion-col >            
+              <ion-img alt="catador" src="../../../../../assets/icon/Catador.png"></ion-img>                       
+          </ion-col>
+          <ion-col >
+            <ion-img alt="descartante" src="../../../../../assets/icon/Descartante.png"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-radio-group [(ngModel)]="usuario.tipo" name="tipo">
+        <ion-row>
+          <ion-col>
+            <ion-radio value="CATADOR"></ion-radio>
+          </ion-col>
+          <ion-col >
+            <ion-radio id="descarte" value="DESCARTANTE" ></ion-radio>
+          </ion-col>           
+        </ion-row>
+      </ion-radio-group> 
+      </div>
+      </ion-grid>
+
+      <!-- 
+    <ion-radio-group [(ngModel)]="usuario.tipo" >
+      <ion-item>
+        <ion-label>
+          Catador
+        </ion-label>
+        <ion-radio value="CATADOR"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Descartante
+        </ion-label>
+        <ion-radio value="DESCARTANTE"></ion-radio>
+      </ion-item>
+
+    </ion-radio-group>
+      --> 
+         
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
           <span *ngIf="campoSenha.errors.required">
@@ -44,6 +82,7 @@
           </span>
         </small>
       </ion-text>
+      
     </div>
     </div>
   </form>   
@@ -51,3 +90,5 @@
   <ion-button class="button-container"expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
 </div>
 </ion-content>
+
+

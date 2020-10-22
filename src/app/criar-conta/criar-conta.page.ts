@@ -21,11 +21,13 @@ export class CriarContaPage implements OnInit {
     this.usuario = {
       nome: null,
       email: null,
-      senha: null,    
+      senha: null,
+      tipo: 'DESCARTANTE',    
     }
    }
 
   ngOnInit() {
+    
   }
 
   async salvar() {  
@@ -53,4 +55,5 @@ export class CriarContaPage implements OnInit {
 
     await alerta.present();
   }
+
 }
