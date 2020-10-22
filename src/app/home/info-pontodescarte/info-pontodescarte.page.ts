@@ -16,7 +16,7 @@ export class PontodescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
   cidades: Cidade[];
-  isCatador: boolean;
+  isCatador: boolean;  
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,6 +31,7 @@ export class PontodescartePage implements OnInit {
       latitude: null,
       longitude: null,
       status: true,
+      tipo: null,
       usuarioId: null,
       usuario: null,
       cidadeId: null,

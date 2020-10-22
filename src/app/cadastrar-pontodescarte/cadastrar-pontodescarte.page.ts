@@ -43,6 +43,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       latitude: null,
       longitude: null,
       status: true,
+      tipo: null,
       cidadeId: null,
       cidade: null,
       usuarioId: null,
@@ -146,7 +147,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       latitude: lat,
       longitude: long,
       // icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
-      icon: '../../assets/icon/marker-vermelho.png'
+      icon: this.tokenService.isCatador() ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'
     });
 
     mapMarker.setMap(this.map);
@@ -175,6 +176,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       latitude: this.pontodescarte.latitude,
       longitude: this.pontodescarte.longitude,
       status: this.pontodescarte.status,
+      tipo: this.tokenService.isCatador() ? 0 : 1,
       cidadeId: this.pontodescarte.cidadeId,
       cidade: null,
       usuarioId: this.tokenService.getUserId(),
