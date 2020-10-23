@@ -1,13 +1,14 @@
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Editar ponto</ion-title>
-    <ion-buttons slot="start">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/listar-pontodescarte"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h3>EDITAR PONTO</h3>
   <form #clienteForm="ngForm" novalidate>
     <ion-item>
       <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>

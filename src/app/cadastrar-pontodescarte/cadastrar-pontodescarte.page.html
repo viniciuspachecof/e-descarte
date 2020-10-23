@@ -1,13 +1,14 @@
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Cadastrar ponto</ion-title>
-    <ion-buttons slot="start">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <ion-buttons slot="start" style="position: absolute;">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h3>CADASTRAR PONTO</h3>
   <form #pontodescarteForm="ngForm" novalidate>
     <ion-item>
       <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>

@@ -1,13 +1,14 @@
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Cadastrar lixo eletrônico</ion-title>
-    <ion-buttons slot="start">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/listar-pontodescarte-item"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h3>CADASTRAR LIXO ELETRÔNICO</h3>
   <form #itemForm="ngForm" novalidate>
     <ion-item>
       <ion-select placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
