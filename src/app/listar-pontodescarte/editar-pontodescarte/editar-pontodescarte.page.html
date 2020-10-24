@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
     <ion-buttons slot="start" style="position: absolute;">
@@ -22,11 +22,14 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
+      <ion-input type="text" placeholder="Fone" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
         <small>
           <span *ngIf="campoFone.errors.required">
-            O campo Fone é obrigatório
+            O campo fone é obrigatório
+          </span>
+          <span *ngIf="campoFone.errors.pattern">
+            O fone é inválido
           </span>
         </small>
       </ion-text>

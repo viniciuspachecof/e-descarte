@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
     <ion-toolbar>
         <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
         <ion-buttons slot="start" style="position: absolute;">
@@ -26,12 +26,15 @@
             </ion-text>
 
             <ion-label>E-mail:</ion-label>
-            <ion-input type="text" name="email" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
+            <ion-input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
             <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
                 <small>
                     <span *ngIf="campoEmail.errors.required">
                         O campo email é obrigatório
                     </span>
+                    <span *ngIf="campoEmail.errors.pattern">
+                        O email é inválido
+                      </span>
                 </small>
             </ion-text>
 
@@ -44,7 +47,7 @@
                         O campo senha é obrigatório
                     </span>
                     <span *ngIf="campoSenha.errors.minlength">
-                        O campo senh deve ter no mínimo 8 caracteres
+                        O campo senha deve ter no mínimo 8 caracteres
                     </span>
                 </small>
             </ion-text>
@@ -72,9 +75,9 @@
                 </div>
             </ion-grid>
         </div>
-    </form>
-
-    <div class="ion-padding">
-        <ion-button class="button-container" expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
-    </div>
+    </form>    
 </ion-content>
+
+<ion-footer style="background-color: #fff">
+    <ion-button class="button-container" expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
+</ion-footer>
