@@ -1,97 +1,80 @@
-<div class="cabecalho">  
-  <ion-buttons class="btn-voltar" slot="start">
-    <ion-back-button defaultHref="/login"></ion-back-button>
-  </ion-buttons>
-</div>
+<ion-header>
+    <ion-toolbar>
+        <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
+        <ion-buttons slot="start" style="position: absolute;">
+            <ion-back-button defaultHref="/login"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 
-<h3>CRIE SUA CONTA</h3>
 <ion-content>
-  <form #criarContaForm="ngForm" novalidate>
-    <div class="content">
-      <div  class="ion-padding">
-      <div>
-      <ion-label>Nome Completo:</ion-label>
-      <ion-input type="text" expand="block" name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
-      <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
-        <small>
-          <span *ngIf="campoNome.errors.required">
-            O campo nome é obrigatório
-          </span>
-          <span *ngIf="campoNome.errors.pattern">
-            O campo deve ter apenas letras
-          </span>
-        </small>
-      </ion-text>   
-      </div>
-      <ion-label>E-mail:</ion-label>
-      <ion-input type="text"  name="email" [(ngModel)]="usuario.email"  required   #campoEmail="ngModel"></ion-input>
-      <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
-        <small>
-          <span *ngIf="campoEmail.errors.required">
-            O campo email é obrigatório
-          </span>
-        </small>
-      </ion-text>   
-      <ion-label>Senha:</ion-label>
-      <ion-input type="password"  name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>  
-      <ion-grid>
-        <div  class="tipoUsuario">
-        <ion-row>          
-          <ion-col >            
-              <ion-img alt="catador" src="../../../../../assets/icon/Catador.png"></ion-img>                       
-          </ion-col>
-          <ion-col >
-            <ion-img alt="descartante" src="../../../../../assets/icon/Descartante.png"></ion-img>
-          </ion-col>
-        </ion-row>
-        <ion-radio-group [(ngModel)]="usuario.tipo" name="tipo">
-        <ion-row>
-          <ion-col>
-            <ion-radio value="CATADOR"></ion-radio>
-          </ion-col>
-          <ion-col >
-            <ion-radio id="descarte" value="DESCARTANTE" ></ion-radio>
-          </ion-col>           
-        </ion-row>
-      </ion-radio-group> 
-      </div>
-      </ion-grid>
+    <h3>CRIE SUA CONTA</h3>
+    <form #criarContaForm="ngForm" novalidate>
+        <div class="ion-padding">
+            <ion-label>Nome Completo:</ion-label>
+            <ion-input type="text" expand="block" name="nome" [(ngModel)]="usuario.nome" required
+                pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+            <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
+                <small>
+                    <span *ngIf="campoNome.errors.required">
+                        O campo nome é obrigatório
+                    </span>
+                    <span *ngIf="campoNome.errors.pattern">
+                        O campo deve ter apenas letras
+                    </span>
+                </small>
+            </ion-text>
 
-      <!-- 
-    <ion-radio-group [(ngModel)]="usuario.tipo" >
-      <ion-item>
-        <ion-label>
-          Catador
-        </ion-label>
-        <ion-radio value="CATADOR"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Descartante
-        </ion-label>
-        <ion-radio value="DESCARTANTE"></ion-radio>
-      </ion-item>
+            <ion-label>E-mail:</ion-label>
+            <ion-input type="text" name="email" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
+            <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
+                <small>
+                    <span *ngIf="campoEmail.errors.required">
+                        O campo email é obrigatório
+                    </span>
+                </small>
+            </ion-text>
 
-    </ion-radio-group>
-      --> 
-         
-      <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
-        <small>
-          <span *ngIf="campoSenha.errors.required">
-            O campo senha é obrigatório
-          </span>
-          <span *ngIf="campoNome.errors.minlength">
-            O campo senh deve ter no mínimo 8 caracteres
-          </span>
-        </small>
-      </ion-text>
-      
+            <ion-label>Senha:</ion-label>
+            <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8"
+                #campoSenha="ngModel"> </ion-input>
+            <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
+                <small>
+                    <span *ngIf="campoSenha.errors.required">
+                        O campo senha é obrigatório
+                    </span>
+                    <span *ngIf="campoSenha.errors.minlength">
+                        O campo senh deve ter no mínimo 8 caracteres
+                    </span>
+                </small>
+            </ion-text>
+
+            <ion-grid>
+                <div class="tipoUsuario">
+                    <ion-row>
+                        <ion-col>
+                            <ion-img alt="catador" src="../../../../../assets/icon/Catador.png"></ion-img>
+                        </ion-col>
+                        <ion-col>
+                            <ion-img alt="descartante" src="../../../../../assets/icon/Descartante.png"></ion-img>
+                        </ion-col>
+                    </ion-row>
+                    <ion-radio-group [(ngModel)]="usuario.tipo" name="tipo">
+                        <ion-row>
+                            <ion-col>
+                                <ion-radio value="CATADOR"></ion-radio>
+                            </ion-col>
+                            <ion-col>
+                                <ion-radio id="descarte" value="DESCARTANTE"></ion-radio>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+            </ion-grid>
+        </div>
+    </form>
+
+    <div class="ion-padding">
+        <ion-button class="button-container" expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
     </div>
-    </div>
-  </form>   
-  <div class="ion-padding"> 
-  <ion-button class="button-container"expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
-</div>
 </ion-content>
-
-
