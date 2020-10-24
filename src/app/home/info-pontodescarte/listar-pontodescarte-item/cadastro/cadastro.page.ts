@@ -16,6 +16,7 @@ export class CadastroPage implements OnInit {
 
   pontodescarteitem: PontoDescarteItem
   itens: Item[];
+  itemPonto: number;
 
   constructor(
     private alertController: AlertController,
@@ -29,6 +30,7 @@ export class CadastroPage implements OnInit {
     this.pontodescarteitem = {
       quant: 0,
       status: 0,
+      totalponto: 0,
       pontodescarteId: this.activatedRoute.snapshot.params['pontodescarteId'],
       pontoDescarte: null,
       itemId: null,
@@ -63,11 +65,20 @@ export class CadastroPage implements OnInit {
   }
 
   async salvar() {
+    this.itemService.getItem(this.pontodescarteitem.itemId).subscribe((data) => {
+      this.itemPonto = data.ponto;
+
+      this.adicionarPontoDescarteItem();
+    });
+  }
+
+  async adicionarPontoDescarteItem() {
     let pontodescarteId = this.pontodescarteitem.pontodescarteId,
       dto = {
         id: this.pontodescarteitem.id,
         quant: this.pontodescarteitem.quant,
         status: this.pontodescarteitem.status,
+        totalponto: this.pontodescarteitem.quant * this.itemPonto,
         pontodescarteId: this.pontodescarteitem.pontodescarteId,
         pontoDescarte: null,
         itemId: this.pontodescarteitem.itemId,
@@ -83,7 +94,7 @@ export class CadastroPage implements OnInit {
       .salvar(dto)
       .subscribe(() => {
         loading.dismiss();
-        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);
+        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);  
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();

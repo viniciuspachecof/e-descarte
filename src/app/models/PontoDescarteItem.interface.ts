@@ -6,6 +6,7 @@ export interface PontoDescarteItem {
     id?: number;
     quant: number;
     status: number;
+    totalponto: number;
     pontodescarteId: number;
     pontoDescarte: PontoDescarte
     itemId: number;

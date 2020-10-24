@@ -191,11 +191,27 @@ export class CadastrarPontoDescartePage implements OnInit {
       .subscribe(() => {
         loading.dismiss();
         this.dataSharingService.selectedIndex.next(1);
+        this.limparCampos();
         this.navController.navigateForward(['/home']);
       }, () => {
         loading.dismiss();
         this.alertMessage();
       });
+  }
+
+  limparCampos() {
+    this.pontodescarte = {
+      nome: null,
+      fone: null,
+      latitude: null,
+      longitude: null,
+      status: true,
+      tipo: null,
+      cidadeId: null,
+      cidade: null,
+      usuarioId: null,
+      usuario: null
+    }
   }
 
   async alertMessageLatLong() {

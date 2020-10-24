@@ -29,20 +29,18 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item (click)="selectedIndex = 5" [class.selected]="selectedIndex == 5"  lines="none" detail="false" href="mailto:edescarteoficial@gmail.com">
+            <ion-item lines="none" detail="false" href="mailto:edescarteoficial@gmail.com">
               <ion-icon name="megaphone" slot="start"></ion-icon>
               <ion-label>Fale conosco</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item (click)="selectedIndex = 6" [class.selected]="selectedIndex == 6" routerLink="/sobre" lines="none" detail="false" routerDirection="root">
+            <ion-item (click)="selectedIndex = 5" [class.selected]="selectedIndex == 5" routerLink="/sobre" lines="none" detail="false" routerDirection="root">
               <ion-icon name="help-circle" slot="start"></ion-icon>
               <ion-label>Sobre</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-        <ion-button expand="block" (click)="logOut()" color="success">Sair
-        </ion-button>
+        </ion-list>       
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
