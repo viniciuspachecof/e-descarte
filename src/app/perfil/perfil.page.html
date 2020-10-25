@@ -44,11 +44,15 @@
           <span *ngIf="campoSenha.errors.required">
             O campo senha é obrigatório
           </span>
-          <span *ngIf="campoNome.errors.minlength">
-            O campo senh deve ter no mínimo 8 caracteres
+          <span *ngIf="campoSenha.errors.minlength">
+            O campo senha deve ter no mínimo 8 caracteres
           </span>
         </small>
       </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" disabled="true" diplaceholder="Total de pontos" name="pontuacao" [(ngModel)]="rankingpontuacao.pontuacao"></ion-input>     
     </ion-item>
   </form>
 

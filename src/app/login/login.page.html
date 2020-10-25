@@ -21,7 +21,7 @@
       </div>   
     <div>
     <ion-label>Senha</ion-label>
-    <ion-input type="password"  name="senha" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
+    <ion-input type="password"  name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
           <span *ngIf="campoSenha.errors.required">
@@ -29,7 +29,7 @@
           </span>
           <span *ngIf="campoSenha.errors.minlength">
             O campo senha deve ter no mínimo 8 caracteres
-          </span>
+          </span>        
         </small>
       </ion-text>
     </div>

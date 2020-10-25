@@ -112,15 +112,7 @@ export class AprovarPage implements OnInit {
   }
 
   async salvarRankingPontuacao() {
-    if (!this.rankingpontuacao) {
-      this.rankingpontuacao = {
-        pontuacao: this.novaPontuacao,
-        usuario: null,
-        usuarioId: this.pontodescarteitem.usuarioId
-      }
-    } else {
-      this.rankingpontuacao.pontuacao = this.novaPontuacao;
-    }
+    this.rankingpontuacao.pontuacao = this.novaPontuacao;    
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
