@@ -1,30 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
 import { CidadeService } from 'src/app/services/cidade.service';
-import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 
 @Component({
-  selector: 'app-pontodescarte',
-  templateUrl: './info-pontodescarte.page.html',
-  styleUrls: ['./info-pontodescarte.page.scss'],
+  selector: 'app-aprovar',
+  templateUrl: './aprovar.page.html',
+  styleUrls: ['./aprovar.page.scss'],
 })
-export class PontodescartePage implements OnInit {
+export class AprovarPage implements OnInit {
 
   pontodescarte: PontoDescarte;
-  cidades: Cidade[];
-  isCatador: boolean;  
-  isAdmin: boolean;  
+  cidades: Cidade[];  
 
   constructor(
+    private alertController: AlertController,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
     private cidadeService: CidadeService,
-    private dataSharingService: DataSharingService
+    private navController: NavController,
   ) {
     this.pontodescarte = {
       nome: null,
@@ -42,13 +40,6 @@ export class PontodescartePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.dataSharingService.isCatador.subscribe(value => {
-      this.isCatador = value;
-    });
-    this.dataSharingService.isAdmin.subscribe(value => {
-      this.isAdmin = value;
-    });
-    this.dataSharingService.displayMenu.next(false);
     this.listarCidades();
   }
 
@@ -70,7 +61,32 @@ export class PontodescartePage implements OnInit {
     });
   }
 
-  navigate() {
-    window.open('https://www.google.com/maps/dir/?api=1&destination=' + this.pontodescarte.latitude + ',' + this.pontodescarte.longitude)
+  async salvar() {
+    this.pontodescarte.usuario = null;
+    this.pontodescarte.cidade = null;
+
+    let loading = await this.loadingController.create({ message: 'Salvando' });
+    loading.present();
+
+    this.pontodescarteService
+      .salvar(this.pontodescarte)
+      .subscribe(() => {
+        loading.dismiss();
+        this.navController.navigateForward(['/aprovar-pontodescarte']);
+      }, () => {
+        loading.dismiss();
+        this.mensagemAlerta();
+      });
+  }
+
+  async mensagemAlerta() {
+    const alerta = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta',
+      message: 'Erro ao liberar o ponto.',
+      buttons: ['OK']
+    });
+
+    await alerta.present();
   }
 }

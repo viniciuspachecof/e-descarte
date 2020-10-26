@@ -6,6 +6,7 @@ import { TokenService } from './token.service';
   providedIn: 'root'
 })
 export class DataSharingService {
+  public isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.tokenService.isAdmin());
   public isCatador: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.tokenService.isCatador());
   public displayMenu: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.tokenService.getToken() != null);
   public selectedIndex: BehaviorSubject<number> = new BehaviorSubject<number>(1);

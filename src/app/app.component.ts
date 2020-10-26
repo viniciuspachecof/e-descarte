@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   displayMenu: boolean;
   isCatador: boolean;
+  isAdmin: boolean;
   selectedIndex: number;
 
   constructor(
@@ -35,6 +36,9 @@ export class AppComponent implements OnInit {
       });
       this.dataSharingService.isCatador.subscribe(value => {
         this.isCatador = value;
+      });
+      this.dataSharingService.isAdmin.subscribe(value => {
+        this.isAdmin = value;
       });
       this.dataSharingService.selectedIndex.subscribe(value => {
         this.selectedIndex = value;

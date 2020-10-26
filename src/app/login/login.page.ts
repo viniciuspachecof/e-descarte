@@ -44,6 +44,7 @@ export class LoginPage implements OnInit {
           this.tokenService.setToken(data);          
           this.dataSharingService.displayMenu.next(true);
           this.dataSharingService.isCatador.next(this.tokenService.isCatador());
+          this.dataSharingService.isAdmin.next(this.tokenService.isAdmin());
           this.dataSharingService.selectedIndex.next(1);
           this.navController.navigateForward(['/home']);
         }, () => {

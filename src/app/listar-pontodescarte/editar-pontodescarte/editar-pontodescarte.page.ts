@@ -33,7 +33,8 @@ export class EditarPontoDescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
-      status: true,
+      ativo: true,
+      status: false,
       tipo: null,
       usuarioId: null,
       usuario: null,
@@ -65,30 +66,15 @@ export class EditarPontoDescartePage implements OnInit {
     });
   }
 
-  onchangeStatus() {
-    this.pontodescarte.status = true
-  }
-
-  async salvar() {
-    let dto = {
-        id: this.pontodescarte.id,
-        nome: this.pontodescarte.nome,
-        fone: this.pontodescarte.fone,
-        longitude: this.pontodescarte.longitude,
-        latitude: this.pontodescarte.latitude,
-        status: this.pontodescarte.status,
-        tipo: this.pontodescarte.tipo,
-        usuarioId: this.tokenService.getUserId(),
-        usuario: null,
-        cidadeId: this.pontodescarte.cidadeId,
-        cidade: null
-      };
-
+  async salvar() {    
+    this.pontodescarte.usuario = null;
+    this.pontodescarte.cidade = null;
+ 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.pontodescarteService
-      .salvar(dto)
+      .salvar(this.pontodescarte)
       .subscribe(() => {
         loading.dismiss();
         this.navController.navigateForward(['/listar-pontodescarte']);

@@ -73,25 +73,18 @@ export class CadastroPage implements OnInit {
   }
 
   async adicionarPontoDescarteItem() {
-    let pontodescarteId = this.pontodescarteitem.pontodescarteId,
-      dto = {
-        id: this.pontodescarteitem.id,
-        quant: this.pontodescarteitem.quant,
-        status: this.pontodescarteitem.status,
-        totalponto: this.pontodescarteitem.quant * this.itemPonto,
-        pontodescarteId: this.pontodescarteitem.pontodescarteId,
-        pontoDescarte: null,
-        itemId: this.pontodescarteitem.itemId,
-        item: null,
-        usuarioId: this.pontodescarteitem.usuarioId,
-        usuario: null
-      };
+    this.pontodescarteitem.pontoDescarte = null;
+    this.pontodescarteitem.item = null;
+    this.pontodescarteitem.usuario = null;
+    this.pontodescarteitem.totalponto = this.pontodescarteitem.quant * this.itemPonto
+
+    let pontodescarteId = this.pontodescarteitem.pontodescarteId;      
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.pontodescarteitemService
-      .salvar(dto)
+      .salvar(this.pontodescarteitem)
       .subscribe(() => {
         loading.dismiss();
         this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);  

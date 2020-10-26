@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'aprovar-pontodescarte-item',
     loadChildren: () => import('./listar-pontodescarte/editar-pontodescarte/aprovar-pontodescarte-item/aprovar-pontodescarte-item.module').then(m => m.AprovarPontodescarteItemPageModule)
+  },  {
+    path: 'aprovar-pontodescarte',
+    loadChildren: () => import('./aprovar-pontodescarte/aprovar-pontodescarte.module').then( m => m.AprovarPontodescartePageModule)
   }
+
 ];
 
 @NgModule({

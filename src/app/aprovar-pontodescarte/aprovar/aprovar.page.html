@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <ion-buttons slot="start" style="position: absolute;">
+      <ion-back-button defaultHref="/aprovar-pontodescarte"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3>APROVAR PONTO DE DESCARTE</h3>
+  <form #clienteForm="ngForm" novalidate>
+    <ion-item>
+      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome"></ion-input>    
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone"></ion-input>    
+    </ion-item>
+    
+    <ion-item>
+      <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
+        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
+          {{cidade.nome}}
+        </ion-select-option>
+      </ion-select>     
+    </ion-item>
+
+    <ion-item>
+      <ion-label>LIBERAR</ion-label>
+      <ion-toggle slot="start" name="ativo" color="success" [(ngModel)]="pontodescarte.status"></ion-toggle>
+    </ion-item>
+  </form>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button color="success" (click)="salvar()" [disabled]="clienteForm.invalid">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -11,13 +11,19 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item (click)="selectedIndex = 2" [class.selected]="selectedIndex == 2" routerLink="/cadastrar-pontodescarte" lines="none" detail="false" routerDirection="root">
+            <ion-item *ngIf="isAdmin" (click)="selectedIndex = 6" [class.selected]="selectedIndex == 6" routerLink="/aprovar-pontodescarte" lines="none" detail="false" routerDirection="root">
+              <ion-icon name="location" slot="start"></ion-icon>
+              <ion-label>Liberar pontos</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item *ngIf="!isAdmin" (click)="selectedIndex = 2" [class.selected]="selectedIndex == 2" routerLink="/cadastrar-pontodescarte" lines="none" detail="false" routerDirection="root">
               <ion-icon name="location" slot="start"></ion-icon>
               <ion-label>Cadastrar ponto</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item (click)="selectedIndex = 3" [class.selected]="selectedIndex == 3" routerLink="/listar-pontodescarte" lines="none" detail="false" routerDirection="root">
+            <ion-item *ngIf="!isAdmin" (click)="selectedIndex = 3" [class.selected]="selectedIndex == 3" routerLink="/listar-pontodescarte" lines="none" detail="false" routerDirection="root">
               <ion-icon name="location" slot="start"></ion-icon>
               <ion-label>Meus pontos cadastrados</ion-label>
             </ion-item>
@@ -29,17 +35,17 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item lines="none" detail="false" href="mailto:edescarteoficial@gmail.com">
+            <ion-item *ngIf="!isAdmin" lines="none" detail="false" href="mailto:edescarteoficial@gmail.com">
               <ion-icon name="megaphone" slot="start"></ion-icon>
               <ion-label>Fale conosco</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item (click)="selectedIndex = 5" [class.selected]="selectedIndex == 5" routerLink="/sobre" lines="none" detail="false" routerDirection="root">
+            <ion-item *ngIf="!isAdmin" (click)="selectedIndex = 5" [class.selected]="selectedIndex == 5" routerLink="/sobre" lines="none" detail="false" routerDirection="root">
               <ion-icon name="help-circle" slot="start"></ion-icon>
               <ion-label>Sobre</ion-label>
             </ion-item>
-          </ion-menu-toggle>
+          </ion-menu-toggle>         
         </ion-list>       
       </ion-content>
     </ion-menu>
