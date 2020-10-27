@@ -1,24 +1,27 @@
-<ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Realizar login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="container" style="background-color: #fff">
+  <img src="../../assets/img/cabecalho_login.png" alt="">
+</div>
 
-<ion-content>
+<ion-content class="conteudo">
   <form #loginForm="ngForm" novalidate>
-    <ion-item>
-      <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
+    <div class="ion-padding">
+      <div>
+        <ion-label>E-mail</ion-label>
+      <ion-input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
         <small>
           <span *ngIf="campoEmail.errors.required">
             O campo email é obrigatório
           </span>
+          <span *ngIf="campoEmail.errors.pattern">
+            O email é inválido
+          </span>
         </small>
       </ion-text>
-    </ion-item>
-    
-    <ion-item>
-      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
+      </div>   
+    <div>
+    <ion-label>Senha</ion-label>
+    <ion-input type="password"  name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
           <span *ngIf="campoSenha.errors.required">
@@ -26,18 +29,17 @@
           </span>
           <span *ngIf="campoSenha.errors.minlength">
             O campo senha deve ter no mínimo 8 caracteres
-          </span>
+          </span>        
         </small>
       </ion-text>
-    </ion-item>
+    </div>
+    </div>
   </form>  
   
-    <ion-button expand="block" (click)="entrar()" [disabled]="loginForm.invalid" color="success">Entrar</ion-button>
-
-    <br>
+    <ion-button fill="clear" expand="block" (click)="entrar()" [disabled]="loginForm.invalid" >Entrar</ion-button>
     <ion-label>
       <p class="center">Não possui cadastro?</p>
     </ion-label>
  
-    <ion-button [routerLink]="['/criar-conta']" class="button-container" expand="full" color="success">Criar conta</ion-button>     
+    <ion-button [routerLink]="['/criar-conta']" class="button-container" expand="full" fill="clear">Criar conta</ion-button>     
 </ion-content>

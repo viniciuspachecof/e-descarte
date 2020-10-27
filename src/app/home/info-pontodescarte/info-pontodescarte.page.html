@@ -1,13 +1,14 @@
-<ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Ponto de descarte</ion-title>
-    <ion-buttons slot="start">
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
+    <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h3>PONTO DE DESCARTE</h3>
   <form #clienteForm="ngForm" novalidate>
     <ion-item>
       <ion-input disabled="true" type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
@@ -29,5 +30,5 @@
   </form>
 
   <ion-button (click)="navigate()">Ir até o local</ion-button>
-  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador">Descartar meu lixo eletrônico aqui</ion-button>
+  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && !isAdmin && pontodescarte.tipo===0">Descartar meu lixo eletrônico aqui</ion-button>
 </ion-content>

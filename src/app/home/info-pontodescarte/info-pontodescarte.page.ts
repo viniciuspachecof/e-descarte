@@ -16,7 +16,8 @@ export class PontodescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
   cidades: Cidade[];
-  isCatador: boolean;
+  isCatador: boolean;  
+  isAdmin: boolean;  
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,7 +31,9 @@ export class PontodescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
-      status: true,
+      ativo: true,
+      status: false,
+      tipo: null,
       usuarioId: null,
       usuario: null,
       cidadeId: null,
@@ -41,6 +44,9 @@ export class PontodescartePage implements OnInit {
   async ngOnInit() {
     this.dataSharingService.isCatador.subscribe(value => {
       this.isCatador = value;
+    });
+    this.dataSharingService.isAdmin.subscribe(value => {
+      this.isAdmin = value;
     });
     this.dataSharingService.displayMenu.next(false);
     this.listarCidades();

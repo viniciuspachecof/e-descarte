@@ -1,18 +1,20 @@
-<ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Meus pontos</ion-title>
-    <ion-buttons slot="start">
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">       
+    <ion-buttons slot="start" style="position: absolute;">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h3>MEUS PONTOS</h3>
   <ion-list>
     <ion-item *ngFor="let pontodescarte of pontosdescarte">
       <span>{{pontodescarte.nome}}</span>
-      <ion-icon color="success" name="create" slot="end" [routerLink]="['/listar-pontodescarte', pontodescarte.id]"></ion-icon>
-      <ion-icon color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarte)"></ion-icon>
+      <ion-icon *ngIf="pontodescarte.status" color="success" name="create" slot="end" [routerLink]="['/listar-pontodescarte', pontodescarte.id]"></ion-icon>
+      <ion-icon *ngIf="pontodescarte.status" color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarte)"></ion-icon>
+      <ion-icon *ngIf="!pontodescarte.status" color="warning" name="alert-circle" slot="end"></ion-icon>
     </ion-item>
   </ion-list>  
 </ion-content>

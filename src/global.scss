@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+h3{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #696969;
+    margin-top: 0%;
+}
+
+ion-menu-button {
+    color: #bfd25e
+}
+
+ion-back-button {
+    color: #bfd25e
+}

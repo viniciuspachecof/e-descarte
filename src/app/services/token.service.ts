@@ -35,6 +35,14 @@ export class TokenService {
     return false;
   }
 
+  isAdmin(): boolean {
+    if(this.getToken()) {
+      var decoded = jwt_decode(this.getToken());                  
+      return (decoded.role === 'ADMINISTRADOR');
+    }
+    return false;
+  }
+
   public logOut(): void {
     window.localStorage.clear();
   }

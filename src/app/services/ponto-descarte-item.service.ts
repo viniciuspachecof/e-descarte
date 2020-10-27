@@ -46,6 +46,10 @@ export class PontoDescarteItemService {
     return this.httpClient.get<PontoDescarteItem[]>(`${this.URL+'/ByPontoDescarteUsuarioNome'}/${pontodescarteId}/${usuarioNome}`);
   };
 
+  getPontoDescarteItemByUsuarioTotalPonto(usuarioId: number) {
+    return this.httpClient.get<number>(`${this.URL+'/ByUsuarioTotalPonto'}/${usuarioId}`);
+  };
+
   salvar(pontodescarteitem: PontoDescarteItem) {
     if (pontodescarteitem && pontodescarteitem.id) {
       return this.atualizar(pontodescarteitem);

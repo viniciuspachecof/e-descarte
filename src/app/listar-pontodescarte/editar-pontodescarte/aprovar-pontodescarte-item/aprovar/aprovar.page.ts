@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Item } from 'src/app/models/Item.interface';
 import { PontoDescarteItem } from 'src/app/models/PontoDescarteItem.interface';
+import { RankingPontuacao } from 'src/app/models/rankingpontuacao.interface';
 import { ItemService } from 'src/app/services/item.service';
 import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.service';
+import { RankingPontuacaoService } from 'src/app/services/ranking-pontuacao.service';
 
 @Component({
   selector: 'app-aprovar',
@@ -13,10 +15,12 @@ import { PontoDescarteItemService } from 'src/app/services/ponto-descarte-item.s
 })
 export class AprovarPage implements OnInit {
 
-  pontodescarteitem: PontoDescarteItem
+  pontodescarteitem: PontoDescarteItem;
+  rankingpontuacao: RankingPontuacao;
   itens: Item[];
-  styleAprovar = {}
-  styleReprovar = {}
+  novaPontuacao: number;
+  styleAprovar = {};
+  styleReprovar = {};
 
   constructor(
     private alertController: AlertController,
@@ -25,10 +29,12 @@ export class AprovarPage implements OnInit {
     private navController: NavController,
     private pontodescarteitemService: PontoDescarteItemService,
     private itemService: ItemService,
+    private rankingpontuacaoService: RankingPontuacaoService,
   ) {
     this.pontodescarteitem = {
       quant: 0,
       status: 0,
+      totalponto: 0,
       pontodescarteId: this.activatedRoute.snapshot.params['pontodescarteId'],
       pontoDescarte: null,
       itemId: null,
@@ -37,17 +43,17 @@ export class AprovarPage implements OnInit {
       usuario: null
     },
 
-    this.styleAprovar = {
-      'filter': 'saturate(0%)',
-      '-webkit-filter': 'saturate(0%)',
-      '-moz-filter': 'saturate(0%)'
-    },
+      this.styleAprovar = {
+        'filter': 'saturate(0%)',
+        '-webkit-filter': 'saturate(0%)',
+        '-moz-filter': 'saturate(0%)'
+      },
 
-    this.styleReprovar = {
-      'filter': 'brightness(200%) saturate(0%)',
-      '-webkit-filter': 'brightness(200%) saturate(0%)',
-      '-moz-filter': 'brightness(200%) saturate(0%)'
-    }
+      this.styleReprovar = {
+        'filter': 'brightness(200%) saturate(0%)',
+        '-webkit-filter': 'brightness(200%) saturate(0%)',
+        '-moz-filter': 'brightness(200%) saturate(0%)'
+      }
   }
 
   async ngOnInit() {
@@ -74,7 +80,7 @@ export class AprovarPage implements OnInit {
     }
   }
 
-  async salvar() {   
+  async salvar() {
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
@@ -83,6 +89,38 @@ export class AprovarPage implements OnInit {
       .subscribe(() => {
         loading.dismiss();
         this.navController.navigateForward(['/editar-pontodescarte', this.pontodescarteitem.pontodescarteId]);
+        this.carregarRankingPontuacao();
+      }, () => {
+        loading.dismiss();
+        this.mensagemAlerta();
+      });
+  }
+
+  carregarRankingPontuacao() {
+    this.rankingpontuacaoService.getRankingPontuacaoByUsuario(this.pontodescarteitem.usuarioId).subscribe((data) => {
+      this.rankingpontuacao = data;
+      
+      this.recuperarPontuacaoUsuario();
+    });
+  }
+
+  recuperarPontuacaoUsuario() {
+    this.pontodescarteitemService.getPontoDescarteItemByUsuarioTotalPonto(this.pontodescarteitem.usuarioId).subscribe((data) => {
+      this.novaPontuacao = data;
+      this.salvarRankingPontuacao()
+    });
+  }
+
+  async salvarRankingPontuacao() {
+    this.rankingpontuacao.pontuacao = this.novaPontuacao;    
+
+    let loading = await this.loadingController.create({ message: 'Salvando' });
+    loading.present();
+
+    this.rankingpontuacaoService
+      .salvar(this.rankingpontuacao)
+      .subscribe(() => {
+        loading.dismiss();
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();
@@ -99,19 +137,19 @@ export class AprovarPage implements OnInit {
 
     await alerta.present();
   }
-  
-  executarAlgo() {   
-    if(this.pontodescarteitem.status === 0) return;
 
-    if(this.pontodescarteitem.status === 1) {      
-      this.styleAprovar = { };
+  executarAlgo() {
+    if (this.pontodescarteitem.status === 0) return;
+
+    if (this.pontodescarteitem.status === 1) {
+      this.styleAprovar = {};
       this.styleReprovar = {
         'filter': 'brightness(200%) saturate(0%)',
         '-webkit-filter': 'brightness(200%) saturate(0%)',
         '-moz-filter': 'brightness(200%) saturate(0%)'
       }
     } else {
-      this.styleReprovar = { };    
+      this.styleReprovar = {};
       this.styleAprovar = {
         'filter': 'saturate(0%)',
         '-webkit-filter': 'saturate(0%)',

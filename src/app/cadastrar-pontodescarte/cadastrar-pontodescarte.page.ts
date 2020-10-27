@@ -42,7 +42,9 @@ export class CadastrarPontoDescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
-      status: true,
+      ativo: true,
+      status: false,
+      tipo: null,
       cidadeId: null,
       cidade: null,
       usuarioId: null,
@@ -146,7 +148,7 @@ export class CadastrarPontoDescartePage implements OnInit {
       latitude: lat,
       longitude: long,
       // icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
-      icon: '../../assets/icon/marker-vermelho.png'
+      icon: this.tokenService.isCatador() ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'
     });
 
     mapMarker.setMap(this.map);
@@ -169,31 +171,41 @@ export class CadastrarPontoDescartePage implements OnInit {
       return;
     }
 
-    let dto = {
-      nome: this.pontodescarte.nome,
-      fone: this.pontodescarte.fone,
-      latitude: this.pontodescarte.latitude,
-      longitude: this.pontodescarte.longitude,
-      status: this.pontodescarte.status,
-      cidadeId: this.pontodescarte.cidadeId,
-      cidade: null,
-      usuarioId: this.tokenService.getUserId(),
-      usuario: null
-    }
+    this.pontodescarte.usuario = null;
+    this.pontodescarte.usuarioId = this.tokenService.getUserId();
+    this.pontodescarte.cidade = null;
+    this.pontodescarte.tipo = this.tokenService.isCatador() ? 0 : 1;
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.pontodescarteService
-      .salvar(dto)
+      .salvar(this.pontodescarte)
       .subscribe(() => {
         loading.dismiss();
         this.dataSharingService.selectedIndex.next(1);
+        this.limparCampos();
         this.navController.navigateForward(['/home']);
       }, () => {
         loading.dismiss();
         this.alertMessage();
       });
+  }
+
+  limparCampos() {
+    this.pontodescarte = {
+      nome: null,
+      fone: null,
+      latitude: null,
+      longitude: null,
+      ativo: true,
+      status: false,
+      tipo: null,
+      cidadeId: null,
+      cidade: null,
+      usuarioId: null,
+      usuario: null
+    }
   }
 
   async alertMessageLatLong() {

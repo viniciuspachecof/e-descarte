@@ -1,0 +1,38 @@
+ion-input {
+    border: 2px solid #8baa6e;
+    background-color: white;
+    border-radius: 15px;
+    font-size: medium;
+    color: #696969;
+    font-weight: bolder;
+    display: flex;
+}
+
+ion-label {
+    padding-left: 10px;
+    padding-top: 5%;
+    color: #696969;
+    font-size: small;
+    font-weight: bolder;
+    display: block;
+}
+
+ion-title {
+    padding-top: 2%;
+    display: block;
+}
+
+ion-button {
+    border-radius: 15px;
+    // border: 2px solid #00D9D0;    
+    font-weight: bold;
+    font-size: medium;
+    background-color: #8baa6e;
+    color: white;
+    opacity: 100%;
+    margin-bottom: 20px;
+}
+
+.tipoUsuario{
+    text-align: center !important;
+}

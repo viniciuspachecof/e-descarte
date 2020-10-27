@@ -16,6 +16,7 @@ export class CadastroPage implements OnInit {
 
   pontodescarteitem: PontoDescarteItem
   itens: Item[];
+  itemPonto: number;
 
   constructor(
     private alertController: AlertController,
@@ -29,6 +30,7 @@ export class CadastroPage implements OnInit {
     this.pontodescarteitem = {
       quant: 0,
       status: 0,
+      totalponto: 0,
       pontodescarteId: this.activatedRoute.snapshot.params['pontodescarteId'],
       pontoDescarte: null,
       itemId: null,
@@ -63,27 +65,29 @@ export class CadastroPage implements OnInit {
   }
 
   async salvar() {
-    let pontodescarteId = this.pontodescarteitem.pontodescarteId,
-      dto = {
-        id: this.pontodescarteitem.id,
-        quant: this.pontodescarteitem.quant,
-        status: this.pontodescarteitem.status,
-        pontodescarteId: this.pontodescarteitem.pontodescarteId,
-        pontoDescarte: null,
-        itemId: this.pontodescarteitem.itemId,
-        item: null,
-        usuarioId: this.pontodescarteitem.usuarioId,
-        usuario: null
-      };
+    this.itemService.getItem(this.pontodescarteitem.itemId).subscribe((data) => {
+      this.itemPonto = data.ponto;
+
+      this.adicionarPontoDescarteItem();
+    });
+  }
+
+  async adicionarPontoDescarteItem() {
+    this.pontodescarteitem.pontoDescarte = null;
+    this.pontodescarteitem.item = null;
+    this.pontodescarteitem.usuario = null;
+    this.pontodescarteitem.totalponto = this.pontodescarteitem.quant * this.itemPonto
+
+    let pontodescarteId = this.pontodescarteitem.pontodescarteId;      
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.pontodescarteitemService
-      .salvar(dto)
+      .salvar(this.pontodescarteitem)
       .subscribe(() => {
         loading.dismiss();
-        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);
+        this.navController.navigateForward(['/info-pontodescarte', pontodescarteId]);  
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();

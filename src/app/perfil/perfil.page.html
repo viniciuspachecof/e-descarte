@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="success">
     <ion-title>Perfil</ion-title>
     <ion-buttons slot="start">
@@ -24,11 +24,14 @@
     </ion-item>
     
     <ion-item>
-      <ion-input type="email" placeholder="E-mail" name="email" [(ngModel)]="usuario.email"  required   #campoEmail="ngModel"></ion-input>
+      <ion-input type="email" placeholder="E-mail" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email"  required   #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
         <small>
           <span *ngIf="campoEmail.errors.required">
             O campo email é obrigatório
+          </span>
+          <span *ngIf="campoEmail.errors.pattern">
+            O email é inválido
           </span>
         </small>
       </ion-text>
@@ -41,11 +44,15 @@
           <span *ngIf="campoSenha.errors.required">
             O campo senha é obrigatório
           </span>
-          <span *ngIf="campoNome.errors.minlength">
-            O campo senh deve ter no mínimo 8 caracteres
+          <span *ngIf="campoSenha.errors.minlength">
+            O campo senha deve ter no mínimo 8 caracteres
           </span>
         </small>
       </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" disabled="true" diplaceholder="Total de pontos" name="pontuacao" [(ngModel)]="rankingpontuacao.pontuacao"></ion-input>     
     </ion-item>
   </form>
 
