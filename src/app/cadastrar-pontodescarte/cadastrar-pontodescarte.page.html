@@ -10,8 +10,9 @@
 <ion-content>
   <h3>CADASTRAR PONTO</h3>
   <form #pontodescarteForm="ngForm" novalidate>
-    <ion-item>
-      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+    <div class="ion-padding">
+    <ion-label>Nome:</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
         <small>
           <span *ngIf="campoNome.errors.required">
@@ -19,10 +20,11 @@
           </span>
         </small>
       </ion-text>
-    </ion-item>
+    
 
-    <ion-item>
-      <ion-input type="text" placeholder="Fone" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
+    
+      <ion-label>Telefone:</ion-label>
+      <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
         <small>
           <span *ngIf="campoFone.errors.required">
@@ -33,7 +35,7 @@
           </span>
         </small>
       </ion-text>
-    </ion-item>
+    </div>
 
     <ion-item>
       <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">

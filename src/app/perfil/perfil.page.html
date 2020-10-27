@@ -1,15 +1,26 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="success">
-    <ion-title>Perfil</ion-title>
-    <ion-buttons slot="start">
+  <ion-toolbar>
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <ion-buttons slot="start" style="position: absolute;">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
   <form #perfilForm="ngForm" novalidate>
-    <ion-item>
+    <div class="container">
+      <img id="foto-perfil" src ="{{imgURL}}" >
+      <!-- <ion-button (click)="getCamera()" >Camera</ion-button> -->      
+    </div>  
+    <div class="btn-carregar">
+      <ion-button  fill="clear" (click)="getGaleria()">Carregar</ion-button>
+    </div>
+    <h3>PERFIL</h3>
+    <div class="ion-padding">
+      <div>
+      <ion-label>Nome:</ion-label>
       <ion-input type="text" placeholder="Nome completo"  name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
         <small>
@@ -20,10 +31,10 @@
             O campo deve ter apenas letras
           </span>
         </small>
-      </ion-text>
-    </ion-item>
-    
-    <ion-item>
+      </ion-text>   
+      </div>
+      <div>
+        <ion-label>E-mail:</ion-label>
       <ion-input type="email" placeholder="E-mail" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email"  required   #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
         <small>
@@ -34,11 +45,11 @@
             O email é inválido
           </span>
         </small>
-      </ion-text>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
+      </ion-text> 
+    </div>  
+    <div>
+      <ion-label>Senha:</ion-label>
+    <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
           <span *ngIf="campoSenha.errors.required">
@@ -49,13 +60,15 @@
           </span>
         </small>
       </ion-text>
-    </ion-item>
-
-    <ion-item>
+    </div>
+    
+    <div>
+      <ion-label>Pontos:</ion-label>
       <ion-input type="text" disabled="true" diplaceholder="Total de pontos" name="pontuacao" [(ngModel)]="rankingpontuacao.pontuacao"></ion-input>     
-    </ion-item>
+    </div>
+  </div>
   </form>
 
-    <ion-button class="button-container" expand="full" [disabled]="perfilForm.invalid" (click)="salvar()" color="success">Salvar</ion-button>  
-    <ion-button expand="block" (click)="logOut()" color="success">Sair</ion-button>
+    <ion-button fill="clear" class="button-container" expand="full" [disabled]="perfilForm.invalid" (click)="salvar()" >Salvar</ion-button>  
+    <ion-button fill="clear" expand="block" (click)="logOut()" >Sair</ion-button>
 </ion-content>
