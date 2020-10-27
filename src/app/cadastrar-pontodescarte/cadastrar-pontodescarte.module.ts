@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CadastrarPontoDescartePageRoutingModule } from './cadastrar-pontodescarte-routing.module';
 
 import { CadastrarPontoDescartePage } from './cadastrar-pontodescarte.page';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CadastrarPontoDescartePageRoutingModule
+    CadastrarPontoDescartePageRoutingModule,
+    NgxMaskIonicModule.forRoot()
   ],
   declarations: [CadastrarPontoDescartePage]
 })

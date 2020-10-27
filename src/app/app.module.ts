@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataSharingService } from './services/data-sharing.service';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { DataSharingService } from './services/data-sharing.service';
     BrowserModule,
     IonicModule.forRoot(),
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxMaskIonicModule.forRoot()
   ],
   providers: [
     StatusBar,
