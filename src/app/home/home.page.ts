@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
   
   addMarkersToMap(markers) {
     for (let marker of markers) {
-      if (marker.status) {
+      if (marker.ativo && marker.status) {
         let position = new google.maps.LatLng(marker.latitude, marker.longitude);
         let mapMarker = new google.maps.Marker({
           id: marker.id, // Adicionando o id para o rastreamento do ponto

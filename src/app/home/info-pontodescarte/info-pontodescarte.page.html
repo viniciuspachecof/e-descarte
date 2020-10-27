@@ -30,5 +30,5 @@
   </form>
 
   <ion-button (click)="navigate()">Ir até o local</ion-button>
-  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && pontodescarte.tipo===0">Descartar meu lixo eletrônico aqui</ion-button>
+  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && !isAdmin && pontodescarte.tipo===0">Descartar meu lixo eletrônico aqui</ion-button>
 </ion-content>

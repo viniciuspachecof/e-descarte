@@ -31,7 +31,6 @@ export class CriarContaPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   async salvar() {
@@ -90,5 +89,4 @@ export class CriarContaPage implements OnInit {
 
     await alerta.present();
   }
-
 }

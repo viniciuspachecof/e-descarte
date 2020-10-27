@@ -42,7 +42,8 @@ export class CadastrarPontoDescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
-      status: true,
+      ativo: true,
+      status: false,
       tipo: null,
       cidadeId: null,
       cidade: null,
@@ -170,24 +171,16 @@ export class CadastrarPontoDescartePage implements OnInit {
       return;
     }
 
-    let dto = {
-      nome: this.pontodescarte.nome,
-      fone: this.pontodescarte.fone,
-      latitude: this.pontodescarte.latitude,
-      longitude: this.pontodescarte.longitude,
-      status: this.pontodescarte.status,
-      tipo: this.tokenService.isCatador() ? 0 : 1,
-      cidadeId: this.pontodescarte.cidadeId,
-      cidade: null,
-      usuarioId: this.tokenService.getUserId(),
-      usuario: null
-    }
+    this.pontodescarte.usuario = null;
+    this.pontodescarte.usuarioId = this.tokenService.getUserId();
+    this.pontodescarte.cidade = null;
+    this.pontodescarte.tipo = this.tokenService.isCatador() ? 0 : 1;
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
     this.pontodescarteService
-      .salvar(dto)
+      .salvar(this.pontodescarte)
       .subscribe(() => {
         loading.dismiss();
         this.dataSharingService.selectedIndex.next(1);
@@ -205,7 +198,8 @@ export class CadastrarPontoDescartePage implements OnInit {
       fone: null,
       latitude: null,
       longitude: null,
-      status: true,
+      ativo: true,
+      status: false,
       tipo: null,
       cidadeId: null,
       cidade: null,

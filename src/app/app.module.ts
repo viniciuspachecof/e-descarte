@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataSharingService } from './services/data-sharing.service';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 import { Camera } from "@ionic-native/camera/ngx";
 
@@ -22,7 +23,8 @@ import { Camera } from "@ionic-native/camera/ngx";
     BrowserModule,
     IonicModule.forRoot(),
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxMaskIonicModule.forRoot()
   ],
   providers: [
     StatusBar,
