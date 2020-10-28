@@ -40,20 +40,21 @@ ion-menu-button {
 ion-back-button {
     color: #bfd25e
 }
+
 ion-input{
     border: 2px solid #8baa6e;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 13px;
     font-size: medium;
-    color: #696969;
+    color: #696969!important;
     font-weight: bolder;
     display: flex;
-    //margin-top: 5%;
-
 }
+
 ion-label{
     padding-left: 10px;
-    padding-top: 5%;
+    padding-top: 12px;
+    padding-bottom: 8px;
     color: #696969;
     font-size: small;
     font-weight: bolder;
@@ -61,15 +62,13 @@ ion-label{
 }
 
 ion-button{
-    border-radius: 15px;
-   // border: 2px solid #00D9D0;    
+    border-radius: 10px;
     font-weight: bold;
     font-size: medium;
     background-color: #8baa6e;
     color: white;
-    opacity: 100%;    
-
 }
-.ion-padding{
-    margin-top: -8%;
+
+ion-header, ion-footer {
+    background-color: #fff;
 }

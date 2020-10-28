@@ -6,7 +6,7 @@
         <ion-list id="inbox-list">                    
           <ion-menu-toggle auto-hide="false">
             <ion-item (click)="selectedIndex = 1" [class.selected]="selectedIndex == 1" routerLink="/home" lines="none" detail="false" routerDirection="root">
-              <ion-icon color="success" name="home" slot="start"></ion-icon>
+              <ion-icon name="home" slot="start"></ion-icon>
               <ion-label>Início</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -30,7 +30,7 @@
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
             <ion-item (click)="selectedIndex = 4" [class.selected]="selectedIndex == 4" routerLink="/perfil" lines="none" detail="false" routerDirection="root">
-              <ion-icon color="success" name="person" slot="start"></ion-icon>
+              <ion-icon name="person" slot="start"></ion-icon>
               <ion-label>Perfil</ion-label>
             </ion-item>
           </ion-menu-toggle>
