@@ -33,6 +33,10 @@ h3{
     margin-top: 0%;
 }
 
+ion-select {
+    color: #696969
+}
+
 ion-menu-button {
     color: #bfd25e
 }
@@ -55,7 +59,7 @@ ion-label{
     padding-left: 10px;
     padding-top: 12px;
     padding-bottom: 8px;
-    color: #696969;
+    color: #696969!important;
     font-size: small;
     font-weight: bolder;
     display: block;    
@@ -69,6 +73,18 @@ ion-button{
     color: white;
 }
 
-ion-header, ion-footer {
+ion-header, ion-footer, ion-content {
     background-color: #fff;
+}
+
+ion-content ion-item ion-icon{
+    color: #8baa6e
+}
+
+ion-content .context {
+    padding: 0 16px 10px 16px;
+}
+
+ion-footer {
+    padding: 0 16px 0 16px;
 }

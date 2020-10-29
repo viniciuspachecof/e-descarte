@@ -1,11 +1,11 @@
 <ion-content>
-  <div class="container" style="background-color: #fff">
+  <div class="container">
     <img src="../../assets/img/cabecalho_login.png" alt="">
   </div>
 
   <h3>REALIZAR LOGIN</h3>
   <form #loginForm="ngForm" novalidate>
-    <div style="padding: 0 16px 10px 16px;">
+    <div class="context">
       <ion-label>E-mail:</ion-label>
       <ion-input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
@@ -34,7 +34,7 @@
     </div>
   </form>
 
-  <ion-footer style="padding: 0 16px 0 16px;">
+  <ion-footer>
     <ion-button fill="clear" expand="block" (click)="entrar()" [disabled]="loginForm.invalid">Entrar</ion-button>
 
     <ion-label style="text-align: center;">NÃO POSSUI CADASTRO?</ion-label>

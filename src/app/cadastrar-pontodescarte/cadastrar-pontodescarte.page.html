@@ -10,7 +10,7 @@
 <ion-content>
   <h3>CADASTRAR PONTO</h3>
   <form #pontodescarteForm="ngForm" novalidate>
-    <div style="padding: 0 16px 10px 16px;">
+    <div class="context">
       <ion-label>Nome:</ion-label>
       <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
@@ -42,9 +42,9 @@
       </ion-select>
   </form>
 
-  <div #map id="map" style="margin: 20px"></div>
+  <div #map id="map"></div>
 
-  <ion-footer style="padding: 0 16px 0 16px;">
+  <ion-footer>
     <ion-button fill="clear" expand="block" (click)="salvar()" [disabled]="pontodescarteForm.invalid">Salvar</ion-button>
   </ion-footer>
 </ion-content>

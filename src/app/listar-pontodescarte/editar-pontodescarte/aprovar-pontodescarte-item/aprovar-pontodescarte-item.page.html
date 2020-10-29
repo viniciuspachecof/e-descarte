@@ -1,7 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
-
     <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/editar-pontodescarte"></ion-back-button>
     </ion-buttons>
@@ -33,8 +32,8 @@
         <p>Descartante.: {{pontodescarteitem.usuario.nome}}</p>
       </ion-label>
       <ion-icon name="eye" slot="end" [routerLink]="['/aprovar-pontodescarte-item/aprovar', pontodescarteitem.id, pontodescarteId]"></ion-icon>
-      <!-- <ion-icon *ngIf="pontodescarteitem.status === 1" color="success" name="checkmark-circle" slot="end"></ion-icon> -->
-      <!-- <ion-icon *ngIf="pontodescarteitem.status === 2" color="danger" name="close-circle" slot="end"></ion-icon> -->
+      <ion-icon *ngIf="pontodescarteitem.status === 1" color="success" name="checkmark-circle" slot="end"></ion-icon>
+      <ion-icon *ngIf="pontodescarteitem.status === 2" color="danger" name="close-circle" slot="end"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

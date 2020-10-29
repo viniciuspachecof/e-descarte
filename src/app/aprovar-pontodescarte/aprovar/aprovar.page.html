@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
     <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/aprovar-pontodescarte"></ion-back-button>
     </ion-buttons>
@@ -8,33 +8,31 @@
 </ion-header>
 
 <ion-content>
-  <h3>APROVAR PONTO DE DESCARTE</h3>
-  <form #clienteForm="ngForm" novalidate>
-    <ion-item>
-      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome"></ion-input>    
-    </ion-item>
+  <h3>{{pontodescarte.nome}}</h3>
+  <form #aprovarpontodescarteForm="ngForm" novalidate>
+    <div class="context">
+      <!-- <ion-label>Nome:</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome"></ion-input> -->
 
-    <ion-item>
-      <ion-input type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone"></ion-input>    
-    </ion-item>
-    
-    <ion-item>
-      <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
-        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
-          {{cidade.nome}}
-        </ion-select-option>
-      </ion-select>     
-    </ion-item>
+      <ion-label>Fone:</ion-label>
+      <ion-input disabled="true" type="text" name="fone" [(ngModel)]="pontodescarte.fone"></ion-input>      
 
-    <ion-item>
-      <ion-label>LIBERAR</ion-label>
-      <ion-toggle slot="start" name="ativo" color="success" [(ngModel)]="pontodescarte.status"></ion-toggle>
-    </ion-item>
+      <ion-item>
+        <ion-select disabled="true" placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
+          <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
+            {{cidade.nome}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>LIBERAR</ion-label>
+        <ion-toggle slot="start" name="ativo" color="success" [(ngModel)]="pontodescarte.status"></ion-toggle>
+      </ion-item>
+    </div>
   </form>
-
-  <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button color="success" (click)="salvar()" [disabled]="clienteForm.invalid">
-      <ion-icon name="checkmark-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
+
+<ion-footer>
+  <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="aprovarpontodescarte.invalid">Salvar</ion-button>
+</ion-footer>

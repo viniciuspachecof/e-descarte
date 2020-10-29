@@ -9,8 +9,8 @@
 
 <ion-content>
     <h3>CRIE SUA CONTA</h3>
-    <form #criarContaForm="ngForm" novalidate>
-        <div style="padding: 0 16px 10px 16px;">
+    <form #criarcontaForm="ngForm" novalidate>
+        <div class="context">
             <ion-label>Nome Completo:</ion-label>
             <ion-input type="text" name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
             <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
@@ -76,6 +76,6 @@
     </form>
 </ion-content>
 
-<ion-footer style="padding: 0 16px 0 16px;">
-    <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
+<ion-footer>
+    <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="criarcontaForm.invalid">Salvar</ion-button>
 </ion-footer>

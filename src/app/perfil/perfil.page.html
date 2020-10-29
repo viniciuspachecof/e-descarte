@@ -19,7 +19,7 @@
       <ion-button fill="clear" (click)="getGaleria()">Carregar</ion-button>
     </div> -->
     
-    <div style="padding: 0 16px 10px 16px;">
+    <div class="context">
       <ion-label>Nome:</ion-label>
       <ion-input type="text" name="nome" [(ngModel)]="usuario.nome" required
         pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
@@ -49,8 +49,7 @@
       </ion-text>
 
       <ion-label>Senha:</ion-label>
-      <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8"
-        #campoSenha="ngModel"></ion-input>
+      <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
           <span *ngIf="campoSenha.errors.required">
@@ -63,12 +62,12 @@
       </ion-text>
 
       <ion-label>Pontos:</ion-label>
-      <ion-input type="text" disabled="true" diplaceholder="Total de pontos" name="pontuacao" [(ngModel)]="rankingpontuacao.pontuacao"></ion-input>
+      <ion-input type="text" disabled="true" name="pontuacao" [(ngModel)]="rankingpontuacao.pontuacao"></ion-input>
     </div>
   </form>
 </ion-content>
 
-<ion-footer style="padding: 0 16px 0 16px;">
+<ion-footer>
     <ion-button fill="clear" expand="full" style="margin-bottom: 6px" [disabled]="perfilForm.invalid" (click)="salvar()">Salvar</ion-button>
     <ion-button fill="clear" expand="block" (click)="logOut()">Sair</ion-button>
 </ion-footer>

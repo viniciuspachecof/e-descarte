@@ -8,24 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <h3>EDITAR PONTO</h3>
-  <form #clienteForm="ngForm" novalidate>
-    <div style="padding: 0 16px 10px 16px;">
-      <div>
-      <ion-label>E-mail:</ion-label>
-      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+  <h3>{{pontodescarte.nome}}</h3>
+
+  <form #editarpontodescarteForm="ngForm" novalidate>
+    <div class="context">    
+      <!-- <ion-label>Nome:</ion-label>
+      <ion-input disabled="true" type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
         <small>
           <span *ngIf="campoNome.errors.required">
             O campo nome é obrigatório
           </span>
         </small>
-      </ion-text>
-    </div>
-
-    <div>
-      <ion-label>E-mail:</ion-label>
-      <ion-input type="text" placeholder="Fone" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
+      </ion-text>     -->
+    
+      <ion-label>Fone:</ion-label>
+      <ion-input disabled="true" type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
         <small>
           <span *ngIf="campoFone.errors.required">
@@ -39,8 +37,7 @@
           </span>
         </small>
       </ion-text>
-    </div>
-    </div>
+    </div>  
     
     <ion-item>
       <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
@@ -59,6 +56,6 @@
   <ion-button expand="block" style="margin: 0px 16px 0px 16px; font-size: 15px" fill="clear" [routerLink]="['/editar-pontodescarte', pontodescarte.id]" *ngIf="pontodescarte.tipo===0">Lixos cadastrados neste local</ion-button>
 </ion-content>
 
-<ion-footer style="padding: 0 16px 0 16px;">
-  <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="clienteForm.invalid">Salvar</ion-button>
+<ion-footer>
+  <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="editarpontodescarteForm.invalid">Salvar</ion-button>
 </ion-footer>

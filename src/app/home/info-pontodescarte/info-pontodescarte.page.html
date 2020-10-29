@@ -8,27 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <h3>PONTO DE DESCARTE</h3>
+  <h3>{{pontodescarte.nome}}</h3>
+
   <form #clienteForm="ngForm" novalidate>
-    <ion-item>
-      <ion-input disabled="true" type="text" placeholder="Nome" name="nome" [(ngModel)]="pontodescarte.nome">
-      </ion-input>
-    </ion-item>
+    <div class="context">
+      <!-- <ion-label>Nome:</ion-label>
+      <ion-input disabled="true" type="text" name="nome" [(ngModel)]="pontodescarte.nome"> </ion-input> -->
 
-    <ion-item>
-      <ion-input disabled="true" type="text" placeholder="Fone" name="fone" [(ngModel)]="pontodescarte.fone">
-      </ion-input>
-    </ion-item>      
+      <ion-label>Fone:</ion-label>
+      <ion-input disabled="true" type="text" name="fone" [(ngModel)]="pontodescarte.fone"> </ion-input>
 
-    <ion-item>
-      <ion-select disabled="true" placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
-        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
-          {{cidade.nome}}
-        </ion-select-option>
-      </ion-select>     
-    </ion-item>
+      <ion-item>
+        <ion-select disabled="true" placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
+          <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
+            {{cidade.nome}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
   </form>
 
-  <ion-button (click)="navigate()">Ir até o local</ion-button>
-  <ion-button [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && !isAdmin && pontodescarte.tipo===0">Descartar meu lixo eletrônico aqui</ion-button>
+  <ion-footer>
+    <ion-button expand="block" fill="clear" (click)="navigate()">Ir até o local</ion-button>
+    <ion-button expand="block" fill="clear" [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && !isAdmin && pontodescarte.tipo===0" style="font-size: 15px">Descartar meu lixo eletrônico</ion-button>
+  </ion-footer>
 </ion-content>

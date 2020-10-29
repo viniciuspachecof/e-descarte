@@ -138,7 +138,7 @@ export class AprovarPage implements OnInit {
     await alerta.present();
   }
 
-  executarAlgo() {
+  executarStyle() {
     if (this.pontodescarteitem.status === 0) return;
 
     if (this.pontodescarteitem.status === 1) {
