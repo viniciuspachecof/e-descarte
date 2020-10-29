@@ -12,10 +12,10 @@
 
   <form #clienteForm="ngForm" novalidate>
     <div class="context">
-      <!-- <ion-label>Nome:</ion-label>
+      <!-- <ion-label>Nome</ion-label>
       <ion-input disabled="true" type="text" name="nome" [(ngModel)]="pontodescarte.nome"> </ion-input> -->
 
-      <ion-label>Fone:</ion-label>
+      <ion-label>Fone</ion-label>
       <ion-input disabled="true" type="text" name="fone" [(ngModel)]="pontodescarte.fone"> </ion-input>
 
       <ion-item>
@@ -28,7 +28,7 @@
     </div>
   </form>
 
-  <ion-footer>
+  <ion-footer class="ion-no-border">
     <ion-button expand="block" fill="clear" (click)="navigate()">Ir até o local</ion-button>
     <ion-button expand="block" fill="clear" [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && !isAdmin && pontodescarte.tipo===0" style="font-size: 15px">Descartar meu lixo eletrônico</ion-button>
   </ion-footer>

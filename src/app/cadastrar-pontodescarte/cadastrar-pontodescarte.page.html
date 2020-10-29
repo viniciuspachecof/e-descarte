@@ -11,7 +11,7 @@
   <h3>CADASTRAR PONTO</h3>
   <form #pontodescarteForm="ngForm" novalidate>
     <div class="context">
-      <ion-label>Nome:</ion-label>
+      <ion-label>Nome</ion-label>
       <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
         <small>
@@ -21,7 +21,7 @@
         </small>
       </ion-text>
 
-      <ion-label>Telefone:</ion-label>
+      <ion-label>Telefone</ion-label>
       <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" mask="(00) 00000-0000" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
         <small>
@@ -44,7 +44,7 @@
 
   <div #map id="map"></div>
 
-  <ion-footer>
+  <ion-footer class="ion-no-border">
     <ion-button fill="clear" expand="block" (click)="salvar()" [disabled]="pontodescarteForm.invalid">Salvar</ion-button>
   </ion-footer>
 </ion-content>

@@ -19,7 +19,7 @@
         </ion-select>
       </ion-item>
 
-      <ion-label>Quantidade:</ion-label>
+      <ion-label>Quantidade</ion-label>
       <ion-input disabled="true" type="text" name="quant" [(ngModel)]="pontodescarteitem.quant"></ion-input>
 
       <ion-radio-group (ionChange)="executarStyle()" name="status" [(ngModel)]="pontodescarteitem.status">
@@ -44,6 +44,6 @@
   </form>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border">
   <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="aprovarlixoForm.invalid">Salvar</ion-button>
 </ion-footer>

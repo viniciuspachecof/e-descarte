@@ -19,12 +19,12 @@
         </ion-select>
       </ion-item>
 
-      <ion-label>Quantidade:</ion-label>
+      <ion-label>Quantidade</ion-label>
       <ion-input type="text" name="quant" [(ngModel)]="pontodescarteitem.quant"></ion-input>
     </div>
   </form>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border">
   <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="cadastrarlixoForm.invalid">Salvar</ion-button>
 </ion-footer>

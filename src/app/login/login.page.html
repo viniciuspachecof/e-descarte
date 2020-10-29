@@ -6,7 +6,7 @@
   <h3>REALIZAR LOGIN</h3>
   <form #loginForm="ngForm" novalidate>
     <div class="context">
-      <ion-label>E-mail:</ion-label>
+      <ion-label>E-mail</ion-label>
       <ion-input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
         <small>
@@ -19,7 +19,7 @@
         </small>
       </ion-text>
 
-      <ion-label>Senha:</ion-label>
+      <ion-label>Senha</ion-label>
       <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>

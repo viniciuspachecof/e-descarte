@@ -20,7 +20,7 @@
     </div> -->
     
     <div class="context">
-      <ion-label>Nome:</ion-label>
+      <ion-label>Nome</ion-label>
       <ion-input type="text" name="nome" [(ngModel)]="usuario.nome" required
         pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
@@ -34,7 +34,7 @@
         </small>
       </ion-text>
 
-      <ion-label>E-mail:</ion-label>
+      <ion-label>E-mail</ion-label>
       <ion-input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
         [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
@@ -48,7 +48,7 @@
         </small>
       </ion-text>
 
-      <ion-label>Senha:</ion-label>
+      <ion-label>Senha</ion-label>
       <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
@@ -59,15 +59,24 @@
             O campo senha deve ter no mínimo 8 caracteres
           </span>
         </small>
-      </ion-text>
-
-      <ion-label>Pontos:</ion-label>
-      <ion-input type="text" disabled="true" name="pontuacao" [(ngModel)]="rankingpontuacao.pontuacao"></ion-input>
-    </div>
+      </ion-text>     
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" offset="3">
+            <div class="pontuacao">
+              <p>Pontos</p>
+              <p style="font-size: 70px; font-weight: normal; color: #8baa6e;">50</p>
+              <p>Nvl: 0</p>
+            </div>
+          </ion-col>
+        </ion-row> 
+      </ion-grid>
+      </div>
   </form>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border">
     <ion-button fill="clear" expand="full" style="margin-bottom: 6px" [disabled]="perfilForm.invalid" (click)="salvar()">Salvar</ion-button>
     <ion-button fill="clear" expand="block" (click)="logOut()">Sair</ion-button>
 </ion-footer>
