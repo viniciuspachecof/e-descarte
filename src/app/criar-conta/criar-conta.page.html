@@ -37,6 +37,19 @@
                 </small>
             </ion-text>
 
+            <ion-label>Fone</ion-label>
+            <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" mask="(00) 00000-0000" [(ngModel)]="usuario.fone" required #campoFone="ngModel"></ion-input>
+            <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
+                <small>
+                <span *ngIf="campoFone.errors.required">
+                    O campo fone é obrigatório
+                </span>
+                <span *ngIf="campoFone.errors.pattern">
+                    O fone é inválido
+                </span>
+                </small>
+            </ion-text>
+
             <ion-label>Senha</ion-label>
             <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"> </ion-input>
             <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">

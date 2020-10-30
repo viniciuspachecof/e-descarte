@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CriarContaPageRoutingModule } from './criar-conta-routing.module';
 
 import { CriarContaPage } from './criar-conta.page';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CriarContaPageRoutingModule
+    CriarContaPageRoutingModule,
+    NgxMaskIonicModule.forRoot()
   ],
   declarations: [CriarContaPage]
 })

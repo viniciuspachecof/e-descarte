@@ -38,14 +38,6 @@
         </small>
       </ion-text>
     </div>  
-    
-    <ion-item>
-      <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
-        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
-          {{cidade.nome}}
-        </ion-select-option>
-      </ion-select>     
-    </ion-item>
 
     <ion-item>
       <ion-label>ATIVO</ion-label>

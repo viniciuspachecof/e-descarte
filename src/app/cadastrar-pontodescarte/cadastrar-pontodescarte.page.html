@@ -21,7 +21,7 @@
         </small>
       </ion-text>
 
-      <ion-label>Telefone</ion-label>
+      <ion-label>Fone</ion-label>
       <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" mask="(00) 00000-0000" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
         <small>
@@ -33,13 +33,7 @@
           </span>
         </small>
       </ion-text>
-    </div>
-
-      <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
-        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
-          {{cidade.nome}}
-        </ion-select-option>
-      </ion-select>
+    </div>  
   </form>
 
   <div #map id="map"></div>

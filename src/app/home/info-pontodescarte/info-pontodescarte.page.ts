@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
-import { CidadeService } from 'src/app/services/cidade.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 
@@ -15,7 +13,6 @@ import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 export class PontodescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
-  cidades: Cidade[];
   isCatador: boolean;  
   isAdmin: boolean;  
 
@@ -23,7 +20,6 @@ export class PontodescartePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
-    private cidadeService: CidadeService,
     private dataSharingService: DataSharingService
   ) {
     this.pontodescarte = {
@@ -36,8 +32,6 @@ export class PontodescartePage implements OnInit {
       tipo: null,
       usuarioId: null,
       usuario: null,
-      cidadeId: null,
-      cidade: null,
     }
   }
 
@@ -49,18 +43,7 @@ export class PontodescartePage implements OnInit {
       this.isAdmin = value;
     });
     this.dataSharingService.displayMenu.next(false);
-    this.listarCidades();
-  }
-
-  async listarCidades() {
-    const loading = await this.loadingController.create({ message: 'Carregando cidades' });
-    loading.present();
-
-    this.cidadeService.getCidades().subscribe((data) => {
-      this.cidades = data;
-      this.carregarPontoDescate();
-      loading.dismiss();
-    });
+    this.carregarPontoDescate();
   }
 
   carregarPontoDescate() {

@@ -17,14 +17,6 @@
 
       <ion-label>Fone</ion-label>
       <ion-input disabled="true" type="text" name="fone" [(ngModel)]="pontodescarte.fone"> </ion-input>
-
-      <ion-item>
-        <ion-select disabled="true" placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
-          <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
-            {{cidade.nome}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
     </div>
   </form>
 

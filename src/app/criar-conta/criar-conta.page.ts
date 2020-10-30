@@ -25,6 +25,7 @@ export class CriarContaPage implements OnInit {
     this.usuario = {
       nome: null,
       email: null,
+      fone: null,
       senha: null,
       tipo: 'DESCARTANTE',
     }

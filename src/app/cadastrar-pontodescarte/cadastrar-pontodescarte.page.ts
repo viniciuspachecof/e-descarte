@@ -3,8 +3,6 @@ import { PontoDescarte } from '../models/PontoDescarte.interface';
 import { LoadingController, AlertController, Platform, NavController } from '@ionic/angular';
 import { PontoDescarteService } from '../services/ponto-descarte.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Cidade } from '../models/cidade.interface';
-import { CidadeService } from '../services/cidade.service';
 import { Usuario } from '../models/Usuario.interface';
 import { TokenService } from '../services/token.service';
 import { DataSharingService } from '../services/data-sharing.service';
@@ -23,7 +21,6 @@ export class CadastrarPontoDescartePage implements OnInit {
   infoWindows: any = [];
   mapMarkers: any = [];
   pontodescarte: PontoDescarte;
-  cidades: Cidade[];
   usuarios: Usuario[];
 
   constructor(
@@ -33,7 +30,6 @@ export class CadastrarPontoDescartePage implements OnInit {
     private loadingController: LoadingController,
     private platform: Platform,
     private pontodescarteService: PontoDescarteService,
-    private cidadeService: CidadeService,
     private tokenService: TokenService,
     private dataSharingService: DataSharingService
   ) {
@@ -45,8 +41,6 @@ export class CadastrarPontoDescartePage implements OnInit {
       ativo: true,
       status: false,
       tipo: null,
-      cidadeId: null,
-      cidade: null,
       usuarioId: null,
       usuario: null
     }
@@ -57,19 +51,8 @@ export class CadastrarPontoDescartePage implements OnInit {
 
   ionViewDidEnter() {
     this.platform.ready().then(() => {
-      this.listarCidades();
-    })
-  }
-
-  async listarCidades() {
-    const loading = await this.loadingController.create({ message: 'Carregando cidades' });
-    loading.present();
-
-    this.cidadeService.getCidades().subscribe((data) => {
-      this.cidades = data;
       this.carregarMapa();
-      loading.dismiss();
-    });
+    })
   }
  
   carregarMapa() {
@@ -173,7 +156,6 @@ export class CadastrarPontoDescartePage implements OnInit {
 
     this.pontodescarte.usuario = null;
     this.pontodescarte.usuarioId = this.tokenService.getUserId();
-    this.pontodescarte.cidade = null;
     this.pontodescarte.tipo = this.tokenService.isCatador() ? 0 : 1;
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
@@ -201,8 +183,6 @@ export class CadastrarPontoDescartePage implements OnInit {
       ativo: true,
       status: false,
       tipo: null,
-      cidadeId: null,
-      cidade: null,
       usuarioId: null,
       usuario: null
     }
