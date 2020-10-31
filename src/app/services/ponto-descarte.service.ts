@@ -18,6 +18,10 @@ export class PontoDescarteService {
     return this.httpClient.get<PontoDescarte[]>(this.URL);
   };
 
+  getPontosDescarteStatus() {
+    return this.httpClient.get<PontoDescarte[]>(`${this.URL+'/ByStatus'}`);
+  };
+
   getPontoDescarte(id: number) {
     return this.httpClient.get<PontoDescarte>(`${this.URL}/${id}`);
   };

@@ -21,7 +21,7 @@
   </form>
 
   <ion-footer class="ion-no-border">
-    <ion-button expand="block" fill="clear" (click)="navigate()">Ir até o local</ion-button>
+    <ion-button expand="block" fill="clear" (click)="navigate()">Ir até o ponto</ion-button>
     <ion-button expand="block" fill="clear" [routerLink]="['/info-pontodescarte', pontodescarte.id]" *ngIf="!isCatador && !isAdmin && pontodescarte.tipo===0" style="font-size: 15px">Descartar meu lixo eletrônico</ion-button>
   </ion-footer>
 </ion-content>

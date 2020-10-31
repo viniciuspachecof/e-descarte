@@ -17,8 +17,8 @@ img#foto-perfil{
     transform: translate(-50%, -50%);
 }
 
-.pontuacao {
-    margin-top: 30px
+ion-grid {
+    margin-top: 10px
 }
 
 .pontuacao p {
@@ -26,4 +26,16 @@ img#foto-perfil{
     text-align: center;
     color: #696969;
     font-weight: bold;
+}
+
+.ranking span {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 15px;
+    color: #696969!important;    
+}
+
+.ranking ion-icon {
+    color: #8baa6e;
+    font-size: 25px;
 }

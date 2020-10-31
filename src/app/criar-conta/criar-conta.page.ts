@@ -63,6 +63,7 @@ export class CriarContaPage implements OnInit {
 
     this.rankingpontuacao = {
       pontuacao: 0,
+      nivel: 0,
       usuarioId: context.id,
       usuario: null,
     }

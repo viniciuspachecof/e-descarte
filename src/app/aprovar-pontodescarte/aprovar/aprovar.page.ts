@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 
 declare var google: any;
@@ -24,6 +25,7 @@ export class AprovarPage implements OnInit {
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
     private navController: NavController,
+    private dataSharingService: DataSharingService
   ) {
     this.pontodescarte = {
       nome: null,
@@ -39,6 +41,7 @@ export class AprovarPage implements OnInit {
   }
 
   async ngOnInit() {
+    this.dataSharingService.displayMenu.next(false);
     this.carregarPontoDescate();
   }
 

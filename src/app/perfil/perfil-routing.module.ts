@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: PerfilPage
+  },  {
+    path: 'rankingpontuacao',
+    loadChildren: () => import('./rankingpontuacao/rankingpontuacao.module').then( m => m.RankingpontuacaoPageModule)
   }
+
 ];
 
 @NgModule({

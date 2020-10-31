@@ -78,7 +78,7 @@ export class HomePage implements OnInit {
 
   addMarkerUserToMap(location, userLat, userLong) {
     let mapMarker = new google.maps.Marker({
-      title: 'Sua posição',
+      title: 'Minha posição',
       position: location,
       latitude: userLat,
       longitude: userLong,
@@ -114,10 +114,8 @@ export class HomePage implements OnInit {
 
   addUserInfoWindowToMarker(marker) {
     let infoWindowContent =
-      `<div class="infoitem">` +
-      `<h4>` + marker.title + `</h4>` +
-      `<p>` + marker.longitude + `</p>` +
-      `<p>` + marker.latitude + `</p>`;
+      `<div class="infoitem" style="text-align: center">` +
+      `<h4 style="color: #696969">` + marker.title + `</h4>`;      
 
 
     let infoWindow = new google.maps.InfoWindow({
@@ -134,11 +132,9 @@ export class HomePage implements OnInit {
 
   addInfoWindowToMarker(marker) {
     let infoWindowContent =
-      `<div class="infoitem">` +
-      `<h4>` + marker.title + `</h4>` +
-      `<p>` + marker.longitude + `</p>` +
-      `<p>` + marker.latitude + `</p>` +
-      `<ion-button id="information">Ver mais...</ion-button>` +
+      `<div class="infoitem" style="text-align: center">` +
+      `<h4 style="color: #696969">` + marker.title + `</h4>` +      
+      `<ion-button id="information" fill="clear">Ver mais...</ion-button>` +
       `</div>`;
 
     let infoWindow = new google.maps.InfoWindow({
