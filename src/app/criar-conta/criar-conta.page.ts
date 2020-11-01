@@ -14,6 +14,7 @@ export class CriarContaPage implements OnInit {
 
   usuario: Usuario;
   rankingpontuacao: RankingPontuacao;
+  confirmSenha: string;
 
   constructor(
     private alertController: AlertController,
@@ -35,6 +36,11 @@ export class CriarContaPage implements OnInit {
   }
 
   async salvar() {
+    if (this.usuario.senha !== this.confirmSenha) {
+      this.alertMessageConfirmSenha();
+      return;
+    }
+
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
 
@@ -79,6 +85,17 @@ export class CriarContaPage implements OnInit {
         loading.dismiss();
         this.mensagemAlerta();
       });
+  }
+
+  async alertMessageConfirmSenha() {
+    const alerta = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Aviso',
+      message: 'As senhas não coincidem.',
+      buttons: ['OK']
+    });
+
+    await alerta.present();
   }
 
   async mensagemAlerta() {

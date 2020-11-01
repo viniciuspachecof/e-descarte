@@ -65,14 +65,34 @@ export class HomePage implements OnInit {
       const options = {
         center: location,
         zoom: 13,
-        disableDefaultUI: true
-      };
+        disableDefaultUI: true,
+        clickableIcons: false
+      };      
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
       this.addMarkerUserToMap(location, userLat, userLong);
 
       this.addMarkersToMap(this.markers);
+
+      const legendsIcons: Record<string, any> = {
+        suaposicao: {
+          name: "Minha posição",
+          icon: '../../assets/icon/marker-azul.png',
+        },
+        pontosprivados: {
+          name: "Pontos privados",
+          icon: '../../assets/icon/marker-vermelho.png',
+        },
+        pontospublicos: {
+          name: "Pontos públicos",
+          icon: '../../assets/icon/marker-verde.png',
+        }               
+      };
+
+      this.addLegendsToMap(legendsIcons);
+
+      this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
     });
   }
 
@@ -90,7 +110,7 @@ export class HomePage implements OnInit {
 
     this.addUserInfoWindowToMarker(mapMarker);
   }
-  
+
   addMarkersToMap(markers) {
     for (let marker of markers) {
       if (marker.ativo && marker.status) {
@@ -112,11 +132,23 @@ export class HomePage implements OnInit {
     }
   }
 
+  addLegendsToMap(legendsIcons) {
+    const legend = document.getElementById("legend") as HTMLElement;
+
+    for (const key in legendsIcons) {
+      const type = legendsIcons[key];
+      const name = type.name;
+      const icon = type.icon;
+      const div = document.createElement("div");
+      div.innerHTML = '<img src="' + icon + '"> ' + name;
+      legend.appendChild(div);
+    }
+  }
+
   addUserInfoWindowToMarker(marker) {
     let infoWindowContent =
       `<div class="infoitem" style="text-align: center">` +
-      `<h4 style="color: #696969">` + marker.title + `</h4>`;      
-
+      `<h4 style="color: #696969">` + marker.title + `</h4>`;
 
     let infoWindow = new google.maps.InfoWindow({
       content: infoWindowContent
@@ -133,7 +165,7 @@ export class HomePage implements OnInit {
   addInfoWindowToMarker(marker) {
     let infoWindowContent =
       `<div class="infoitem" style="text-align: center">` +
-      `<h4 style="color: #696969">` + marker.title + `</h4>` +      
+      `<h4 style="color: #696969">` + marker.title + `</h4>` +
       `<ion-button id="information" fill="clear">Ver mais...</ion-button>` +
       `</div>`;
 
