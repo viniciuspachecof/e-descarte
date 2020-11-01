@@ -32,9 +32,8 @@
           </span>
         </small>
       </ion-text>
-    </ion-item>
     
-    <ion-item>
+      <ion-label>E-mail:</ion-label>
       <ion-input type="email" placeholder="E-mail" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email"  required #campoEmail="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
         <small>
