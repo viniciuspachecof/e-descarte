@@ -1,4 +1,3 @@
-import { Cidade } from './cidade.interface';
 import { Usuario } from './Usuario.interface';
 
 export interface PontoDescarte {
@@ -12,6 +11,4 @@ export interface PontoDescarte {
     tipo: number;
     usuarioId: number;
     usuario: Usuario[];
-    cidadeId: number;
-    cidade: Cidade;
 };

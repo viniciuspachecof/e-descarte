@@ -28,10 +28,6 @@ const routes: Routes = [
     loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule)
   },
   {
-    path: 'fale-conosco',
-    loadChildren: () => import('./fale-conosco/fale-conosco.module').then(m => m.FaleConoscoPageModule)
-  },
-  {
     path: 'cadastrar-pontodescarte',
     loadChildren: () => import('./cadastrar-pontodescarte/cadastrar-pontodescarte.module').then(m => m.CadastrarPontoDescartePageModule)
   },
@@ -54,7 +50,8 @@ const routes: Routes = [
   {
     path: 'aprovar-pontodescarte-item',
     loadChildren: () => import('./listar-pontodescarte/editar-pontodescarte/aprovar-pontodescarte-item/aprovar-pontodescarte-item.module').then(m => m.AprovarPontodescarteItemPageModule)
-  },  {
+  },
+  {
     path: 'aprovar-pontodescarte',
     loadChildren: () => import('./aprovar-pontodescarte/aprovar-pontodescarte.module').then( m => m.AprovarPontodescartePageModule)
   }

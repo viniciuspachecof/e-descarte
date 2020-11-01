@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
     <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/aprovar-pontodescarte-item"></ion-back-button>
     </ion-buttons>
@@ -9,45 +9,41 @@
 
 <ion-content>
   <h3>APROVAR LIXO ELETRÔNICO</h3>
-  <form #itemForm="ngForm" novalidate>
-    <ion-item>
-      <ion-select disabled="true" placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
-        <ion-select-option *ngFor="let item of itens" [value]="item.id">
-          {{item.nome}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+  <form #aprovarlixoForm="ngForm" novalidate>
+    <div class="context">
+      <ion-item>
+        <ion-select disabled="true" placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
+          <ion-select-option *ngFor="let item of itens" [value]="item.id">
+            {{item.nome}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-item>
-      <ion-input disabled="true" type="text" placeholder="Quantidade" name="quant" [(ngModel)]="pontodescarteitem.quant">
-      </ion-input>
-    </ion-item>
-   
-    <ion-radio-group (ionChange)="executarAlgo()" name="status" [(ngModel)]="pontodescarteitem.status">
-    <ion-grid style="margin-top: 100px">
-      <ion-row>
-        <ion-col style="position: relative;" size="5" offset="1">
-          <ion-item style="--border-style: none !important">
-            <img [ngStyle]="styleAprovar" src="../../../../../assets/icon/icone-aprovado.png" alt="icone-aprovado">
-            <ion-radio slot="start" [value]=1></ion-radio>
-          </ion-item>
-        </ion-col>
-        <ion-col style="position: relative;" size="5">
-          <ion-item  style="--border-style: none !important">
-            <img [ngStyle]="styleReprovar" src="../../../../../assets/icon/icone-reprovado.png" alt="icone-reprovado">
-            <ion-radio slot="start" [value]=2></ion-radio>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-radio-group>
+      <ion-label>Quantidade</ion-label>
+      <ion-input disabled="true" type="text" name="quant" [(ngModel)]="pontodescarteitem.quant"></ion-input>
+
+      <ion-radio-group (ionChange)="executarStyle()" name="status" [(ngModel)]="pontodescarteitem.status">
+        <ion-grid style="margin-top: 100px">
+          <ion-row>
+            <ion-col style="position: relative;" size="5" offset="1">
+              <ion-item style="--border-style: none !important">
+                <img [ngStyle]="styleAprovar" src="../../../../../assets/icon/icone-aprovado.png" alt="icone-aprovado">
+                <ion-radio slot="start" [value]=1></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col style="position: relative;" size="5">
+              <ion-item style="--border-style: none !important">
+                <img [ngStyle]="styleReprovar" src="../../../../../assets/icon/icone-reprovado.png" alt="icone-reprovado">
+                <ion-radio slot="start" [value]=2></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-radio-group>
+    </div>
   </form>
-
-  <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button color="success" (click)="salvar()" [disabled]="itemForm.invalid">
-      <ion-icon name="checkmark-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="aprovarlixoForm.invalid">Salvar</ion-button>
+</ion-footer>

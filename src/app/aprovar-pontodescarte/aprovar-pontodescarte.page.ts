@@ -18,8 +18,6 @@ export class AprovarPontodescartePage implements OnInit {
   constructor(
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
-    private tokenService: TokenService,
-    private navController: NavController,
     private dataSharingService: DataSharingService
   ) { }
 
@@ -27,21 +25,16 @@ export class AprovarPontodescartePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.dataSharingService.displayMenu.next(true);
     this.listar();
   }
 
   async listar() {
     const loading = await this.loadingController.create({ message: 'Carregando' });
     loading.present();
-    this.pontodescarteService.getPontosDescarte().subscribe((data) => {
+    this.pontodescarteService.getPontosDescarteStatus().subscribe((data) => {
       this.pontosdescarte = data;
       loading.dismiss();
     });
-  }
-
-  logOut() {
-    this.tokenService.logOut();
-    this.dataSharingService.displayMenu.next(false);
-    this.navController.navigateForward(['/login']);
   }
 }

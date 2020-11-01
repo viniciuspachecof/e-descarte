@@ -15,7 +15,7 @@
         <span>{{pontodescarte.nome}}</span>
         <p>Solicitante: {{pontodescarte.usuario.nome}}</p>
       </ion-label>
-      <ion-icon color="success" name="eye" slot="end" [routerLink]="['/aprovar-pontodescarte/aprovar', pontodescarte.id]"></ion-icon>      
+      <ion-icon name="eye" slot="end" [routerLink]="['/aprovar-pontodescarte/aprovar', pontodescarte.id]"></ion-icon>      
     </ion-item>
   </ion-list>
 </ion-content>

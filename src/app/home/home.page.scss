@@ -17,3 +17,27 @@
     height: 100%;
 }
 
+#information {
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: medium;
+    background-color: #8baa6e;
+    color: white;
+}
+
+#legend {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+  
+#legend h3 {
+    margin-top: 0;
+    color: #696969;
+}
+
+#legend img {
+    vertical-align: middle;
+}

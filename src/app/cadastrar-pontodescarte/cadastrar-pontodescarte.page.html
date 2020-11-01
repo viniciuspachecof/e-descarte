@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
     <ion-buttons slot="start" style="position: absolute;">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -10,8 +10,8 @@
 <ion-content>
   <h3>CADASTRAR PONTO</h3>
   <form #pontodescarteForm="ngForm" novalidate>
-    <div class="ion-padding">
-    <ion-label>Nome:</ion-label>
+    <div class="context">
+      <ion-label>Nome</ion-label>
       <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
         <small>
@@ -20,11 +20,9 @@
           </span>
         </small>
       </ion-text>
-    
 
-    
-      <ion-label>Telefone:</ion-label>
-      <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
+      <ion-label>Fone</ion-label>
+      <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" mask="(00) 00000-0000" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
         <small>
           <span *ngIf="campoFone.errors.required">
@@ -35,19 +33,12 @@
           </span>
         </small>
       </ion-text>
-    </div>
-
-    <ion-item>
-      <ion-select placeholder="Selecione a cidade" [(ngModel)]="pontodescarte.cidadeId" name="cidade">
-        <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">
-          {{cidade.nome}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+    </div>  
   </form>
 
-  <div #map id="map" style="margin: 20px"></div>
+  <div #map id="map"></div>
 
-  <ion-button expand="block" (click)="salvar()" [disabled]="pontodescarteForm.invalid" color="success">Salvar
-  </ion-button>
+  <ion-footer class="ion-no-border">
+    <ion-button fill="clear" expand="block" (click)="salvar()" [disabled]="pontodescarteForm.invalid">Salvar</ion-button>
+  </ion-footer>
 </ion-content>

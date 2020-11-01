@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FaleConoscoPageRoutingModule } from './fale-conosco-routing.module';
+import { RankingpontuacaoPageRoutingModule } from './rankingpontuacao-routing.module';
 
-import { FaleConoscoPage } from './fale-conosco.page';
+import { RankingpontuacaoPage } from './rankingpontuacao.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FaleConoscoPageRoutingModule
+    RankingpontuacaoPageRoutingModule
   ],
-  declarations: [FaleConoscoPage]
+  declarations: [RankingpontuacaoPage]
 })
-export class FaleConoscoPageModule {}
+export class RankingpontuacaoPageModule {}

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
-import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
-import { CidadeService } from 'src/app/services/cidade.service';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
+
+declare var google: any;
 
 @Component({
   selector: 'app-aprovar',
@@ -12,17 +13,19 @@ import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
   styleUrls: ['./aprovar.page.scss'],
 })
 export class AprovarPage implements OnInit {
+  @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
+  map: any;
+  infoWindows: any = [];
   pontodescarte: PontoDescarte;
-  cidades: Cidade[];  
 
   constructor(
     private alertController: AlertController,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
-    private cidadeService: CidadeService,
     private navController: NavController,
+    private dataSharingService: DataSharingService
   ) {
     this.pontodescarte = {
       nome: null,
@@ -34,36 +37,50 @@ export class AprovarPage implements OnInit {
       tipo: null,
       usuarioId: null,
       usuario: null,
-      cidadeId: null,
-      cidade: null,
     }
   }
 
   async ngOnInit() {
-    this.listarCidades();
-  }
-
-  async listarCidades() {
-    const loading = await this.loadingController.create({ message: 'Carregando cidades' });
-    loading.present();
-
-    this.cidadeService.getCidades().subscribe((data) => {
-      this.cidades = data;
-      this.carregarPontoDescate();
-      loading.dismiss();
-    });
+    this.dataSharingService.displayMenu.next(false);
+    this.carregarPontoDescate();
   }
 
   carregarPontoDescate() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.pontodescarteService.getPontoDescarte(id).subscribe((pontodescarte) => {
       this.pontodescarte = pontodescarte;
+      this.carregarMapa(this.pontodescarte.latitude, this.pontodescarte.longitude);
     });
+  }
+
+  carregarMapa(lat, long) {
+      const location = new google.maps.LatLng(lat, long);
+      const options = {
+        center: location,
+        zoom: 15,
+        disableDefaultUI: true
+      };
+
+      this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+      this.addMarkerToMap(location, lat, long);   
+  }
+
+  addMarkerToMap(location, userLat, userLong) {
+    let mapMarker = new google.maps.Marker({
+      title: this.pontodescarte.nome,
+      position: location,
+      latitude: userLat,
+      longitude: userLong,
+      // icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
+      icon: this.pontodescarte.tipo===0 ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'     
+    });
+
+    mapMarker.setMap(this.map);
   }
 
   async salvar() {
     this.pontodescarte.usuario = null;
-    this.pontodescarte.cidade = null;
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();

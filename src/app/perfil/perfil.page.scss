@@ -1,12 +1,3 @@
-ion-input{
-    border: 2px solid #8baa6e;
-    background-color: white;
-    border-radius: 15px;
-    font-size: medium;
-    color: #696969;
-    font-weight: bolder;
-    display: flex;
-}
 img#foto-perfil{
     height:120px;
     width:120px; 
@@ -17,10 +8,34 @@ img#foto-perfil{
     margin-right: auto;
 
 }
+
 .btn-carregar{
     margin: 0;
     position: absolute;  
     left: 50%;
     -ms-transform: translate(-30%, -50%);
     transform: translate(-50%, -50%);
+}
+
+ion-grid {
+    margin-top: 10px
+}
+
+.pontuacao p {
+    margin: 0!important;
+    text-align: center;
+    color: #696969;
+    font-weight: bold;
+}
+
+.ranking span {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 15px;
+    color: #696969!important;    
+}
+
+.ranking ion-icon {
+    color: #8baa6e;
+    font-size: 25px;
 }

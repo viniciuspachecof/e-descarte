@@ -9,11 +9,10 @@
 
 <ion-content>
     <h3>CRIE SUA CONTA</h3>
-    <form #criarContaForm="ngForm" novalidate>
-        <div class="ion-padding">
-            <ion-label>Nome Completo:</ion-label>
-            <ion-input type="text" expand="block" name="nome" [(ngModel)]="usuario.nome" required
-                pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+    <form #criarcontaForm="ngForm" novalidate>
+        <div class="context">
+            <ion-label>Nome Completo</ion-label>
+            <ion-input type="text" name="nome" [(ngModel)]="usuario.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
             <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
                 <small>
                     <span *ngIf="campoNome.errors.required">
@@ -25,7 +24,7 @@
                 </small>
             </ion-text>
 
-            <ion-label>E-mail:</ion-label>
+            <ion-label>E-mail</ion-label>
             <ion-input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.email" required #campoEmail="ngModel"></ion-input>
             <ion-text color="danger" *ngIf="campoEmail.invalid && (campoEmail.dirty || campoEmail.touched)">
                 <small>
@@ -34,13 +33,12 @@
                     </span>
                     <span *ngIf="campoEmail.errors.pattern">
                         O email é inválido
-                      </span>
+                    </span>
                 </small>
             </ion-text>
 
-            <ion-label>Senha:</ion-label>
-            <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8"
-                #campoSenha="ngModel"> </ion-input>
+            <ion-label>Senha</ion-label>
+            <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"> </ion-input>
             <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
                 <small>
                     <span *ngIf="campoSenha.errors.required">
@@ -51,6 +49,32 @@
                     </span>
                 </small>
             </ion-text>
+
+            <ion-label>Confirmar senha</ion-label>
+            <ion-input type="password" name="senha" [(ngModel)]="confirmSenha" required minlength="8" #campoConfirmSenha="ngModel"> </ion-input>
+            <ion-text color="danger" *ngIf="campoConfirmSenha.invalid && (campoConfirmSenha.dirty || campoConfirmSenha.touched)">
+                <small>
+                    <span *ngIf="campoConfirmSenha.errors.required">
+                        O campo senha é obrigatório
+                    </span>
+                    <span *ngIf="campoConfirmSenha.errors.minlength">
+                        O campo senha deve ter no mínimo 8 caracteres
+                    </span>
+                </small>
+            </ion-text>
+
+            <ion-label>Fone</ion-label>
+            <ion-input type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" mask="(00) 00000-0000" [(ngModel)]="usuario.fone" required #campoFone="ngModel"></ion-input>
+            <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
+                <small>
+                <span *ngIf="campoFone.errors.required">
+                    O campo fone é obrigatório
+                </span>
+                <span *ngIf="campoFone.errors.pattern">
+                    O fone é inválido
+                </span>
+                </small>
+            </ion-text>            
 
             <ion-grid>
                 <div class="tipoUsuario">
@@ -75,9 +99,9 @@
                 </div>
             </ion-grid>
         </div>
-    </form>    
+    </form>
 </ion-content>
 
-<ion-footer style="background-color: #fff">
-    <ion-button class="button-container" expand="block" fill="clear" (click)="salvar()" [disabled]="criarContaForm.invalid">Salvar</ion-button>
+<ion-footer class="ion-no-border">
+    <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="criarcontaForm.invalid">Salvar</ion-button>
 </ion-footer>

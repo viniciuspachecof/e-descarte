@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">    
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
     <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/listar-pontodescarte-item"></ion-back-button>
     </ion-buttons>
@@ -9,24 +9,22 @@
 
 <ion-content>
   <h3>CADASTRAR LIXO ELETRÔNICO</h3>
-  <form #itemForm="ngForm" novalidate>
-    <ion-item>
-      <ion-select placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
-        <ion-select-option *ngFor="let item of itens" [value]="item.id">
-          {{item.nome}}
-        </ion-select-option>
-      </ion-select>     
-    </ion-item>
-    
-    <ion-item>
-      <ion-input type="text" placeholder="Quantidade" name="quant" [(ngModel)]="pontodescarteitem.quant">
-      </ion-input>
-    </ion-item>
+  <form #cadastrarlixoForm="ngForm" novalidate>
+    <div class="context">
+      <ion-item>
+        <ion-select placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
+          <ion-select-option *ngFor="let item of itens" [value]="item.id">
+            {{item.nome}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-label>Quantidade</ion-label>
+      <ion-input type="text" name="quant" [(ngModel)]="pontodescarteitem.quant"></ion-input>
+    </div>
   </form>
-  
-  <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button color="success" (click)="salvar()" [disabled]="itemForm.invalid">
-      <ion-icon name="checkmark-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="cadastrarlixoForm.invalid">Salvar</ion-button>
+</ion-footer>

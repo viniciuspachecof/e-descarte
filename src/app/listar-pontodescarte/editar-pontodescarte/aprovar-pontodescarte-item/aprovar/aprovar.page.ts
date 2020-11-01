@@ -99,7 +99,7 @@ export class AprovarPage implements OnInit {
   carregarRankingPontuacao() {
     this.rankingpontuacaoService.getRankingPontuacaoByUsuario(this.pontodescarteitem.usuarioId).subscribe((data) => {
       this.rankingpontuacao = data;
-      
+
       this.recuperarPontuacaoUsuario();
     });
   }
@@ -112,7 +112,18 @@ export class AprovarPage implements OnInit {
   }
 
   async salvarRankingPontuacao() {
-    this.rankingpontuacao.pontuacao = this.novaPontuacao;    
+    this.rankingpontuacao.pontuacao = this.novaPontuacao;
+
+    switch (true) {
+      case this.rankingpontuacao.pontuacao > 1 && this.rankingpontuacao.pontuacao < 10:
+        this.rankingpontuacao.nivel = 1;
+        break;
+      case this.rankingpontuacao.pontuacao >= 10 && this.rankingpontuacao.pontuacao < 20:
+        this.rankingpontuacao.nivel = 2;
+        break;
+      default:
+        break;
+    }
 
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();
@@ -138,7 +149,7 @@ export class AprovarPage implements OnInit {
     await alerta.present();
   }
 
-  executarAlgo() {
+  executarStyle() {
     if (this.pontodescarteitem.status === 0) return;
 
     if (this.pontodescarteitem.status === 1) {

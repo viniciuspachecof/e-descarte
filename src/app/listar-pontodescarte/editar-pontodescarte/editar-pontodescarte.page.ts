@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
-import { Cidade } from 'src/app/models/cidade.interface';
 import { PontoDescarte } from 'src/app/models/pontodescarte.interface';
-import { CidadeService } from 'src/app/services/cidade.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -16,14 +14,12 @@ import { TokenService } from 'src/app/services/token.service';
 export class EditarPontoDescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
-  cidades: Cidade[];  
 
   constructor(
     private alertController: AlertController,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
-    private cidadeService: CidadeService,
     private navController: NavController,
     private tokenService: TokenService,
     private dataSharingService: DataSharingService
@@ -38,25 +34,12 @@ export class EditarPontoDescartePage implements OnInit {
       tipo: null,
       usuarioId: null,
       usuario: null,
-      cidadeId: null,
-      cidade: null,
     }
   }
 
   async ngOnInit() {
     this.dataSharingService.displayMenu.next(false);
-    this.listarCidades();
-  }
-
-  async listarCidades() {
-    const loading = await this.loadingController.create({ message: 'Carregando cidades' });
-    loading.present();
-
-    this.cidadeService.getCidades().subscribe((data) => {
-      this.cidades = data;
-      this.carregarPontoDescate();
-      loading.dismiss();
-    });
+    this.carregarPontoDescate();
   }
 
   carregarPontoDescate() {
@@ -68,7 +51,6 @@ export class EditarPontoDescartePage implements OnInit {
 
   async salvar() {    
     this.pontodescarte.usuario = null;
-    this.pontodescarte.cidade = null;
  
     let loading = await this.loadingController.create({ message: 'Salvando' });
     loading.present();

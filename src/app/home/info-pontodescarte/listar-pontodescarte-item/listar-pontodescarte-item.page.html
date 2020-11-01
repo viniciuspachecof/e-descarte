@@ -8,23 +8,23 @@
 </ion-header>
 
 <ion-content>
-  <h3>PONTO DE DESCARTE ITEM</h3>
+  <h3>MEUS LIXOS ELETRÔNICOS</h3>
   <ion-list>
     <ion-item *ngFor="let pontodescarteitem of pontodescarteitens">   
       <ion-label>
         <span>{{pontodescarteitem.item.nome}}</span>
         <p>Qtde.: {{pontodescarteitem.quant}}</p>
       </ion-label>   
-      <ion-icon *ngIf="pontodescarteitem.status === 0" color="success" name="create" slot="end" [routerLink]="['/listar-pontodescarte-item/editar', pontodescarteitem.id, pontodescarteId]"></ion-icon>
-      <ion-icon *ngIf="pontodescarteitem.status === 0" color="success" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarteitem)"></ion-icon>
+      <ion-icon *ngIf="pontodescarteitem.status === 0" name="create" slot="end" [routerLink]="['/listar-pontodescarte-item/editar', pontodescarteitem.id, pontodescarteId]"></ion-icon>
+      <ion-icon *ngIf="pontodescarteitem.status === 0" name="close-circle" slot="end" (click)="confirmarExclusao(pontodescarteitem)"></ion-icon>
       <ion-icon *ngIf="pontodescarteitem.status === 1" color="success" name="checkmark-circle" slot="end"></ion-icon>
       <ion-icon *ngIf="pontodescarteitem.status === 2" color="danger" name="close-circle" slot="end"></ion-icon>
     </ion-item>
   </ion-list>  
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button color="success" [routerLink]="['/listar-pontodescarte-item/cadastro', pontodescarteId]">
-      <ion-icon name="add-circle"></ion-icon>
+    <ion-fab-button [routerLink]="['/listar-pontodescarte-item/cadastro', pontodescarteId]">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

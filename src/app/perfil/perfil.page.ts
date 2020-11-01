@@ -17,6 +17,8 @@ export class PerfilPage implements OnInit {
 
   imgURL;
   usuario: Usuario;
+  isAdmin: boolean;
+  isCatador: boolean;
   rankingpontuacao: RankingPontuacao;
 
   constructor(
@@ -32,11 +34,13 @@ export class PerfilPage implements OnInit {
     this.usuario = {
       nome: null,
       email: null,
+      fone: null,
       senha: null,
       tipo:null,
     },
     this.rankingpontuacao = {
       pontuacao: null,
+      nivel: null,
       usuarioId: null,
       usuario: null
     }
@@ -46,6 +50,13 @@ export class PerfilPage implements OnInit {
   }
 
   ionViewDidEnter(){
+    this.dataSharingService.displayMenu.next(true);
+    this.dataSharingService.isCatador.subscribe(value => {
+      this.isCatador = value;
+    });
+    this.dataSharingService.isAdmin.subscribe(value => {
+      this.isAdmin = value;
+    });
     this.usuarioService.getUsuario(this.tokenService.getUserId()).subscribe((data) => {
       this.usuario = data;
       this.usuario.senha = null;
