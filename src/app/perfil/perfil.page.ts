@@ -6,7 +6,7 @@ import { DataSharingService } from '../services/data-sharing.service';
 import { RankingPontuacaoService } from '../services/ranking-pontuacao.service';
 import { TokenService } from '../services/token.service';
 import { UsuarioService } from '../services/usuario.service';
-import { Camera } from "@ionic-native/camera/ngx";
+//import { Camera } from "@ionic-native/camera/ngx";
 
 @Component({
   selector: 'app-perfil',
@@ -22,7 +22,7 @@ export class PerfilPage implements OnInit {
   rankingpontuacao: RankingPontuacao;
 
   constructor(
-    private camera:Camera,
+   // private camera:Camera,
     private tokenService: TokenService,
     private alertController: AlertController,
     private loadingController: LoadingController,
@@ -111,10 +111,11 @@ export class PerfilPage implements OnInit {
   logOut() {
     this.tokenService.logOut();
     this.dataSharingService.displayMenu.next(false);
+    
     this.navController.navigateForward(['/login']);
   }
 
-  getCamera(){
+ /* getCamera(){
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.FILE_URI
@@ -123,9 +124,9 @@ export class PerfilPage implements OnInit {
     }).catch(e =>{
       console.log(e);
     })
-  }
+  }*/
 
-  getGaleria(){
+ /* getGaleria(){
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL
@@ -134,5 +135,5 @@ export class PerfilPage implements OnInit {
     }).catch(e =>{
       console.log(e);
     })
-  }
+  }*/
 }

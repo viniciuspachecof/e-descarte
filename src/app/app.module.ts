@@ -14,7 +14,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataSharingService } from './services/data-sharing.service';
 import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 
-import { Camera } from "@ionic-native/camera/ngx";
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
+//import { Camera } from "@ionic-native/camera/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,10 +31,10 @@ import { Camera } from "@ionic-native/camera/ngx";
   providers: [
     StatusBar,
     SplashScreen,
-    Camera,
+    //Camera,
     Geolocation,
     DataSharingService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },OneSignal
   ],
   bootstrap: [AppComponent]
 })
