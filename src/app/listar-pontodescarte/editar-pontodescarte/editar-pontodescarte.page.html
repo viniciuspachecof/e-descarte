@@ -13,36 +13,16 @@
   <form #editarpontodescarteForm="ngForm" novalidate>
     <div class="context">    
       <!-- <ion-label>Nome</ion-label>
-      <ion-input disabled="true" type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
-      <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
-        <small>
-          <span *ngIf="campoNome.errors.required">
-            O campo nome é obrigatório
-          </span>
-        </small>
-      </ion-text>     -->
+      <ion-input disabled="true" type="text" name="nome" [(ngModel)]="pontodescarte.nome"></ion-input> -->
     
       <ion-label>Fone</ion-label>
-      <ion-input disabled="true" type="text" name="fone" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" [(ngModel)]="pontodescarte.fone" required #campoFone="ngModel"></ion-input>
-      <ion-text color="danger" *ngIf="campoFone.invalid && (campoFone.dirty || campoFone.touched)">
-        <small>
-          <span *ngIf="campoFone.errors.required">
-            O campo fone é obrigatório
-          </span>
-          <span *ngIf="campoFone.errors.pattern">
-            O fone é inválido
-          </span>
-          <span *ngIf="campoFone.errors.pattern">
-            O fone é inválido
-          </span>
-        </small>
-      </ion-text>
+      <ion-input disabled="true" type="text" name="fone" [(ngModel)]="pontodescarte.fone"></ion-input>     
+      
+      <ion-item>
+        <ion-label>ATIVO</ion-label>
+        <ion-toggle slot="start" name="ativo" color="success" [(ngModel)]="pontodescarte.ativo" checked></ion-toggle>
+      </ion-item>
     </div>  
-
-    <ion-item>
-      <ion-label>ATIVO</ion-label>
-      <ion-toggle slot="start" name="ativo" color="success" [(ngModel)]="pontodescarte.ativo" checked></ion-toggle>
-    </ion-item>
   </form>
 
   <ion-button expand="block" style="margin: 0px 16px 0px 16px; font-size: 15px" fill="clear" [routerLink]="['/editar-pontodescarte', pontodescarte.id]" *ngIf="pontodescarte.tipo===0">Lixos cadastrados neste ponto</ion-button>
