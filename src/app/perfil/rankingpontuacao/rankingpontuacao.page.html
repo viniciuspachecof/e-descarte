@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">       
+    <img src="../../../../../assets/img/cabecalho.png" class="background" alt="">
     <ion-buttons slot="start" style="position: absolute;">
       <ion-back-button defaultHref="/perfil"></ion-back-button>
     </ion-buttons>
@@ -10,14 +10,14 @@
 <ion-content>
   <h3>RANKING</h3>
   <ion-list>
-    <ion-item *ngFor="let rankingpontuacao of rankingpontuacoes; let i = index">   
+    <ion-item *ngFor="let rankingpontuacao of rankingpontuacoes; let i = index">
       <div class="information">
-          <span>{{i+1}}º</span>
-          <span> {{rankingpontuacao.usuario.nome}}</span>
+        <span>{{i+1}}º</span>
+        <span> {{rankingpontuacao.usuario.nome}}</span>
       </div>
       <div class="pts">
-          <span>{{rankingpontuacao.pontuacao}}pts</span>
+        <span>{{rankingpontuacao.pontuacao}}pts</span>
       </div>
     </ion-item>
-  </ion-list>  
+  </ion-list>
 </ion-content>

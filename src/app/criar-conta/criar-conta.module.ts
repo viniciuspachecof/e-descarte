@@ -7,7 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { CriarContaPageRoutingModule } from './criar-conta-routing.module';
 
 import { CriarContaPage } from './criar-conta.page';
-import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+// import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   imports: [
@@ -15,7 +20,8 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic';
     FormsModule,
     IonicModule,
     CriarContaPageRoutingModule,
-    NgxMaskIonicModule.forRoot()
+    // NgxMaskIonicModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfig)
   ],
   declarations: [CriarContaPage]
 })

@@ -22,7 +22,7 @@ export class PerfilPage implements OnInit {
   rankingpontuacao: RankingPontuacao;
 
   constructor(
-   // private camera:Camera,
+    // private camera:Camera,
     private tokenService: TokenService,
     private alertController: AlertController,
     private loadingController: LoadingController,
@@ -36,20 +36,20 @@ export class PerfilPage implements OnInit {
       email: null,
       fone: null,
       senha: null,
-      tipo:null,
+      tipo: null,
     },
-    this.rankingpontuacao = {
-      pontuacao: null,
-      nivel: null,
-      usuarioId: null,
-      usuario: null
-    }
+      this.rankingpontuacao = {
+        pontuacao: null,
+        nivel: null,
+        usuarioId: null,
+        usuario: null
+      }
   }
 
   ngOnInit() {
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.dataSharingService.displayMenu.next(true);
     this.dataSharingService.isCatador.subscribe(value => {
       this.isCatador = value;
@@ -72,8 +72,8 @@ export class PerfilPage implements OnInit {
     this.usuarioService
       .salvar(this.usuario)
       .subscribe(() => {
-        loading.dismiss();    
-        this.mensagemSucesso();   
+        loading.dismiss();
+        this.mensagemSucesso();
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();
@@ -82,7 +82,7 @@ export class PerfilPage implements OnInit {
 
   carregarRankingPontuacao() {
     this.rankingpontuacaoService.getRankingPontuacaoByUsuario(this.usuario.id).subscribe((data) => {
-      this.rankingpontuacao = data;    
+      this.rankingpontuacao = data;
     });
   }
 
@@ -111,29 +111,29 @@ export class PerfilPage implements OnInit {
   logOut() {
     this.tokenService.logOut();
     this.dataSharingService.displayMenu.next(false);
-    
+
     this.navController.navigateForward(['/login']);
   }
 
- /* getCamera(){
-    this.camera.getPicture({
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI
-    }).then( (res)=>{
-      this.imgURL = res;
-    }).catch(e =>{
-      console.log(e);
-    })
-  }*/
+  /* getCamera(){
+     this.camera.getPicture({
+       sourceType: this.camera.PictureSourceType.CAMERA,
+       destinationType: this.camera.DestinationType.FILE_URI
+     }).then( (res)=>{
+       this.imgURL = res;
+     }).catch(e =>{
+       console.log(e);
+     })
+   }*/
 
- /* getGaleria(){
-    this.camera.getPicture({
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL
-    }).then( (res)=>{
-      this.imgURL = 'data:image/jpeg;base64,' + res;
-    }).catch(e =>{
-      console.log(e);
-    })
-  }*/
+  /* getGaleria(){
+     this.camera.getPicture({
+       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+       destinationType: this.camera.DestinationType.DATA_URL
+     }).then( (res)=>{
+       this.imgURL = 'data:image/jpeg;base64,' + res;
+     }).catch(e =>{
+       console.log(e);
+     })
+   }*/
 }

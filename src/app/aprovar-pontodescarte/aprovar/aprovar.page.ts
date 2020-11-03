@@ -54,17 +54,17 @@ export class AprovarPage implements OnInit {
   }
 
   carregarMapa(lat, long) {
-      const location = new google.maps.LatLng(lat, long);
-      const options = {
-        center: location,
-        zoom: 15,
-        disableDefaultUI: true,
-        clickableIcons: false
-      };
+    const location = new google.maps.LatLng(lat, long);
+    const options = {
+      center: location,
+      zoom: 15,
+      disableDefaultUI: true,
+      clickableIcons: false
+    };
 
-      this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
-      this.addMarkerToMap(location, lat, long);   
+    this.addMarkerToMap(location, lat, long);
   }
 
   addMarkerToMap(location, userLat, userLong) {
@@ -74,7 +74,7 @@ export class AprovarPage implements OnInit {
       latitude: userLat,
       longitude: userLong,
       // icon: 'http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png'
-      icon: this.pontodescarte.tipo===0 ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'     
+      icon: this.pontodescarte.tipo === 0 ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'
     });
 
     mapMarker.setMap(this.map);
@@ -103,12 +103,12 @@ export class AprovarPage implements OnInit {
       let push = {
         "app_id": "f5d4c64d-e936-4b93-bc89-f5340f80ccc1",
         "included_segments": ["All"],
-        "content_available":"true",
-        "data": {"foo": "bar"},
-        "contents": {"en": "Acesso o aplicativo para mais informações."},
-        "headings": {"en": "Novo ponto de descarte cadastrado!"}
+        "content_available": "true",
+        "data": { "foo": "bar" },
+        "contents": { "en": "Acesso o aplicativo para mais informações." },
+        "headings": { "en": "Novo ponto de descarte cadastrado!" }
       }
-      
+
       this.pontodescarteService.oneSignal(push)
     }
   }

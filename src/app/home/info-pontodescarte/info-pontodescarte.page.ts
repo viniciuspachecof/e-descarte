@@ -13,12 +13,11 @@ import { PontoDescarteService } from 'src/app/services/ponto-descarte.service';
 export class PontodescartePage implements OnInit {
 
   pontodescarte: PontoDescarte;
-  isCatador: boolean;  
-  isAdmin: boolean;  
+  isCatador: boolean;
+  isAdmin: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private loadingController: LoadingController,
     private pontodescarteService: PontoDescarteService,
     private dataSharingService: DataSharingService
   ) {

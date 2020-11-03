@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
         zoom: 13,
         disableDefaultUI: true,
         clickableIcons: false
-      };      
+      };
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
@@ -87,7 +87,7 @@ export class HomePage implements OnInit {
         pontospublicos: {
           name: "Pontos públicos",
           icon: '../../assets/icon/marker-verde.png',
-        }               
+        }
       };
 
       this.addLegendsToMap(legendsIcons);
@@ -122,7 +122,7 @@ export class HomePage implements OnInit {
           latitude: marker.latitude,
           longitude: marker.longitude,
           // icon: 'http://maps.gstatic.com/mapfiles/markers2/marker.png'
-          icon: marker.tipo===0 ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'
+          icon: marker.tipo === 0 ? '../../assets/icon/marker-vermelho.png' : '../../assets/icon/marker-verde.png'
         });
 
         mapMarker.setMap(this.map);

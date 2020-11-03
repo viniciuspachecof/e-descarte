@@ -47,8 +47,7 @@
       </ion-text>
 
       <ion-label>Senha</ion-label>
-      <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel">
-      </ion-input>
+      <ion-input type="password" name="senha" [(ngModel)]="usuario.senha" required minlength="8" #campoSenha="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoSenha.invalid && (campoSenha.dirty || campoSenha.touched)">
         <small>
           <span *ngIf="campoSenha.errors.required">
@@ -84,7 +83,6 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <ion-button fill="clear" expand="full" style="margin-bottom: 6px" [disabled]="perfilForm.invalid" (click)="salvar()">
-    Salvar</ion-button>
+  <ion-button fill="clear" expand="full" style="margin-bottom: 6px" [disabled]="perfilForm.invalid" (click)="salvar()">Salvar</ion-button>
   <ion-button fill="clear" expand="block" (click)="logOut()">Sair</ion-button>
 </ion-footer>

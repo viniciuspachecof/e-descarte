@@ -7,7 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { CadastrarPontoDescartePageRoutingModule } from './cadastrar-pontodescarte-routing.module';
 
 import { CadastrarPontoDescartePage } from './cadastrar-pontodescarte.page';
-import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+// import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   imports: [
@@ -15,7 +20,8 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic';
     FormsModule,
     IonicModule,
     CadastrarPontoDescartePageRoutingModule,
-    NgxMaskIonicModule.forRoot()
+    // NgxMaskIonicModule.forRoot()
+    NgxMaskModule.forRoot(maskConfig)
   ],
   declarations: [CadastrarPontoDescartePage]
 })

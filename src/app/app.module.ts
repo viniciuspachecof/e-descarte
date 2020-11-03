@@ -12,11 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataSharingService } from './services/data-sharing.service';
-import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+// import {NgxMaskIonicModule} from 'ngx-mask-ionic';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 //import { Camera } from "@ionic-native/camera/ngx";
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +29,8 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     IonicModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
-    NgxMaskIonicModule.forRoot()
+    // NgxMaskIonicModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   providers: [
     StatusBar,

@@ -55,6 +55,18 @@ ion-input{
     display: flex;
 }
 
+input{
+    border: 2px solid #8baa6e;
+    background-color: white;
+    border-radius: 13px;
+    font-size: medium;
+    color: #696969!important;
+    font-weight: bolder;
+    display: flex;
+    padding: 10px 0px 10px 8px;    
+    width: 100%;
+}
+
 ion-label{
     padding-left: 10px;
     padding-top: 12px;
