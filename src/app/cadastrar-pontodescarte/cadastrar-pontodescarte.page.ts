@@ -67,7 +67,8 @@ export class CadastrarPontoDescartePage implements OnInit {
       const options = {
         center: location,
         zoom: 15,
-        disableDefaultUI: true
+        disableDefaultUI: true,
+        clickableIcons: false
       };
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
@@ -167,6 +168,7 @@ export class CadastrarPontoDescartePage implements OnInit {
         loading.dismiss();
         this.dataSharingService.selectedIndex.next(1);
         this.limparCampos();
+        this.alertMessageConfirmPonto();
         this.navController.navigateForward(['/home']);
       }, () => {
         loading.dismiss();
@@ -193,6 +195,17 @@ export class CadastrarPontoDescartePage implements OnInit {
       cssClass: 'my-custom-class',
       header: 'Aviso',
       message: 'Informe ao mapa o local de descarte.',
+      buttons: ['OK']
+    });
+
+    await alerta.present();
+  }
+
+  async alertMessageConfirmPonto() {
+    const alerta = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Aviso',
+      message: 'Seu ponto estará liberado assim que possível, após uma avaliação de nossa equipe.',
       buttons: ['OK']
     });
 

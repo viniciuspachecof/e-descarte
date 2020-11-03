@@ -58,7 +58,8 @@ export class AprovarPage implements OnInit {
       const options = {
         center: location,
         zoom: 15,
-        disableDefaultUI: true
+        disableDefaultUI: true,
+        clickableIcons: false
       };
 
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
@@ -87,13 +88,29 @@ export class AprovarPage implements OnInit {
 
     this.pontodescarteService
       .salvar(this.pontodescarte)
-      .subscribe(() => {
+      .subscribe((data) => {
         loading.dismiss();
+        this.pushNotifications(data);
         this.navController.navigateForward(['/aprovar-pontodescarte']);
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();
       });
+  }
+
+  pushNotifications(data) {
+    if (data.status) {
+      let push = {
+        "app_id": "f5d4c64d-e936-4b93-bc89-f5340f80ccc1",
+        "included_segments": ["All"],
+        "content_available":"true",
+        "data": {"foo": "bar"},
+        "contents": {"en": "Acesso o aplicativo para mais informações."},
+        "headings": {"en": "Novo ponto de descarte cadastrado!"}
+      }
+      
+      this.pontodescarteService.oneSignal(push)
+    }
   }
 
   async mensagemAlerta() {

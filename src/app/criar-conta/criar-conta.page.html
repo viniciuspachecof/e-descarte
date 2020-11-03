@@ -51,7 +51,7 @@
             </ion-text>
 
             <ion-label>Confirmar senha</ion-label>
-            <ion-input type="password" name="senha" [(ngModel)]="confirmSenha" required minlength="8" #campoConfirmSenha="ngModel"> </ion-input>
+            <ion-input type="password" name="confirmSenha" [(ngModel)]="confirmSenha" required minlength="8" #campoConfirmSenha="ngModel"> </ion-input>
             <ion-text color="danger" *ngIf="campoConfirmSenha.invalid && (campoConfirmSenha.dirty || campoConfirmSenha.touched)">
                 <small>
                     <span *ngIf="campoConfirmSenha.errors.required">

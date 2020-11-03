@@ -12,7 +12,7 @@
   <form #pontodescarteForm="ngForm" novalidate>
     <div class="context">
       <ion-label>Nome</ion-label>
-      <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" #campoNome="ngModel"></ion-input>
+      <ion-input type="text" name="nome" [(ngModel)]="pontodescarte.nome" required #campoNome="ngModel"></ion-input>
       <ion-text color="danger" *ngIf="campoNome.invalid && (campoNome.dirty || campoNome.touched)">
         <small>
           <span *ngIf="campoNome.errors.required">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PontoDescarte } from '../models/pontodescarte.interface';
 import { api } from './api';
 
@@ -9,6 +9,7 @@ import { api } from './api';
 export class PontoDescarteService {
 
   private URL = api + 'pontodescarte';
+  private ONESIGNAL = 'https://onesignal.com/api/v1/notifications';
 
   constructor(
     private httpClient : HttpClient
@@ -49,4 +50,13 @@ export class PontoDescarteService {
       return this.adicionar(pontodescarte);
     }
   };
+
+  oneSignal(context: {}) {
+    var header = {
+      headers: new HttpHeaders()
+        .set('Authorization',  `Basic 1010101010`)
+    }
+
+    return this.httpClient.post<{}>(this.ONESIGNAL, context, header);
+  }
 }

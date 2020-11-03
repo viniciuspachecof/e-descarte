@@ -28,7 +28,7 @@ export class CriarContaPage implements OnInit {
       email: null,
       fone: null,
       senha: null,
-      tipo: 'DESCARTANTE',
+      tipo: 'DESCARTANTE'
     }
   }
 
@@ -80,11 +80,24 @@ export class CriarContaPage implements OnInit {
     this.rankingpontuacaoService
       .salvar(this.rankingpontuacao)
       .subscribe(() => {
+        this.limparCampos();
         loading.dismiss();
       }, () => {
         loading.dismiss();
         this.mensagemAlerta();
       });
+  }
+
+  limparCampos() {
+    this.usuario = {
+      nome: null,
+      email: null,
+      fone: null,
+      senha: null,
+      tipo: 'DESCARTANTE'
+    }
+
+    this.confirmSenha = null;
   }
 
   async alertMessageConfirmSenha() {
