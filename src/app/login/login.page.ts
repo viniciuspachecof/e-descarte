@@ -4,8 +4,6 @@ import { Usuario } from '../models/Usuario.interface';
 import { DataSharingService } from '../services/data-sharing.service';
 import { TokenService } from '../services/token.service';
 import { UsuarioService } from '../services/usuario.service';
-import { Plugins } from '@capacitor/core';
-const { App } = Plugins;
 
 @Component({
   selector: 'app-login',
@@ -14,8 +12,8 @@ const { App } = Plugins;
 })
 export class LoginPage implements OnInit {
 
-  subscribe: any;
-
+  subscribe: any; 
+  
   usuario: Usuario
 
   constructor(
@@ -26,7 +24,6 @@ export class LoginPage implements OnInit {
     private tokenService: TokenService,
     private dataSharingService: DataSharingService,
     private platform: Platform,
-    private routerOutlet: IonRouterOutlet,
     private alertCtrl: AlertController,
   ) {
     this.usuario = {
@@ -36,34 +33,19 @@ export class LoginPage implements OnInit {
       senha: null,
       tipo: null,
     }
-    // this.subscribe = this.platform.backButton.subscribeWithPriority(66666,() => { 
-    //   if(this.constructor.name == 'LoginPage')
-    //   {
-    //     this.presentAlertConfirm();
-    //   }
-    //  })
   }
 
-  // async presentAlertConfirm(){
-  //   const alert = await this.alertCtrl.create({
-  //     header: 'Confirme',
-  //     message: 'Deseja sair do App ?',
-  //     buttons: [{
-  //       text: 'Cancel',
-  //       role:'cancel',
-  //       cssClass:'secondary',
-  //       handler: (blah)=>{}
-  //     },{
-  //       text:'Fechar App',
-  //       handler: () => {
-  //         navigator['app'].exitApp();
-  //       }
-  //     }]
-  //   });
-  //   await alert.present();
-  // }
-
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.subscribe = this.platform.backButton.subscribeWithPriority(0, () => {
+      this.presentAlertConfirm();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.subscribe.unsubscribe();
   }
 
   async entrar() {
@@ -84,6 +66,25 @@ export class LoginPage implements OnInit {
           loading.dismiss();
           this.mensagemAlerta();
         });
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirme',
+      message: 'Deseja realmente sair do App ?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => { }
+      }, {
+        text: 'Fechar App',
+        handler: () => {
+          navigator['myApp'].exitApp();
+        }
+      }]
+    });
+    await alert.present();
   }
 
   async mensagemAlerta() {
