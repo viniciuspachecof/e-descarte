@@ -54,7 +54,7 @@ export class PontoDescarteService {
   oneSignal(context: {}) {
     var header = {
       headers: new HttpHeaders()
-        .set('Authorization',  `Basic 1010101010`)
+        .set('Authorization',  `Basic ZjkzYTkwOTUtNTVlNy00M2NlLThkNzAtY2Q3NWI4NDRhMzQy`)
     }
 
     return this.httpClient.post<{}>(this.ONESIGNAL, context, header);

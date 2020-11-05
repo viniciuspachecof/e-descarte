@@ -100,7 +100,7 @@ export class AprovarPage implements OnInit {
 
   pushNotifications(data) {
     if (data.status) {
-      let push = {
+      let obj = {
         "app_id": "f5d4c64d-e936-4b93-bc89-f5340f80ccc1",
         "included_segments": ["All"],
         "content_available": "true",
@@ -109,7 +109,7 @@ export class AprovarPage implements OnInit {
         "headings": { "en": "Novo ponto de descarte cadastrado!" }
       }
 
-      this.pontodescarteService.oneSignal(push)
+      this.pontodescarteService.oneSignal(obj).subscribe(() => { })
     }
   }
 
