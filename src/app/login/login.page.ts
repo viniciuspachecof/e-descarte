@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
       }, {
         text: 'Fechar App',
         handler: () => {
-          navigator['myApp'].exitApp();
+          navigator['app'].exitApp();
         }
       }]
     });

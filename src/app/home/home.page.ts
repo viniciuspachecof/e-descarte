@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
   map: any;
+  legend: any;
   infoWindows: any = [];
   markers: any = [];
 
@@ -90,9 +91,11 @@ export class HomePage implements OnInit {
         }
       };
 
+      if (!this.legend) this.legend = document.getElementById("legend") as HTMLElement;      
+
       this.addLegendsToMap(legendsIcons);
 
-      this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
+      this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(this.legend);
     });
   }
 
@@ -133,7 +136,7 @@ export class HomePage implements OnInit {
   }
 
   addLegendsToMap(legendsIcons) {
-    const legend = document.getElementById("legend") as HTMLElement;
+    if(this.legend.querySelector('div')) return;
 
     for (const key in legendsIcons) {
       const type = legendsIcons[key];
@@ -141,7 +144,7 @@ export class HomePage implements OnInit {
       const icon = type.icon;
       const div = document.createElement("div");
       div.innerHTML = '<img src="' + icon + '"> ' + name;
-      legend.appendChild(div);
+      this.legend.appendChild(div);
     }
   }
 

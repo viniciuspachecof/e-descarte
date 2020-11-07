@@ -12,8 +12,8 @@
 
   <form #clienteForm="ngForm" novalidate>
     <div class="context">
-      <!-- <ion-label>Nome</ion-label>
-      <ion-input disabled="true" type="text" name="nome" [(ngModel)]="pontodescarte.nome"> </ion-input> -->
+      <ion-label *ngIf="pontodescarte.tipo === 0">Catador</ion-label>
+      <ion-input disabled="true" type="text" name="usuario" [(ngModel)]="pontodescarte.usuario.nome" *ngIf="pontodescarte.tipo === 0"> </ion-input>
 
       <ion-label>Fone</ion-label>
       <ion-input disabled="true" type="text" name="fone" [(ngModel)]="pontodescarte.fone"> </ion-input>

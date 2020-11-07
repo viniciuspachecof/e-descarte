@@ -49,22 +49,27 @@ ion-input{
     border: 2px solid #8baa6e;
     background-color: white;
     border-radius: 13px;
-    font-size: medium;
+    font-size: small!important;
     color: #696969!important;
-    font-weight: bolder;
+    font-weight: bold;
     display: flex;
+    padding: 10px 0px 10px 8px!important; 
 }
 
 input{
     border: 2px solid #8baa6e;
     background-color: white;
     border-radius: 13px;
-    font-size: medium;
+    font-size: small!important;
     color: #696969!important;
-    font-weight: bolder;
+    font-weight: bold;
     display: flex;
-    padding: 10px 0px 10px 8px;    
+    padding: 10px 0px 10px 8px!important; 
     width: 100%;
+}
+
+input:focus{
+    outline: none;
 }
 
 ion-label{
@@ -73,7 +78,7 @@ ion-label{
     padding-bottom: 8px;
     color: #696969!important;
     font-size: small;
-    font-weight: bolder;
+    font-weight: bold;
     display: block;    
 }
 
