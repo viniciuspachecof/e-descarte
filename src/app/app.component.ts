@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Location } from '@angular/common';
 import { NavController, Platform, AlertController, IonRouterOutlet } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TokenService } from './services/token.service';
 import { DataSharingService } from './services/data-sharing.service';
 
 import { OneSignal } from "@ionic-native/onesignal/ngx";
-import { App } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +14,6 @@ import { App } from '@capacitor/core';
 })
 export class AppComponent implements OnInit {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
-  // lastTimeBackPress = 0;
-  // timePeriodToExit = 2000;
 
   displayMenu: boolean;
   isCatador: boolean;
@@ -33,52 +28,12 @@ export class AppComponent implements OnInit {
     private tokenService: TokenService,
     private navController: NavController,
     private onesignal: OneSignal,
-    private alertCtrl: AlertController,
-    private router: Router,
-    private location: Location
+    private alertCtrl: AlertController  
   ) {
 
-    this.initializeApp();
-    //this.backButtonEvent();
+    this.initializeApp();   
   }
 
-  /*backButtonEvent(){    
-    this.platform.backButton.subscribeWithPriority(0,() => {
-      this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
-        if (this.router.url != '/login'){
-          await this.router.navigate(['/']);
-          await this.location.back();
-        }else if (this.router.url === '/login'){
-          if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit){
-            this.lastTimeBackPress = new Date().getTime();            
-            this.presentAlertConfirm();
-          }else{            
-            navigator['myApp'].exitApp();
-            App.exitApp();
-          }
-        }
-      });
-    });
-  }*/
-
-  // async presentAlertConfirm(){
-  //   const alert = await this.alertCtrl.create({
-  //     header: 'Confirme',
-  //     message: 'Deseja realmente sair do App ?',
-  //     buttons: [{
-  //       text: 'Cancel',
-  //       role:'cancel',
-  //       cssClass:'secondary',
-  //       handler: (blah)=>{}
-  //     },{
-  //       text:'Fechar App',
-  //       handler: () => {
-  //         navigator['myApp'].exitApp();
-  //       }
-  //     }]
-  //   });
-  //   await alert.present();
-  // }
 
   initializeApp() {
     this.platform.ready().then(() => {
