@@ -34,10 +34,10 @@
     </div>
   </form>
 
-  <ion-footer>
+  <ion-footer class="ion-no-border">
     <ion-button fill="clear" expand="block" (click)="entrar()" [disabled]="loginForm.invalid">Entrar</ion-button>
 
     <ion-label style="text-align: center;">NÃO POSSUI CADASTRO?</ion-label>
-    <ion-button [routerLink]="['/criar-conta']" class="button-container" expand="full" fill="clear">Criar conta</ion-button>
+    <ion-button [routerLink]="['/criar-conta']" class="button-container" expand="block" fill="clear">Criar conta</ion-button>
   </ion-footer>
 </ion-content>

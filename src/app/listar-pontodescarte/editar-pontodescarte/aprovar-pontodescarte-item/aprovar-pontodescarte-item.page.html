@@ -29,7 +29,7 @@
       <ion-label>
         <span>{{pontodescarteitem.item.nome}}</span>
         <p>Qtde.: {{pontodescarteitem.quant}}</p>
-        <p>Descartante.: {{pontodescarteitem.usuario.nome}}</p>
+        <p>Descartante: {{pontodescarteitem.usuario.nome}}</p>
       </ion-label>
       
       <ion-icon *ngIf="pontodescarteitem.status === 0" name="eye" slot="end" [routerLink]="['/aprovar-pontodescarte-item/aprovar', pontodescarteitem.id, pontodescarteId]"></ion-icon>

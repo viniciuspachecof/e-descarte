@@ -49,6 +49,7 @@ export class CriarContaPage implements OnInit {
       .subscribe((context) => {
         loading.dismiss();
         this.carregarRankingPontuacao(context);
+        this.limparCampos();
         this.navController.navigateForward(['/login']);
       }, () => {
         loading.dismiss();
@@ -79,8 +80,7 @@ export class CriarContaPage implements OnInit {
 
     this.rankingpontuacaoService
       .salvar(this.rankingpontuacao)
-      .subscribe(() => {
-        this.limparCampos();
+      .subscribe(() => {        
         loading.dismiss();
       }, () => {
         loading.dismiss();

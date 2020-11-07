@@ -25,8 +25,8 @@
   </form>
 
   <div #map id="map"></div>
+  
+  <ion-footer class="ion-no-border">
+    <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="aprovarpontodescarteForm.invalid">Salvar</ion-button>
+  </ion-footer>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <ion-button expand="block" fill="clear" (click)="salvar()" [disabled]="aprovarpontodescarteForm.invalid">Salvar</ion-button>
-</ion-footer>

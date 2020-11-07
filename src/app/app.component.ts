@@ -17,8 +17,8 @@ import { App } from '@capacitor/core';
 })
 export class AppComponent implements OnInit {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
-  lastTimeBackPress = 0;
-  timePeriodToExit = 2000;
+  // lastTimeBackPress = 0;
+  // timePeriodToExit = 2000;
 
   displayMenu: boolean;
   isCatador: boolean;

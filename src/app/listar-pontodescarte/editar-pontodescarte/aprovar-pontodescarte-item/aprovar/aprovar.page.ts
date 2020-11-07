@@ -115,11 +115,14 @@ export class AprovarPage implements OnInit {
     this.rankingpontuacao.pontuacao = this.novaPontuacao;
 
     switch (true) {
-      case this.rankingpontuacao.pontuacao > 1 && this.rankingpontuacao.pontuacao < 10:
+      case this.rankingpontuacao.pontuacao >= 1 && this.rankingpontuacao.pontuacao < 10:
         this.rankingpontuacao.nivel = 1;
         break;
       case this.rankingpontuacao.pontuacao >= 10 && this.rankingpontuacao.pontuacao < 20:
         this.rankingpontuacao.nivel = 2;
+        break;
+      case this.rankingpontuacao.pontuacao >= 20:
+        this.rankingpontuacao.nivel = 3;
         break;
       default:
         break;
