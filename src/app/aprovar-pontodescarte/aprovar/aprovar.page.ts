@@ -105,7 +105,7 @@ export class AprovarPage implements OnInit {
         "included_segments": ["All"],
         "content_available": "true",
         "data": { "foo": "bar" },
-        "contents": { "en": "Acesso o aplicativo para mais informações." },
+        "contents": { "en": "Acesse o mapa inicial para visualizá-lo." },
         "headings": { "en": "Novo ponto de descarte cadastrado!" }
       }
 
