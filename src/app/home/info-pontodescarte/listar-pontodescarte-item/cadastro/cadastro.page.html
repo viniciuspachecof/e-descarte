@@ -14,7 +14,7 @@
       <ion-item>
         <ion-select placeholder="Selecione o item" required [(ngModel)]="pontodescarteitem.itemId" name="item" #campoItem="ngModel">
           <ion-select-option *ngFor="let item of itens" [value]="item.id">
-            {{item.nome}}
+            {{item.nome}} - {{item.ponto}}pts
           </ion-select-option>
         </ion-select>
       </ion-item>
