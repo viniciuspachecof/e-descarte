@@ -28,10 +28,10 @@ export class AppComponent implements OnInit {
     private tokenService: TokenService,
     private navController: NavController,
     private onesignal: OneSignal,
-    private alertCtrl: AlertController  
+    private alertCtrl: AlertController
   ) {
 
-    this.initializeApp();   
+    this.initializeApp();
   }
 
 
@@ -62,9 +62,8 @@ export class AppComponent implements OnInit {
       subHeader: msg,
       buttons: [
         {
-          text: `Action: ${task}`,
-          handler: () => {
-          }
+          text: `OK`,
+          handler: () => { }
         }
       ]
     })
@@ -83,10 +82,10 @@ export class AppComponent implements OnInit {
       this.showAlert(title, msg, additionalData.task);
     });
 
-    this.onesignal.handleNotificationOpened().subscribe(data => {
-      let additionalData = data.notification.payload.additionalData;
-      this.showAlert('Notification opened', 'you already read this before', additionalData.task);
-    });
+    // this.onesignal.handleNotificationOpened().subscribe(data => {
+    //   let additionalData = data.notification.payload.additionalData;
+    //   this.showAlert('Notification opened', 'you already read this before', additionalData.task);
+    // });
 
     this.onesignal.endInit();
   }

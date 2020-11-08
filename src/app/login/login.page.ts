@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
       header: 'Confirme',
       message: 'Deseja realmente sair do App ?',
       buttons: [{
-        text: 'Cancel',
+        text: 'Cancelar',
         role: 'cancel',
         cssClass: 'secondary',
         handler: () => { }

@@ -12,15 +12,32 @@
   <form #cadastrarlixoForm="ngForm" novalidate>
     <div class="context">
       <ion-item>
-        <ion-select placeholder="Selecione o item" [(ngModel)]="pontodescarteitem.itemId" name="item">
+        <ion-select placeholder="Selecione o item" required [(ngModel)]="pontodescarteitem.itemId" name="item" #campoItem="ngModel">
           <ion-select-option *ngFor="let item of itens" [value]="item.id">
             {{item.nome}}
           </ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-text color="danger" *ngIf="campoItem.invalid && (campoItem.dirty || campoItem.touched)">
+        <small>
+          <span *ngIf="campoItem.errors.required">
+            O campo item é obrigatório
+          </span>           
+        </small>
+      </ion-text>
 
       <ion-label>Quantidade</ion-label>
-      <ion-input type="text" name="quant" [(ngModel)]="pontodescarteitem.quant"></ion-input>
+      <ion-input type="text" name="quant" [(ngModel)]="pontodescarteitem.quant" required pattern="[0-99999999 ]+" #campoQuant="ngModel"></ion-input>
+      <ion-text color="danger" *ngIf="campoQuant.invalid && (campoQuant.dirty || campoQuant.touched)">
+        <small>
+          <span *ngIf="campoQuant.errors.required">
+            O campo quantidade é obrigatório
+          </span>
+          <span *ngIf="campoQuant.errors.pattern">
+            O campo deve ter apenas números
+          </span>
+        </small>
+      </ion-text>
     </div>
   </form>
 </ion-content>

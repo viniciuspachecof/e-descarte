@@ -28,7 +28,7 @@ export class CadastroPage implements OnInit {
     private navController: NavController,
   ) {
     this.pontodescarteitem = {
-      quant: 0,
+      quant: 1,
       status: 0,
       totalponto: 0,
       pontodescarteId: this.activatedRoute.snapshot.params['pontodescarteId'],

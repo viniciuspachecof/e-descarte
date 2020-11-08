@@ -36,7 +36,7 @@ export class AprovarPage implements OnInit {
       status: false,
       tipo: null,
       usuarioId: null,
-      usuario: null,
+      usuario: null
     }
   }
 
