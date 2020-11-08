@@ -10,7 +10,7 @@
 <ion-content>
   <h3>PERFIL</h3>
   <form #perfilForm="ngForm" novalidate>
-    <div *ngIf="!isAdmin && !isCatador">
+    <div *ngIf="!isAdmin && !isCatador" class="cortar-icones">
       <img class="iconeNivel" src="../../../../../assets/icon/Nível 0.jpeg" alt="icone nível 0" *ngIf="rankingpontuacao.nivel === 0">
       <img class="iconeNivel" src="../../../../../assets/icon/Nível 1.jpeg" alt="icone nível 1" *ngIf="rankingpontuacao.nivel === 1">
       <img class="iconeNivel" src="../../../../../assets/icon/Nível 2.jpeg" alt="icone nível 2" *ngIf="rankingpontuacao.nivel > 1">
