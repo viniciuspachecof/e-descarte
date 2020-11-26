@@ -84,7 +84,7 @@ export class CriarContaPage implements OnInit {
         loading.dismiss();
       }, () => {
         loading.dismiss();
-        this.mensagemAlerta();
+        this.mensagemAlertaRanking();
       });
   }
 
@@ -116,6 +116,17 @@ export class CriarContaPage implements OnInit {
       cssClass: 'my-custom-class',
       header: 'Alerta',
       message: 'Erro ao criar a conta.',
+      buttons: ['OK']
+    });
+
+    await alerta.present();
+  }
+
+  async mensagemAlertaRanking() {
+    const alerta = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta',
+      message: 'Erro ao salvar os dados do usuario no ranking.',
       buttons: ['OK']
     });
 
